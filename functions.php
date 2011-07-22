@@ -9,6 +9,7 @@ define('THEME_CSS_URL', THEME_STATIC_URL.'/css');
 define('THEME_OPTIONS_GROUP', 'settings');
 define('THEME_OPTIONS_NAME', 'theme');
 define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
+define('EVENT_PROXY_URL', THEME_STATIC_URL.'/event_proxy.php');
 
 require_once('functions-base.php');     # Base theme functions
 require_once('custom-post-types.php');  # Where per theme post types are defined
@@ -28,10 +29,10 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
  * object.
  **/
 Config::$custom_post_types = array(
-	'Example',
+	'Page',
 );
 
-Config::$body_classes = array('default',);
+Config::$body_classes = array();
 
 /**
  * Configure theme settings, see abstract class Field's descendants for
@@ -109,6 +110,7 @@ Config::$scripts = array(
 	THEME_JS_URL.'/jquery-ui.js',
 	THEME_JS_URL.'/jquery-browser.js',
 	THEME_JS_URL.'/jquery-uniform.js',
+	'http://events.ucf.edu/tools/script.js',
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
 );
 

@@ -62,8 +62,57 @@ var chartbeat = function($){
 	}
 };
 
+// Events RSS reader functions
+function get_month_from_rss(str){
+	var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	var index  = Number(str.substr(5, 2));
+	return months[index - 1];
+}
+
+function get_day_from_rss(str){
+	return str.substr(8, 2);
+}
+
+var eventsCallback = function($, _this){
+	var calendar = _this.attr('data-calendar-id');
+	var url      = _this.attr('data-url');
+	var limit    = _this.attr('data-limit');
+	if (!calendar){calendar = 1;}
+	if (!url)     {url = 'http://events.ucf.edu';}
+	if (!limit)   {limit = 4;}
+
+	$.getUCFEvents({
+			'calendar_id' : calendar,
+			'url'         : EVENT_PROXY_URL + '/events.php',
+			'limit'       : limit}, function(data, status, request){
+		if (data == null){return;}
+
+		for (var i = 0; i < data.length; i++){
+			var e     = data[i];
+			var event = $('<li />', {'class' : 'event'});
+			var date  = $('<div />', {'class' : 'date'});
+			var month = $('<span />', {'class' : 'month'});
+			var day   = $('<span />', {'class' : 'day'});
+			var title = $('<a>', {'class' : 'title', 'href' : url + '?eventdatetime_id='+e.id});
+			var end   = $('<div>', {'class' : 'end'});
+
+			title.text(e.title);
+			day.text(get_day_from_rss(e.starts));
+			month.text(get_month_from_rss(e.starts));
+
+			date.append(month);
+			date.append(day);
+			event.append(date);
+			event.append(title);
+			event.append(end);
+			_this.append(event);
+		}
+	});
+};
+
 (function($){
 	chartbeat($);
 	analytics($);
 	handleExternalLinks($);
+	$('.events').each(function(){eventsCallback($, $(this));});
 })(jQuery);

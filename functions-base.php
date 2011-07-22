@@ -383,7 +383,11 @@ function debug($string){
 function __init__(){
 	add_theme_support('menus');
 	add_theme_support('post-thumbnails');
-	register_nav_menu('header-menu', __('Header Menu'));
+	//register_nav_menu('header-menu', __('Header Menu'));
+	register_nav_menu('student-resources', __('Student Resources'));
+	register_nav_menu('academic-degrees', __('Academic Degrees'));
+	register_nav_menu('sidebar-nav-menu', __('Sidebar Navigation Menu'));
+	register_nav_menu('sidebar-social-menu', __('Sidebar Social Menu'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
 	register_sidebar(array(
 		'name'          => __('Sidebar'),
@@ -496,13 +500,12 @@ function get_menu($name, $classes=null, $id=null, $callback=null){
 	}
 	
 	$items = wp_get_nav_menu_items($menu);
-	
 	if ($callback === null){
 		ob_start();
 		?>
 		<ul<?php if($classes):?> class="<?=$classes?>"<?php endif;?><?php if($id):?> id="<?=$id?>"<?php endif;?>>
 			<?php foreach($items as $key=>$item): $last = $key == count($items) - 1;?>
-			<li<?php if($last):?> class="last"<?php endif;?>><a href="<?=$item->url?>"><?=$item->title?></a></li>
+			<li<?php if($last):?> class="last"<?php endif;?>><a href="<?=$item->url?>" class="<?=implode(' ', $item->classes)?>"><?=$item->title?></a></li>
 			<?php endforeach;?>
 		</ul>
 		<?php
@@ -982,5 +985,4 @@ function _show_meta_boxes($post, $meta_box){
 	<?php endif;?>
 	<?php
 }
-
 ?>

@@ -17,8 +17,8 @@ abstract class CustomPostType{
 		$use_thumbnails = False, # Featured images
 		$use_order      = False, # Wordpress built-in order meta data
 		$use_metabox    = False, # Enable if you have custom fields to display in admin
-		$use_shortcode  = False; # Auto generate a shortcode for the post type (see also toHTML method)
-	
+		$use_shortcode  = False, # Auto generate a shortcode for the post type (see also toHTML method)
+	  $_builtin       = False; # True when extending built-in post type (post, page, etc.)
 	
 	/**
 	 * Wrapper for get_posts function, that predefines post_type for this
@@ -163,6 +163,7 @@ abstract class CustomPostType{
 			'labels'   => $this->labels(),
 			'supports' => $this->supports(),
 			'public'   => $this->options('public'),
+			'_builtin' => $this->options('_builtin'),
 		);
 		
 		if ($this->options('use_order')){
@@ -217,14 +218,14 @@ abstract class CustomPostType{
 }
 
 
-class Example extends CustomPostType{
+class Page extends CustomPostType{
 	public 
-		$name           = 'example',
-		$plural_name    = 'Examples',
-		$singular_name  = 'Example',
-		$add_new_item   = 'Add New Example',
-		$edit_item      = 'Edit Example',
-		$new_item       = 'New Example',
+		$name           = 'page',
+		$plural_name    = 'pages',
+		$singular_name  = 'Page',
+		$add_new_item   = 'Add New Page',
+		$edit_item      = 'Edit Page',
+		$new_item       = 'New Page',
 		$public         = True,
 		$use_categories = True,
 		$use_thumbnails = True,
@@ -232,48 +233,22 @@ class Example extends CustomPostType{
 		$use_order      = True,
 		$use_title      = True,
 		$use_shortcode  = True,
-		$use_metabox    = True;
+		$use_metabox    = True,
+		$_builtin       = True;
 	
 	public function fields(){
 		return array(
 			array(
-				'name'  => 'Helpy Help',
-				'desc'  => 'Help Example, static content to assist the nice users.',
-				'id'    => $this->options('name').'_help',
-				'type'  => 'help',
-			),
-			array(
-				'name' => 'Text',
-				'desc' => 'Text field example',
-				'id'   => $this->options('name').'_text',
-				'type' => 'text',
-			),
-			array(
-				'name' => 'Textarea',
-				'desc' => 'Textarea example',
-				'id'   => $this->options('name').'_textarea',
-				'type' => 'textarea',
-			),
-			array(
-				'name'    => 'Select',
-				'desc'    => 'Select example',
-				'default' => '(None)',
-				'id'      => $this->options('name').'_select',
-				'options' => array('Select One' => 1, 'Select Two' => 2,),
-				'type'    => 'select',
-			),
-			array(
-				'name'    => 'Radio',
-				'desc'    => 'Radio example',
-				'id'      => $this->options('name').'_radio',
-				'options' => array('Key One' => 1, 'Key Two' => 2,),
-				'type'    => 'radio',
-			),
-			array(
-				'name'  => 'Checkbox',
-				'desc'  => 'Checkbox example',
-				'id'    => $this->options('name').'_checkbox',
+				'name'  => 'Appear on Front Page:',
+				'desc'  => '',
+				'id'    => $this->options('name').'_frontpage',
 				'type'  => 'checkbox',
+			),
+			array(
+				'name'  => 'Subtitle:',
+				'desc'  => 'Appears below H2 on front page.',
+				'id'    => $this->options('name').'_subtitle',
+				'type'  => 'text',
 			),
 		);
 	}

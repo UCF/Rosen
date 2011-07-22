@@ -4,7 +4,7 @@
 	<div class="span-24 last page-content" id="<?=$post->post_name?>">
 		<div class="span-18">
 			<article>
-				<h1><?php the_title();?></h1>
+				<h2><?php the_title();?></h2>
 				<?php the_content();?>
 			</article>
 		</div>
