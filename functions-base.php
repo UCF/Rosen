@@ -7,13 +7,13 @@
 class ArgumentException extends Exception{}
 class Config{
 	static
-		$body_classes      = array(), # Body classes 
-		$theme_settings    = array(), # Theme settings
+		$body_classes			 = array(), # Body classes 
+		$theme_settings		 = array(), # Theme settings
 		$custom_post_types = array(), # Custom post types to register
-		$styles            = array(), # Stylesheets to register
-		$scripts           = array(), # Scripts to register
-		$links             = array(), # <link>s to include in <head>
-		$metas             = array(); # <meta>s to include in <head>
+		$styles						 = array(), # Stylesheets to register
+		$scripts					 = array(), # Scripts to register
+		$links						 = array(), # <link>s to include in <head>
+		$metas						 = array(); # <meta>s to include in <head>
 	
 	
 	/**
@@ -32,30 +32,30 @@ class Config{
 	 * attributes.
 	 *
 	 * A string argument will be treated as the src value for the css, and all
-	 * other attributes will default to the most common values.  To override
+	 * other attributes will default to the most common values.	 To override
 	 * those values, you must pass the attribute array.
 	 *
 	 * Array Argument:
 	 * $attr = array(
-	 *    'name'  => 'theme-style',  # Wordpress uses this to identify queued files
-	 *    'media' => 'all',          # What media types this should apply to
-	 *    'admin' => False,          # Should this be used in admin as well?
-	 *    'src'   => 'http://some.domain/style.css',
+	 *		'name'	=> 'theme-style',	 # Wordpress uses this to identify queued files
+	 *		'media' => 'all',					 # What media types this should apply to
+	 *		'admin' => False,					 # Should this be used in admin as well?
+	 *		'src'		=> 'http://some.domain/style.css',
 	 * );
 	 **/
 	static function add_css($attr){
 		# Allow string arguments, defining source.
 		if (is_string($attr)){
-			$new        = array();
+			$new				= array();
 			$new['src'] = $attr;
-			$attr       = $new;
+			$attr				= $new;
 		}
 		
 		if (!isset($attr['src'])){
 			throw new ArgumentException('add_css expects argument array to contain key "src"');
 		}
 		$default = array(
-			'name'  => self::generate_name($attr['src'], '.css'),
+			'name'	=> self::generate_name($attr['src'], '.css'),
 			'media' => 'all',
 			'admin' => False,
 		);
@@ -80,24 +80,24 @@ class Config{
 	 *
 	 * Array Argument:
 	 * $attr = array(
-	 *    'name'  => 'jquery',  # Wordpress uses this to identify queued files
-	 *    'admin' => False,     # Should this be used in admin as well?
-	 *    'src'   => 'http://some.domain/style.js',
+	 *		'name'	=> 'jquery',	# Wordpress uses this to identify queued files
+	 *		'admin' => False,			# Should this be used in admin as well?
+	 *		'src'		=> 'http://some.domain/style.js',
 	 * );
 	 **/
 	static function add_script($attr){
 		# Allow string arguments, defining source.
 		if (is_string($attr)){
-			$new        = array();
+			$new				= array();
 			$new['src'] = $attr;
-			$attr       = $new;
+			$attr				= $new;
 		}
 		
 		if (!isset($attr['src'])){
 			throw new ArgumentException('add_script expects argument array to contain key "src"');
 		}
 		$default = array(
-			'name'  => self::generate_name($attr['src'], '.js'),
+			'name'	=> self::generate_name($attr['src'], '.js'),
 			'admin' => False,
 		);
 		$attr = array_merge($default, $attr);
@@ -118,11 +118,11 @@ class Config{
 
 abstract class Field{
 	function __construct($attr){
-		$this->name        = @$attr['name'];
-		$this->id          = @$attr['id'];
-		$this->value       = @$attr['value'];
+		$this->name				 = @$attr['name'];
+		$this->id					 = @$attr['id'];
+		$this->value			 = @$attr['value'];
 		$this->description = @$attr['description'];
-		$this->default     = @$attr['default'];
+		$this->default		 = @$attr['default'];
 		
 		if ($this->value === null){
 			$this->value = $this->default;
@@ -266,15 +266,15 @@ function shortcodes(){
 	$file = file_get_contents(THEME_DIR.'/shortcodes.php');
 	
 	$documentation = "\/\*\*(?P<documentation>.*?)\*\*\/";
-	$declaration   = "function[\s]+(?P<declaration>[^\(]+)";
+	$declaration	 = "function[\s]+(?P<declaration>[^\(]+)";
 	
 	# Auto generated shortcode documentation.
 	$codes = array();
-	$auto  = array_filter(installed_custom_post_types(), create_function('$c', '
+	$auto	 = array_filter(installed_custom_post_types(), create_function('$c', '
 		return $c->options("use_shortcode");
 	'));
 	foreach($auto as $code){
-		$scode  = $code->options('name').'-list';
+		$scode	= $code->options('name').'-list';
 		$plural = $code->options('plural_name');
 		$doc = <<<DOC
  Outputs a list of {$plural} filtered by tag
@@ -289,7 +289,7 @@ function shortcodes(){
 DOC;
 		$codes[] = array(
 			'documentation' => $doc,
-			'shortcode'     => $scode,
+			'shortcode'			=> $scode,
 		);
 	}
 	
@@ -298,7 +298,7 @@ DOC;
 	if ($found){
 		foreach ($matches['declaration'] as $key=>$match){
 			$codes[$match]['documentation'] = $matches['documentation'][$key];
-			$codes[$match]['shortcode']     = str_replace(
+			$codes[$match]['shortcode']			= str_replace(
 				array('sc_', '_',),
 				array('', '-',),
 				$matches['declaration'][$key]
@@ -354,7 +354,7 @@ function is_login(){
  **/
 function dump(){
 	$args = func_get_args();
-	$out  = array();
+	$out	= array();
 	foreach($args as $arg){
 		$out[] = print_r($arg, True);
 	}
@@ -377,7 +377,7 @@ function debug($string){
 
 /**
  * Responsible for running code that needs to be executed as wordpress is
- * initializing.  Good place to register scripts, stylesheets, theme elements,
+ * initializing.	Good place to register scripts, stylesheets, theme elements,
  * etc.
  **/
 function __init__(){
@@ -390,11 +390,11 @@ function __init__(){
 	register_nav_menu('sidebar-social-menu', __('Sidebar Social Menu'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
 	register_sidebar(array(
-		'name'          => __('Sidebar'),
-		'id'            => 'sidebar',
-		'description'   => 'Sidebar found throughout site',
+		'name'					=> __('Sidebar'),
+		'id'						=> 'sidebar',
+		'description'		=> 'Sidebar found throughout site',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
+		'after_widget'	=> '</div>',
 	));
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
@@ -406,9 +406,9 @@ add_action('after_setup_theme', '__init__');
  * Appends formatting styles for tinyMCE editor box.
  **/
 function editor_styles($css){
-	$css   = array_map('trim', explode(',', $css));
+	$css	 = array_map('trim', explode(',', $css));
 	$css[] = THEME_CSS_URL.'/formatting.css';
-	$css   = implode(',', $css);
+	$css	 = implode(',', $css);
 	return $css;
 }
 add_filter('mce_css', 'editor_styles');
@@ -433,7 +433,7 @@ remove_filter('the_excerpt', 'wpautop');
 
 
 /**
- * Really get the post type.  A post type of revision will return it's parent
+ * Really get the post type.	A post type of revision will return it's parent
  * post type.
  **/
 function post_type($post){
@@ -445,7 +445,7 @@ function post_type($post){
 	$post_type = $post->post_type;
 	
 	if ($post_type === 'revision'){
-		$parent    = (int)$post->post_parent;
+		$parent		 = (int)$post->post_parent;
 		$post_type = post_type($parent);
 	}
 	
@@ -454,9 +454,9 @@ function post_type($post){
 
 
 /**
- * Will return a string $s normalized to a slug value.  The optional argument, 
+ * Will return a string $s normalized to a slug value.	The optional argument, 
  * $spaces, allows you to define what spaces and other undesirable characters
- * will be replaced with.  Useful for content that will appear in urls or
+ * will be replaced with.	 Useful for content that will appear in urls or
  * turning plain text into an id.
  **/
 function slug($s, $spaces='-'){
@@ -482,7 +482,7 @@ function get_custom_post_type($name){
 
 /**
  * Wraps wordpress' native functions, allowing you to get a menu defined by
- * its location rather than the name given to the menu.  The argument $classes
+ * its location rather than the name given to the menu.	 The argument $classes
  * lets you define a custom class(es) to place on the list generated, $id does
  * the same but with an id attribute.
  *
@@ -493,7 +493,7 @@ function get_custom_post_type($name){
  **/
 function get_menu($name, $classes=null, $id=null, $callback=null){
 	$locations = get_nav_menu_locations();
-	$menu      = @$locations[$name];
+	$menu			 = @$locations[$name];
 	
 	if (!$menu){
 		return "<div class='error'>No menu location found with name '{$name}'.</div>";
@@ -522,10 +522,10 @@ function get_menu($name, $classes=null, $id=null, $callback=null){
 
 
 /**
- * Creates an arbitrary html element.  $tag defines what element will be created
- * such as a p, h1, or div.  $attr is an array defining attributes and their
+ * Creates an arbitrary html element.	 $tag defines what element will be created
+ * such as a p, h1, or div.	 $attr is an array defining attributes and their
  * associated values for the tag created. $content determines what data the tag
- * wraps.  And $self_close defines whether or not the tag should close like
+ * wraps.	 And $self_close defines whether or not the tag should close like
  * <tag></tag> (False) or <tag /> (True).
  **/
 function create_html_element($tag, $attr=array(), $content=null, $self_close=True){
@@ -546,7 +546,7 @@ function create_html_element($tag, $attr=array(), $content=null, $self_close=Tru
 
 /**
  * Creates a string of attributes and their values from the key/value defined by
- * $attr.  The string is suitable for use in html tags.
+ * $attr.	 The string is suitable for use in html tags.
  **/
 function create_attribute_string($attr){
 	$attr_string = '';
@@ -600,12 +600,12 @@ function header_($tabs=2){
  * Handles generating the meta tags configured for this theme.
  **/
 function header_meta(){
-	$metas     = Config::$metas;
+	$metas		 = Config::$metas;
 	$meta_html = array();
-	$defaults  = array();
+	$defaults	 = array();
 	
 	foreach($metas as $meta){
-		$meta        = array_merge($defaults, $meta);
+		$meta				 = array_merge($defaults, $meta);
 		$meta_html[] = create_html_element('meta', $meta);
 	}
 	$meta_html = implode("\n", $meta_html);
@@ -617,12 +617,12 @@ function header_meta(){
  * Handles generating the link tags configured for this theme.
  **/
 function header_links(){
-	$links      = Config::$links;
+	$links			= Config::$links;
 	$links_html = array();
-	$defaults   = array();
+	$defaults		= array();
 	
 	foreach($links as $link){
-		$link         = array_merge($defaults, $link);
+		$link					= array_merge($defaults, $link);
 		$links_html[] = create_html_element('link', $link, null, False);
 	}
 	
@@ -684,7 +684,7 @@ function header_title(){
 			$elements = array(
 				'content' => $content,
 			);
-		}  
+		}	 
 	} else {
 		$elements = array(
 			'site_name' => $site_name,
@@ -722,7 +722,7 @@ function body_classes(){
 
 /**
  * Returns a list of classes to determined by current user agent string, for
- * platform specific purposes.  Pulled from thematic wordpress theme
+ * platform specific purposes.	Pulled from thematic wordpress theme
  * (http://themeshaper.com/)
  **/
 function browser_classes() {
@@ -984,5 +984,43 @@ function _show_meta_boxes($post, $meta_box){
 	<p><?=$meta_box['helptxt']?></p>
 	<?php endif;?>
 	<?php
+}
+
+/**
+ * Get a theme option safely.
+ *
+ * @return $mixed or False
+ * @author Chris Conover
+ **/
+function get_theme_option($key)
+{
+	$theme_options = get_option(THEME_OPTIONS_NAME);
+	return ($theme_options !== FALSE && isset($theme_options[$key])) ? $theme_options[$key] : False;
+}
+
+/**
+ * Generate HTML for promos on home page.
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function get_promo_html()
+{
+	$promo_count = get_theme_option('promo_post_num');
+	if($promo_count === False) {
+		$promo_count = 1;
+	}
+	
+	$promos = get_posts(array('numberposts' => $promo_count));
+	
+	ob_start();
+	foreach($promos as $promo) { ?>
+		<li class="clearfix">
+			<?=get_the_post_thumbnail($promo->ID, 'medium')?>
+			<h3 class="serif"><?=$promo->post_title?></h3>
+			<?=str_replace(']]>', ']]&gt;', apply_filters('the_content', $promo->post_content));?>
+		</li>
+	<? } 
+	return ob_get_clean();
 }
 ?>

@@ -67,6 +67,7 @@ Config::$theme_settings = array(
 		'default'     => null,
 		'value'       => $theme_options['cb_domain'],
 	)),
+	/*
 	new RadioField(array(
 		'name'        => 'Radio Example',
 		'id'          => THEME_OPTIONS_NAME.'[radio]',
@@ -78,7 +79,22 @@ Config::$theme_settings = array(
 		),
 		'value'       => $theme_options['radio'],
 	)),
+	*/
+	new TextField(array(
+		'name'        => 'Number of Home Page Promos:',
+		'id'          => THEME_OPTIONS_NAME.'[promo_post_num]',
+		'description' => 'Controls how many promo posts will appear on the home page.',
+		'default'     => 1,
+	)),
 );
+
+if(get_option(THEME_OPTIONS_NAME) === False) {
+  foreach(Config::$theme_settings as $setting) {
+    if(!is_null($setting['defult'])) {
+      update_option($setting['id'], $setting['default']);
+    }
+  }
+}
 
 /**
  * Configure theme settings, see abstract class Field's descendants for

@@ -7,18 +7,7 @@
 				<h2 class="serif"><?php the_title();?></h2>
 				<p id="subtitle" class="serif"><?=get_post_meta($post->ID, 'page_subtitle', True)?></p>
 				<ul id="promos">
-				  <li class="clearfix">
-				    <img src="<?php bloginfo('stylesheet_directory'); ?>/static/img/dev/promo.png" />
-				    <h3 class="serif">Grab Your Passport</h3>
-				    <p class="serif">
-				      Immerse yourself in 
-              diverse cultures, 
-              enrich your education 
-              and cultivate your 
-              worldwide hospitality 
-              network.
-				    </p>
-				  </li>
+				  <?=get_promo_html()?>
 				</ul>
 				<div class="span-7 append-1">
 				  <div class="widget">
