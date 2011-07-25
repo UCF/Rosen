@@ -4,7 +4,7 @@
 <? if(is_page()) {?>
 	<?=get_the_post_thumbnail($post->ID, 'sidebar-feature')?>
 <? } ?>
-<?=get_menu('sidebar-nav-menu', 'menu vertical sans', 'sidebar-nav-menu')?>
+<?=get_menu('sidebar-nav-menu', 'menu vertical sans', 'sidebar-nav-menu', NULL, (is_front_page() ? 1 : 0))?>
 <?=get_today_news()?>
 <div class="sidebar-pub">
 	<h3 class="serif">Let us Cater to You</h3>

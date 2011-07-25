@@ -45,7 +45,7 @@ li.facebook > a {background-image:url('static/img/social/facebook.png');}
 li.twitter > a {background-image:url('static/img/social/twitter.png');}
 li.youtube > a {background-image:url('static/img/social/youtube.png');}
 
-.forms {padding-top:5px;clear:both;}
+.forms {padding-top:5pxlog;clear:both;}
 .forms > h3 {padding-bottom:0px;margin-bottom:5px;}
 .forms > ul {padding-left:0;margin-left:5px;padding-top:0;margin-top:0;}
 .forms > ul > li {list-style-type:none;margin-left:0;padding-left:0;}
@@ -106,10 +106,19 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 
 /*/ Subpage /*/
 #page h1 {position:relative;left:-10px;}
-#page .page-content > .span-15 {background: rgba(255,255,255,0.6);position:relative;top:-88px;left:-30px;padding-top:78px;padding-left:30px;margin-right:-20px;padding-bottom:20px;}
-#page h2 {color:#8c5c12;margin-bottom:10px;}
-#page .page-content > .span-15 h3 {color:#333;font-size:170%;font-weight:100;}
-#page .page-content > .span-15 a {color:#7e5e05 !important;}
+#page .page-content > .span-15 {background-color: rgba(255,255,255,0.6);position:relative;top:-88px;left:-30px;padding-top:78px;padding-left:30px;margin-right:-20px;padding-bottom:20px;}
+.trident #page .page-content > .span-15 {background: transparent;
+																				-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99FFFFFF,endColorstr=#99FFFFFF)"; /* IE8 */
+																				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99FFFFFF,endColorstr=#99FFFFFF);   /* IE6 & 7 */
+																				zoom: 1;}
+#page article h2 {color:#8c5c12;margin-bottom:10px;}
+#page article h3 {color:#333;font-size:170%;font-weight:100;}
+#page article  a {color:#7e5e05 !important;}
+#page article .quote {background-color:rgba(57,74,48, 0.6);padding:15px;color:#fff;font-size:105%;margin-bottom:0;}
+.trident #page article .quote {background: transparent;
+															-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99394A30,endColorstr=#99394A30)"; /* IE8 */
+															filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99394A30,endColorstr=#99394A30);   /* IE6 & 7 */
+															zoom: 1;}
 #page #sidebar {top:-89px;}
 
 #page .page-content > .span-15 .wp-caption-text {margin: 5px 20px;}

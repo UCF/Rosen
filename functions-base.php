@@ -492,7 +492,7 @@ function get_custom_post_type($name){
  * callback passed should accept one argument, which will be the items for the
  * menu in question.
  **/
-function get_menu($name, $classes=null, $id=null, $callback=null){
+function get_menu($name, $classes=null, $id=null, $callback=null, $depth = 0){
 	$locations = get_nav_menu_locations();
 	$menu			 = @$locations[$name];
 	
@@ -505,7 +505,8 @@ function get_menu($name, $classes=null, $id=null, $callback=null){
 	$args = Array('menu' => $menu, 
 								'container' => '',
 								'menu_class' => $classes,
-								'menu_id' => $id);
+								'menu_id' => $id,
+								'depth' => $depth);
 	
 	//var_dump($items);
 	if ($callback === null){

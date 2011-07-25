@@ -250,6 +250,12 @@ class Page extends CustomPostType{
 				'id'    => $this->options('name').'_subtitle',
 				'type'  => 'text',
 			),
+			array(
+				'name'  => 'Quote:',
+				'desc'  => 'Appears at the bottom of the page in a highlighed section.',
+				'id'    => $this->options('name').'_quote',
+				'type'  => 'textarea',
+			),
 		);
 	}
 }

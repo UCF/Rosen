@@ -6,6 +6,9 @@
 			<article class="serif">
 				<h2><?php the_title();?></h2>
 				<?php the_content();?>
+				<? if( ($_quote = get_post_meta($post->ID, 'page_quote', True)) != '') {?>
+					<p class="quote"><?=$_quote?></p>
+				<? } ?>
 			</article>
 		</div>
 		<div id="sidebar" class="span-8 last">

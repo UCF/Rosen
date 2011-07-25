@@ -15,7 +15,7 @@
     			</p>
     		</div>
     		<div class="span-10">
-          <?=get_menu('footer-menu', 'menu vertical clearfix', 'footer-menu')?>
+          <?=get_menu('footer-menu', 'menu vertical clearfix', 'footer-menu', NULL, 1)?>
     		</div>
     		<div class="span-7 last" id="search">
     		  <h3 class="serif"><a href="#">Search Rosen College:</a></h3>
