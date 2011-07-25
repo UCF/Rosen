@@ -72,4 +72,19 @@ function sc_object($attr){
 	return $results;
 }
 add_shortcode('sc-object', 'sc_object');
+
+/**
+ * Outputs forms, organized by the sub-category of 'Forms' they are related to.
+ * Uncategorized forms will not display.
+ *
+ * Example:
+ * [sc-forms]
+ **/
+function sc_forms(){
+	ob_start();
+	include('templates/section-forms.php');
+	return ob_get_clean();
+}
+add_shortcode('sc-forms', 'sc_forms');
+
 ?>

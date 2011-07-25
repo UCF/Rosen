@@ -254,4 +254,60 @@ class Page extends CustomPostType{
 	}
 }
 
+abstract class RosenLink extends CustomPostType{
+	public
+		$name           = 'rosen_link',
+		$plural_name    = 'Forms',
+		$singular_name  = 'Form',
+		$add_new_item   = 'Add Form',
+		$edit_item      = 'Edit Form',
+		$new_item       = 'New Form',
+		$public         = True,
+		$use_title      = True,
+		$use_metabox    = True;
+	
+	public function fields(){
+		return array(
+			array(
+				'name' => __('url'),
+				'desc' => __('URL'),
+				'id'   => $this->options('name').'_url',
+				'type' => 'text',
+			),
+		);
+	}
+}
+
+class RosenForm extends RosenLink{
+	public
+		$name           = 'rosen_form',
+		$plural_name    = 'Forms',
+		$singular_name  = 'Form',
+		$add_new_item   = 'Add Form',
+		$edit_item      = 'Edit Form',
+		$new_item       = 'New Form',
+		$public         = True,
+		$use_shortcode  = True,
+		$use_tags       = True,
+		$use_categories = True;
+	
+	public function fields(){
+		$fields   = parent::fields();
+		$fields[] = array(
+			'name'    => __('Document'),
+			'desc'    => __('Define an external url or upload a new file.  Uploaded files will override any url set.'),
+			'id'      => $this->options('name').'_file',
+			'type'    => 'file',
+		);
+		return $fields;
+	}
+	
+	static function get_url($form){
+		$x = get_post_meta($form->ID, 'rosen_form_url', True);
+		$y = wp_get_attachment_url(get_post_meta($form->ID, 'rosen_form_file', True));
+		
+		return ($y) ? $y : $x;
+	}
+}
+
 ?>

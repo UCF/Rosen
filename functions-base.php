@@ -471,6 +471,7 @@ function slug($s, $spaces='-'){
  **/
 function get_custom_post_type($name){
 	$installed = installed_custom_post_types();
+	var_dump($installed);
 	foreach($installed as $object){
 		if ($object->options('name') == $name){
 			return get_class($object);
@@ -892,6 +893,34 @@ function save_default($post_id, $field){
 	return;
 }
 
+function save_file($post_id, $field){
+	$file_uploaded = @!empty($_FILES[$field['id']]);
+	if ($file_uploaded){
+		require_once(ABSPATH.'wp-admin/includes/file.php');
+		$override['action'] = 'editpost';
+		$file               = $_FILES[$field['id']];
+		$uploaded_file      = wp_handle_upload($file, $override);
+		
+		# TODO: Pass reason for error back to frontend
+		if ($uploaded_file['error']){return;}
+		
+		$attachment = array(
+			'post_title'     => $file['name'],
+			'post_content'   => '',
+			'post_type'      => 'attachment',
+			'post_parent'    => $post_id,
+			'post_mime_type' => $file['type'],
+			'guid'           => $uploaded_file['url'],
+		);
+		$id = wp_insert_attachment($attachment, $file['file'], $post_id);
+		wp_update_attachment_metadata(
+			$id,
+			wp_generate_attachment_metadata($id, $file['file'])
+		);
+		update_post_meta($post_id, $field['id'], $id);
+	}
+}
+
 /**
  * Handles saving a custom post as well as it's custom fields and metadata.
  *
@@ -920,6 +949,9 @@ function _save_meta_data($post_id, $meta_box){
 	
 	foreach ($meta_box['fields'] as $field) {
 		switch ($field['type']){
+			case 'file':
+				save_file($post_id, $field);
+				break;
 			default:
 				save_default($post_id, $field);
 				break;
@@ -973,6 +1005,21 @@ function _show_meta_boxes($post, $meta_box){
 				<input type="checkbox" name="<?=$field['id']?>" id="<?=$field['id']?>"<?=($current_value) ? ' checked="checked"' : ''?> />
 			
 			<?php break; case 'help':?><!-- Do nothing for help -->
+			<?php break; case 'file':
+							$document_id = get_post_meta($post->ID, $field['id'], True);
+							if ($document_id){
+								$document = get_post($document_id);
+								$url      = wp_get_attachment_url($document->ID);
+							}else{
+								$document = null;
+							}
+							?>
+							<label for="file_<?=$post->ID?>"><?=$field['desc'];?></label><br />
+							<?php if($document):?>
+							Current file:
+							<a href="<?=$url?>"><?=$document->post_title?></a><br /><br />
+							<?php endif;?>
+							<input type="file" id="file_<?=$post->ID?>" name="<?=$field['id']?>"><br />
 			<?php break; default:?>
 				<p class="error">Don't know how to handle field of type '<?=$field['type']?>'</p>
 			<?php break; endswitch;?>
@@ -1023,5 +1070,52 @@ function get_promo_html()
 		</li>
 	<? } 
 	return ob_get_clean();
+}
+
+/**
+ * Fetch UCF Today Rosen News
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function get_today_news()
+{
+	$feed_url = get_theme_option('today_rosen_rss');
+	if($feed_url !== False && $feed_url != '') {
+		$rss = fetch_feed($feed_url);
+		if(!is_wp_error($rss)) {
+			$item = $rss->get_item(0);
+			$description = $item->get_description();
+			
+			// Try to extract the image from the post
+			$img = False;
+			if(preg_match('/<img([^>]+)>/', $description, $matches)) {
+				$img_src   = null;
+				$img_width = null;
+				$img_alt   = '';
+				
+				if(preg_match('/src="([^"]+)"/', $matches[1], $src_match) && preg_match('/width="(\d+)"/', $matches[1], $width_match)) {
+					$img_src   = $src_match[1];
+					$img_width = $width_match[1];
+					
+					if(preg_match('/alt="([^"]+)"/', $matches[1], $alt_match)) {
+						$img_alt = $alt_match[1];
+					}
+					
+					$img = '<img src="'.$img_src.'" width="'.(($img_width > 272) ? 272 : $img_width).'" alt="'.$alt.'" />';
+				}
+			}
+			
+			ob_start();?>
+			<div class="sidebar-pub serif">
+				<?=($img !== False) ? $img : ''?>
+				<h3><a href="<?=$item->get_permalink()?>"><?=$item->get_title()?></a></h3>
+				<p><?=strip_tags($description)?></p>
+				<a href="<?=preg_replace('/feed\/?$/', '', $feed_url)?>">More Rosen College News &raquo;</a>
+			</div>
+			<?
+			return ob_get_clean();
+		}
+	}
 }
 ?>

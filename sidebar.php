@@ -5,15 +5,7 @@
 	<?=get_the_post_thumbnail($post->ID, 'sidebar-feature')?>
 <? } ?>
 <?=get_menu('sidebar-nav-menu', 'menu vertical sans', 'sidebar-nav-menu')?>
-<div class="sidebar-pub">
-	<img src="<?php bloginfo('stylesheet_directory'); ?>/static/img/dev/news.png" />
-	<h3 class="serif">Rosen College Event Raises Thousands</h3>
-	<p class="serif">
-		Students at the Rosen College of Hospitality Management 
-		had only 14 weeks to plan, promote and produce the second 
-		annual Cabaret & Cabernet event, and they did so with flying colors.
-	</p>
-</div>
+<?=get_today_news()?>
 <div class="sidebar-pub">
 	<h3 class="serif">Let us Cater to You</h3>
 	<p class="serif">

@@ -31,7 +31,7 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
  * object.
  **/
 Config::$custom_post_types = array(
-	'Page',
+	'Page', 'RosenForm'
 );
 
 Config::$body_classes = array();
@@ -87,12 +87,20 @@ Config::$theme_settings = array(
 		'id'          => THEME_OPTIONS_NAME.'[promo_post_num]',
 		'description' => 'Controls how many promo posts will appear on the home page.',
 		'default'     => 1,
+		'value'       => $theme_options['promo_post_num']
+	)),
+	new TextField(array(
+		'name'        => 'UCF Today Rosen News RSS URL :',
+		'id'          => THEME_OPTIONS_NAME.'[today_rosen_rss]',
+		'description' => 'URL of the Rosen RSS feed on UCF Today that populated the sidebar news item.',
+		'default'     => null,
+		'value'       => $theme_options['today_rosen_rss']
 	)),
 );
 
 if(get_option(THEME_OPTIONS_NAME) === False) {
 	foreach(Config::$theme_settings as $setting) {
-		if(!is_null($setting['defult'])) {
+		if(!is_null($setting['default'])) {
 			update_option($setting['id'], $setting['default']);
 		}
 	}
@@ -141,3 +149,9 @@ if ((bool)$theme_options['gw_verify']){
 		'content' => htmlentities($theme_options['gw_verify']),
 	);
 }
+
+#Add custom javascript to admin
+function provost_admin_scripts(){
+	wp_enqueue_script('custom-admin', PROVOST_JS_URL.'/admin.js', array('jquery'), False, True);
+}
+add_action('admin_enqueue_scripts', 'provost_admin_scripts');
