@@ -1,6 +1,9 @@
 <?php disallow_direct_load('sidebar.php');?>
 
 <?php if(!function_exists('dynamic_sidebar') or !dynamic_sidebar('Sidebar')):?>
+<? if(is_page()) {?>
+	<?=get_the_post_thumbnail($post->ID, 'sidebar-feature')?>
+<? } ?>
 <?=get_menu('sidebar-nav-menu', 'menu vertical sans', 'sidebar-nav-menu')?>
 <div class="sidebar-pub">
 	<img src="<?php bloginfo('stylesheet_directory'); ?>/static/img/dev/news.png" />

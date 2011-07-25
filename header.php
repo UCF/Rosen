@@ -22,7 +22,7 @@
 			<?php endif?>	
 		</script>
 	</head>
-	<body class="<?=body_classes()?>" id="<?=is_front_page() ? 'home' : ''?>">
+	<body class="<?=body_classes()?>" id="<?=is_front_page() ? 'home' : ''?><?=is_page() ? 'page' : ''?>">
 	<div id="blueprint-container" class="container">
 			<? if(is_front_page()) {
 					$___ = query_posts(array( 'numberposts' => 1, 

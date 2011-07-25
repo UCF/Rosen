@@ -499,16 +499,17 @@ function get_menu($name, $classes=null, $id=null, $callback=null){
 		return "<div class='error'>No menu location found with name '{$name}'.</div>";
 	}
 	
-	$items = wp_get_nav_menu_items($menu);
+	//$items = wp_get_nav_menu_items($menu);
+	
+	$args = Array('menu' => $menu, 
+								'container' => '',
+								'menu_class' => $classes,
+								'menu_id' => $id);
+	
+	//var_dump($items);
 	if ($callback === null){
 		ob_start();
-		?>
-		<ul<?php if($classes):?> class="<?=$classes?>"<?php endif;?><?php if($id):?> id="<?=$id?>"<?php endif;?>>
-			<?php foreach($items as $key=>$item): $last = $key == count($items) - 1;?>
-			<li<?php if($last):?> class="last"<?php endif;?>><a href="<?=$item->url?>" class="<?=implode(' ', $item->classes)?>"><?=$item->title?></a></li>
-			<?php endforeach;?>
-		</ul>
-		<?php
+		wp_nav_menu($args);
 		$menu = ob_get_clean();
 	}else{
 		$menu = (is_array($callback)) ?
