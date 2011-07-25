@@ -1,6 +1,5 @@
 <?php disallow_direct_load('home.php');?>
 <?php get_header(); ?>
-	
 	<div class="span-24 last page-content" id="<?=$post->post_name?>">
 		<div class="span-15 append-1">
 			<article>
@@ -11,17 +10,17 @@
 				</ul>
 				<div class="span-7 append-1">
 				  <div class="widget">
-  				  <h3 class="serif">Events</h3>
-  				  <ul class="events clearfix"></ul>
-  				</div>
+					<h3 class="serif">Events</h3>
+						<ul class="events clearfix"></ul>
+				</div>
 				</div>
 				<div class="span-7 last">
 				  <div class="widget">
-  				  <h3 class="serif">Student Resources</h3>
-  				  <?=get_menu('student-resources', 'menu vertical sans', '')?>
-  				  <h3 class="serif">Academic Degress</h3>
-  				  <?=get_menu('academic-degrees', 'menu vertical sans last', '')?>
-  				</div>
+						<h3 class="serif">Student Resources</h3>
+						<?=get_menu('student-resources', 'menu vertical sans', '')?>
+						<h3 class="serif">Academic Degress</h3>
+							<?=get_menu('academic-degrees', 'menu vertical sans last', '')?>
+ 					</div>
 				</div>
 			</article>
 		</div>
@@ -31,5 +30,4 @@
 		<div class="clear"></div>
 		<?php get_template_part('templates/below-the-fold'); ?>
 	</div>
-
 <?php get_footer();?>

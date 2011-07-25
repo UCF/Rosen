@@ -89,11 +89,11 @@ Config::$theme_settings = array(
 );
 
 if(get_option(THEME_OPTIONS_NAME) === False) {
-  foreach(Config::$theme_settings as $setting) {
-    if(!is_null($setting['defult'])) {
-      update_option($setting['id'], $setting['default']);
-    }
-  }
+	foreach(Config::$theme_settings as $setting) {
+		if(!is_null($setting['defult'])) {
+			update_option($setting['id'], $setting['default']);
+		}
+	}
 }
 
 /**
