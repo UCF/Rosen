@@ -12,14 +12,12 @@ abstract class CustomPostType{
 		$use_title      = True,  # Title field
 		$use_editor     = True,  # WYSIWYG editor, post content field
 		$use_revisions  = True,  # Revisions on post content and titles
-		$use_tags       = True,  # Tags taxonomy
-		$use_categories = False, # Categories taxonomy
 		$use_thumbnails = False, # Featured images
 		$use_order      = False, # Wordpress built-in order meta data
 		$use_metabox    = False, # Enable if you have custom fields to display in admin
 		$use_shortcode  = False, # Auto generate a shortcode for the post type (see also toHTML method)
-	  $_builtin       = False; # True when extending built-in post type (post, page, etc.)
-	
+		$_builtin       = False, # True when extending built-in post type (post, page, etc.)
+		$taxonomies     = Array(); # Taxonomies associated with this post type (e.g. post_tag, category)
 	/**
 	 * Wrapper for get_posts function, that predefines post_type for this
 	 * custom post type.  Any options valid in get_posts can be passed as an
@@ -160,10 +158,11 @@ abstract class CustomPostType{
 	 **/
 	public function register(){
 		$registration = array(
-			'labels'   => $this->labels(),
-			'supports' => $this->supports(),
-			'public'   => $this->options('public'),
-			'_builtin' => $this->options('_builtin'),
+			'labels'     => $this->labels(),
+			'supports'   => $this->supports(),
+			'public'     => $this->options('public'),
+			'taxonomies' => $this->options('taxonomies'),
+			'_builtin'   => $this->options('_builtin'),
 		);
 		
 		if ($this->options('use_order')){
@@ -171,14 +170,6 @@ abstract class CustomPostType{
 		}
 		
 		register_post_type($this->options('name'), $registration);
-		
-		if ($this->options('use_categories')){
-			register_taxonomy_for_object_type('category', $this->options('name'));
-		}
-		
-		if ($this->options('use_tags')){
-			register_taxonomy_for_object_type('post_tag', $this->options('name'));
-		}
 		
 		if ($this->options('use_shortcode')){
 			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
@@ -227,15 +218,16 @@ class Page extends CustomPostType{
 		$edit_item      = 'Edit Page',
 		$new_item       = 'New Page',
 		$public         = True,
-		$use_categories = True,
 		$use_thumbnails = True,
 		$use_editor     = True,
 		$use_order      = True,
 		$use_title      = True,
 		$use_shortcode  = True,
 		$use_metabox    = True,
-		$_builtin       = True;
-	
+		$_builtin       = True,
+		
+		$taxonomies     = Array('categories');
+		
 	public function fields(){
 		return array(
 			array(
