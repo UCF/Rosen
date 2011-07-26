@@ -12,6 +12,7 @@ define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
 define('EVENT_PROXY_URL', THEME_STATIC_URL.'/event_proxy.php');
 
 add_image_size('sidebar-feature', 303, 9999, True);
+add_image_size('sidebar-profile', 109, 9999, True);
 
 require_once('functions-base.php');     # Base theme functions
 require_once('custom-taxonomies.php');	# Where per theme custom taxonomies are defined
@@ -32,11 +33,11 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
  * object.
  **/
 Config::$custom_post_types = array(
-	'Page', 'RosenForm'
+	'Page', 'RosenForm', 'RosenPerson'
 );
 
 Config::$custom_taxonomies = array(
-	
+	'RosenOrganizationalGroups'
 );
 
 Config::$body_classes = array();

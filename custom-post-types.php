@@ -286,8 +286,7 @@ class RosenForm extends RosenLink{
 		$new_item       = 'New Form',
 		$public         = True,
 		$use_shortcode  = True,
-		$use_tags       = True,
-		$use_categories = True;
+		$taxonomies     = Array('post_tag', 'categories');
 	
 	public function fields(){
 		$fields   = parent::fields();
@@ -307,5 +306,61 @@ class RosenForm extends RosenLink{
 		return ($y) ? $y : $x;
 	}
 }
+
+/**
+ * Describes a staff member of the Rosen College
+ *
+ * @author Chris Conover
+ **/
+class RosenPerson extends CustomPostType
+{
+	public
+		$name           = 'rosen_person',
+		$plural_name    = 'People',
+		$singular_name  = 'Person',
+		$add_new_item   = 'Add Person',
+		$edit_item      = 'Edit Person',
+		$new_item       = 'New Person',
+		$public         = True,
+		$use_shortcode  = True,
+		$use_metabox   = True,
+		$taxonomies     = Array('rosen_org_groups');
+		
+		public function fields(){
+			$fields = array(
+				array(
+					'name'    => __('Title Prefix'),
+					'desc'    => __('Be sure to include trailing space if neccessary.'),
+					'id'      => $this->options('name').'_title_prefix',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Title Suffix'),
+					'desc'    => __('Be sure to include leading comma or space if neccessary.'),
+					'id'      => $this->options('name').'_title_suffix',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Job Title'),
+					'desc'    => __(''),
+					'id'      => $this->options('name').'_jobtitle',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Phone'),
+					'desc'    => __('Separate multiple entries with commas.'),
+					'id'      => $this->options('name').'_phones',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Email'),
+					'desc'    => __(''),
+					'id'      => $this->options('name').'_email',
+					'type'    => 'text',
+				),
+			);
+			return $fields;
+		}
+} // END class 
 
 ?>
