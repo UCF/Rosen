@@ -76,11 +76,13 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 																zoom: 1;}
 .gecko #home #promos > li {-moz-box-shadow: 0px 0px	 5px #333;}
 .webkit .#home #promos > li {-webkit-box-shadow: 0px 0px	 5px #333;}
-#home #promos > li > img {float:left;}
-#home #promos > li > h3,
-	#home #promos > li > p {position:relative;right:-20px;padding-right:15px;}
-#home #promos > li > h3 {color:#775a09;font-size:130%;margin-bottom:5px;}
-#home #promos > li > p {font-size:120%;font-family:Georgia,serif;}
+#home #promos > li > a {text-decoration:none;}
+#home #promos > li > a:hover > p {color: #333;}
+#home #promos > li > a > img {float:left;}
+#home #promos > li > a >h3,
+	#home #promos > li > a > p {position:relative;right:-20px;padding-right:15px;}
+#home #promos > li > a > h3 {color:#775a09;font-size:130%;margin-bottom:5px;}
+#home #promos > li > a > p {font-size:120%;font-family:Georgia,serif;}
 
 #home .widget {background-color:#b3a06b;padding:10px 12px 12px 12px;box-shadow: 0px 0px 5px #333;}
 .gecko #home .widget {-moz-box-shadow: 0px 0px 5px #333;}

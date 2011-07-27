@@ -1092,11 +1092,15 @@ function get_promo_html()
 	$promos = get_posts(array('numberposts' => $promo_count));
 	
 	ob_start();
-	foreach($promos as $promo) { ?>
+	foreach($promos as $promo) { 
+		$link_url = get_post_meta($promo->ID, '_links_to', True);
+		$link_target = get_post_meta($promo->UD, '_links_to_target', True);?>
 		<li class="clearfix">
-			<?=get_the_post_thumbnail($promo->ID, 'medium')?>
-			<h3 class="serif"><?=$promo->post_title?></h3>
-			<?=str_replace(']]>', ']]&gt;', apply_filters('the_content', $promo->post_content));?>
+			<? if($link_url != '') {?><a href="<?=$link_url?>" target="<?=$link_target?>"><?}?>
+				<?=get_the_post_thumbnail($promo->ID, 'medium')?>
+				<h3 class="serif"><?=$promo->post_title?></h3>
+				<?=str_replace(']]>', ']]&gt;', apply_filters('the_content', $promo->post_content));?>
+			<? if($link_url != '') {?></a><?}?>
 		</li>
 	<? } 
 	return ob_get_clean();
