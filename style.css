@@ -10,6 +10,8 @@ html {background:#fcdd88 url('static/img/iron.gif') repeat-y top center;}
 body {}
 
 h2 {font-weight:normal;font-size:350%;margin-top:10px;}
+h2 > a {text-decoration:none;}
+h2 > a:hover {text-decoration:underline;color:#313130;}
 
 .large {font-size:130%;}
 
