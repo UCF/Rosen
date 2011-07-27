@@ -24,20 +24,19 @@
 	</head>
 	<body class="<?=body_classes()?>" id="<?=is_front_page() ? 'home' : ''?><?=is_page() ? 'page' : ''?>">
 	<div id="blueprint-container" class="container">
-			<? if(is_front_page()) {
-					$___ = query_posts(array( 'numberposts' => 1, 
-																		'orderby'     => 'rand', 
-																		'post_type'   => 'page', 
-																		'meta_key'    => 'page_frontpage', 
-																		'meta_value'  => 'on'));
-						$post = $___[0];
-						setup_postdata($post);
-						?>
-				<div id="splash-container">
-					<?=get_the_post_thumbnail($post->ID, 'full')?>
-				</div>
-				<? } ?>
-				<div id="content-container">
-				<div id="header" class="span-15 last">
-					<h1 class="span-15 last sans"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
-				</div>
+	<? if(is_front_page()) {
+			$page_posts = query_posts(array(	'numberposts' => 1,
+																				'orderby'     => 'rand',
+																				'post_type'   => 'page',
+																				'meta_key'    => 'page_frontpage',
+																				'meta_value'  => 'on'));
+			$post = $page_posts[0];
+			setup_postdata($post);?>
+		<div id="splash-container">
+			<?=get_the_post_thumbnail($post->ID, 'full')?>
+		</div>
+	<? } ?>
+		<div id="content-container">
+			<div id="header" class="span-15 last">
+				<h1 class="span-15 last sans"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
+			</div>
