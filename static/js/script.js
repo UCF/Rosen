@@ -115,4 +115,22 @@ var eventsCallback = function($, _this){
 	analytics($);
 	handleExternalLinks($);
 	$('.events').each(function(){eventsCallback($, $(this));});
+	
+	(function() {
+		$('#newsletter_signup input[type="text"]')
+			.focus(function() {
+				var email = $(this);
+				if(email.val() == 'Enter Email Address...') {
+					email.val('');
+					email.addClass('focus');
+				}
+			})
+			.blur(function() {
+				var email = $(this);
+				if(email.val() == '') {
+					email.val('Enter Email Address...');
+					email.removeClass('focus');
+				}
+			});
+	})();
 })(jQuery);

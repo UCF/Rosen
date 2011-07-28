@@ -153,11 +153,11 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 #footer {position:relative;z-index:1;background-color:#706355;color:#FFF;padding-bottom:20px;margin-bottom:0;padding-top:35px;margin-top:0px;}
 #footer #logo {text-indent:-500em;display:block; background: url('static/img/logo.png') no-repeat top center;height:55px;width:150px;}
 #footer #contact {margin:10px 0 0 15px;font-weight:100;}
-#footer #search {margin-left:15px;padding-left:15px;padding-bottom:15px;background-color:#ddcb9a;}
-#footer #search > h3 {margin-bottom:10px;font-weight:normal;font-size:120%;}
-#footer #search > h3 > a {color:#775224 !important;}
-#footer #search > form > input[type="submit"] {z-index:2;position:relative;top:1px;background:#FFF url('static/img/search.png') no-repeat center left;text-indent:-500em;width:19px;height:14px;border:none;}
-#footer #search > form > input[type="text"] {position:relative;left:-25px;z-index:1;padding-left:23px;height:20px;width:210px;}
+#footer #newsletter_signup {margin-left:15px;padding:15px 0 15px 15px;background-color:#ddcb9a;}
+#footer #newsletter_signup > h3 {color:#775224;margin-bottom:10px;font-weight:normal;font-size:120%;}
+#footer #newsletter_signup > form > input[type="text"] {height:20px;width:240px;display:block;padding:3px;color:#666;font-style:italic;}
+#footer #newsletter_signup > form > input[type="text"].focus {color:#000;font-style:normal;}
+#footer #newsletter_signup > form > input[type="submit"] {display:block;margin:10px 0 0 1px;color:#fff;background-color:#706355;border:none;padding:5px;font-size:100%;}
 #footer #footer-menu {margin-top:0;}
 #footer #footer-menu li {list-style-type:none;}
 #footer #footer-menu li > a {color:#FFF;text-decoration:underline;font-weight:100;}
