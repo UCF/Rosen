@@ -8,10 +8,15 @@ Version: v0.0.0
 /*/ Global Styles /*/
 html {background:#fcdd88 url('static/img/iron.gif') repeat-y top center;}
 body {}
+	
+ul {font-size:16px;}
 
 h2 {font-weight:normal;font-size:350%;margin-top:10px;}
 h2 > a {text-decoration:none;}
 h2 > a:hover {text-decoration:underline;color:#313130;}
+
+.sans{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+.serif{font-family: "Georgia", "serif";}
 
 .large {font-size:130%;}
 
