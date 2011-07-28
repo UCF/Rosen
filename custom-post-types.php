@@ -231,8 +231,8 @@ class Page extends CustomPostType{
 	public function fields(){
 		return array(
 			array(
-				'name'  => 'Appear on Front Page:',
-				'desc'  => '',
+				'name'  => 'Front Page:',
+				'desc'  => 'Put this page into the rotation for the front page.',
 				'id'    => $this->options('name').'_frontpage',
 				'type'  => 'checkbox',
 			),
