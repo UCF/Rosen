@@ -132,5 +132,20 @@ var eventsCallback = function($, _this){
 					email.removeClass('focus');
 				}
 			});
+		$('#search input[type="text"]')
+			.focus(function() {
+				var email = $(this);
+				if(email.val() == 'Enter Search Term...') {
+					email.val('');
+					email.addClass('focus');
+				}
+			})
+			.blur(function() {
+				var email = $(this);
+				if(email.val() == '') {
+					email.val('Enter Search Term...');
+					email.removeClass('focus');
+				}
+			});
 	})();
 })(jQuery);

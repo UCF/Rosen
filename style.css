@@ -47,6 +47,10 @@ li.facebook > a {background-image:url('static/img/social/facebook.png');}
 li.twitter > a {background-image:url('static/img/social/twitter.png');}
 li.youtube > a {background-image:url('static/img/social/youtube.png');}
 
+#sidebar #search > form > input[type="text"] {height:20px;width:265px;display:block;padding:3px;color:#666;font-style:italic;}
+#sidebar #search > form > input[type="text"].focus {color:#000;font-style:normal;}
+#sidebar #search > form > input[type="submit"] {display:block;margin:7px 0 0 1px;color:#fff;background-color:#706355;border:none;padding:5px;font-size:100%;}
+
 .forms {padding-top:5pxlog;clear:both;}
 .forms > h3 {padding-bottom:0px;margin-bottom:5px;}
 .forms > ul {padding-left:0;margin-left:5px;padding-top:0;margin-top:0;}
