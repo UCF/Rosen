@@ -80,7 +80,7 @@ var eventsCallback = function($, _this){
 
 	$.getUCFEvents({
 			'calendar_id' : calendar,
-			'url'         : EVENT_PROXY_URL + '/events.php',
+			'url'         : EVENT_PROXY_URL,
 			'limit'       : limit}, function(data, status, request){
 		if (data == null){return;}
 
@@ -105,6 +105,7 @@ var eventsCallback = function($, _this){
 			_this.append(event);
 		}
 	});
+}
 var loadMoreSearchResults = function($){
 	var more  = '#search-results .more';
 	var items = '#search-results .result-list .item';
