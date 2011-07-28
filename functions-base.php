@@ -1114,7 +1114,11 @@ function get_promo_html()
  **/
 function get_today_news()
 {
-	$feed_url = get_theme_option('today_rosen_rss');
+	global $post;
+	
+	if( ($feed_url = get_post_meta($post->ID, 'page_feed', True)) == '') {
+		$feed_url = get_theme_option('today_rosen_rss');
+	}
 	if($feed_url !== False && $feed_url != '') {
 		$rss = fetch_feed($feed_url);
 		if(!is_wp_error($rss)) {

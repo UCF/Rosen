@@ -248,6 +248,12 @@ class Page extends CustomPostType{
 				'id'    => $this->options('name').'_quote',
 				'type'  => 'textarea',
 			),
+			array(
+				'name'  => 'Alternate New Feed URL:',
+				'desc'  => 'Overrid theme options news feed URL.',
+				'id'    => $this->options('name').'_feed',
+				'type'  => 'text',
+			),
 		);
 	}
 }
