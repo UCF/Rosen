@@ -47,9 +47,11 @@ li.facebook > a {background-image:url('static/img/social/facebook.png');}
 li.twitter > a {background-image:url('static/img/social/twitter.png');}
 li.youtube > a {background-image:url('static/img/social/youtube.png');}
 
-#sidebar #search > form > input[type="text"] {height:20px;width:265px;display:block;padding:3px;color:#666;font-style:italic;}
+#sidebar #search > form > input[type="text"] {height:20px;width:199px;display:block;padding:3px;color:#666;font-style:italic;float:left;}
+.webkit #sidebar #search > form > input[type="text"] {width:205px;}
 #sidebar #search > form > input[type="text"].focus {color:#000;font-style:normal;}
-#sidebar #search > form > input[type="submit"] {display:block;margin:7px 0 0 1px;color:#fff;background-color:#706355;border:none;padding:5px;font-size:100%;}
+#sidebar #search > form > input[type="submit"] {margin:0px 0 0 5px;color:#fff;background-color:#706355;border:1px solid #706355;padding:5px;font-size:100%;}
+.gecko #sidebar #search > form > input[type="submit"] {padding-top:4px;padding-bottom:4px;}
 
 .forms {padding-top:5pxlog;clear:both;}
 .forms > h3 {padding-bottom:0px;margin-bottom:5px;}
@@ -159,9 +161,11 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 #footer #contact {margin:10px 0 0 15px;font-weight:100;}
 #footer #newsletter_signup {margin-left:15px;padding:15px 0 15px 15px;background-color:#ddcb9a;}
 #footer #newsletter_signup > h3 {color:#775224;margin-bottom:10px;font-weight:normal;font-size:120%;}
-#footer #newsletter_signup > form > input[type="text"] {height:20px;width:240px;display:block;padding:3px;color:#666;font-style:italic;}
+#footer #newsletter_signup > form > input[type="text"] {height:20px;width:180px;display:block;padding:3px;color:#666;font-style:italic;float:left;}
+.webkit #footer #newsletter_signup > form > input[type="text"] {width:190px;}
 #footer #newsletter_signup > form > input[type="text"].focus {color:#000;font-style:normal;}
-#footer #newsletter_signup > form > input[type="submit"] {display:block;margin:10px 0 0 1px;color:#fff;background-color:#706355;border:none;padding:5px;font-size:100%;}
+#footer #newsletter_signup > form > input[type="submit"] {margin:1px 0 0 5px;color:#fff;background-color:#706355;border:1px solid #706355;padding:5px;font-size:100%;}
+.gecko #footer #newsletter_signup > form > input[type="submit"] {padding-top:4px;padding-bottom:4px;}
 #footer #footer-menu {margin-top:0;}
 #footer #footer-menu li {list-style-type:none;}
 #footer #footer-menu li > a {color:#FFF;text-decoration:underline;font-weight:100;}
