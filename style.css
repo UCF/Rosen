@@ -52,6 +52,7 @@ li.youtube > a {background-image:url('static/img/social/youtube.png');}
 #sidebar #search > form > input[type="text"].focus {color:#000;font-style:normal;}
 #sidebar #search > form > input[type="submit"] {margin:0px 0 0 5px;color:#fff;background-color:#706355;border:1px solid #706355;padding:5px;font-size:100%;}
 .gecko #sidebar #search > form > input[type="submit"] {padding-top:4px;padding-bottom:4px;}
+.msie7 #sidebar #search > form > input[type="submit"] {padding:3px 0 3px 0;}
 
 .forms {padding-top:5pxlog;clear:both;}
 .forms > h3 {padding-bottom:0px;margin-bottom:5px;}
@@ -166,6 +167,7 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 #footer #newsletter_signup > form > input[type="text"].focus {color:#000;font-style:normal;}
 #footer #newsletter_signup > form > input[type="submit"] {margin:1px 0 0 5px;color:#fff;background-color:#706355;border:1px solid #706355;padding:5px;font-size:100%;}
 .gecko #footer #newsletter_signup > form > input[type="submit"] {padding-top:4px;padding-bottom:4px;}
+.msie7 #footer #newsletter_signup > form > input[type="submit"] {padding:3px 0 3px 0;}
 #footer #footer-menu {margin-top:0;}
 #footer #footer-menu li {list-style-type:none;}
 #footer #footer-menu li > a {color:#FFF;text-decoration:underline;font-weight:100;}
