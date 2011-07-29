@@ -341,7 +341,7 @@ function sc_flickr_gallery($atts = Array())
 		<ul id="flickr_gallery">
 			<?foreach($photos as $photo) {?>
 				<li class="<?=((($count % 7) == 0) ? 'last' :'')?>">
-					<a href="<?=substr($photo['src'], 0, strlen($photo['src']) - 6).'.jpg'?>">
+					<a href="<?=substr($photo['src'], 0, strlen($photo['src']) - 6).'_z.jpg'?>">
 						<img src="<?=substr($photo['src'], 0, strlen($photo['src']) - 6).'_s.jpg'?>" />
 					</a>
 				</li>
