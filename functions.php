@@ -11,7 +11,7 @@ define('THEME_OPTIONS_NAME', 'theme');
 define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
 define('EVENT_PROXY_URL', THEME_STATIC_URL.'/event_proxy.php');
 
-add_image_size('sidebar-feature', 303, 9999, True);
+add_image_size('sidebar-feature', 303, 360, True);
 
 require_once('functions-base.php');     # Base theme functions
 require_once('custom-taxonomies.php');	# Where per theme custom taxonomies are defined
@@ -111,7 +111,7 @@ Config::$theme_settings = array(
 	)),
 	new TextField(array(
 		'name'        => 'Gallery Feed URL:',
-		'id'          => THEME_OPTIONS_NAME.'[aboutus_featured_group]',
+		'id'          => THEME_OPTIONS_NAME.'[gallery_feed_url]',
 		'description' => 'Expects a Flickr RSS feed URL.',
 		'default'     => 'http://api.flickr.com/services/feeds/photoset.gne?set=72157624283202883&nsid=36226710@N08&lang=en-us',
 		'value'       => $theme_options['gallery_feed_url']
