@@ -296,7 +296,7 @@ function sc_staff($atts = Array())
 add_shortcode('sc-staff', 'sc_staff');
 
 /**
- * undocumented function
+ * Get gallery images from Flickr RSS feed and render them
  *
  * @return void
  * @author Chris Conover
