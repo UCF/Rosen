@@ -199,9 +199,11 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 #flickr_gallery > li > a {display:block;}
 #flickr_gallery > li > a > img {width:75px;height:75px;border:1px solid #7e5e05;}
 
-/*/ Open House at Rosen /*/
-#open-house-at-rosen table th {width:200px;}
-#open-house-at-rosen table input[type="text"] {width:250px;}
+/*/ Open House at Rosen - Rosen Campus Tour /*/
+#open-house-at-rosen table th,
+ 		#rosen-campus-tour table th {width:200px;}
+#open-house-at-rosen table input[type="text"],
+ 		#rosen-campus-tour table input[type="text"] {width:250px;}
 
 /*/ Footer /*/
 #footer {position:relative;z-index:1;background-color:#706355;color:#FFF;padding-bottom:20px;margin-bottom:0;padding-top:35px;margin-top:0px;}
