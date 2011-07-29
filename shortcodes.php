@@ -140,7 +140,15 @@ add_shortcode('sc-object', 'sc_object');
  * Example:
  * [sc-forms]
  **/
-function sc_forms(){
+function sc_forms($atts = Array()){
+	
+	$category_name = (isset($atts['category'])) ? $atts['category'] : False;
+	if($category_name !== False) {
+		if(($category = get_term_by('name', $category_name, 'category')) !== False) {
+			$categories = Array($category);
+		}	
+		unset($category);
+	}
 	ob_start();
 	include('templates/section-forms.php');
 	return ob_get_clean();

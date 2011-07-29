@@ -1,11 +1,12 @@
 <?php
 	$rosen_forms = new Form();
-	$categories    = get_categories(array(
-		'orderby' => 'name',
-		'order'   => 'ASC',
-		'parent'  => get_category_by_slug('forms')->term_id,
-	));
-
+	if(!isset($categories)) {
+		$categories    = get_categories(array(
+			'orderby' => 'name',
+			'order'   => 'ASC',
+			'parent'  => get_category_by_slug('forms')->term_id,
+		));
+	}
 ?>
 
 <div class="forms">
