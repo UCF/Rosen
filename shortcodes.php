@@ -286,4 +286,63 @@ function sc_staff($atts = Array())
 	return ob_get_clean();
 }
 add_shortcode('sc-staff', 'sc_staff');
+
+/**
+ * undocumented function
+ *
+ * @return void
+ * @author Chris Conover
+ **/
+function sc_flickr_gallery($atts = Array())
+{
+	$num_photos = (isset($atts['num_photos']) && is_int($atts['num_photos'])) ? $atts['num_photos'] : 25;
+	$feed_url = get_theme_option('gallery_feed_url');
+	
+	if($feed_url !== False) {
+		$rss = fetch_feed($feed_url);
+		if(!is_wp_error($rss)) {
+			$items = $rss->get_items(0, $rss->get_item_quantity($num_photos));
+			$photos = Array();
+			foreach($items as $item) {
+				if(preg_match('/<img([^>]+)>/', $item->get_description(), $matches) == 1) {
+					$img_atts   = $matches[1];
+					$img_src    = null;
+					$img_width  = null;
+					$img_height = null;
+					
+					if(preg_match('/src="([^"]+)"/', $img_atts, $matches) == 1) {
+						$img_src = $matches[1];
+					}
+					if(preg_match('/width="(\d+)"/', $img_atts, $matches) == 1) {
+						$img_width = $matches[1];
+					}
+					if(preg_match('/height="(\d+)"/', $img_atts, $matches) == 1) {
+						$img_height = $matches[1];
+					}
+					if(!is_null($img_src) && !is_null($img_width) && !is_null($img_height)) {
+						array_push($photos, array('src'    => $img_src, 
+																			'width'  => $img_width, 
+																			'height' => $img_height,
+																			'link'   => $item->get_link()));
+					}
+				}
+			}
+		}
+		$count = 1;
+		ob_start();?>
+		<ul id="flickr_gallery">
+			<?foreach($photos as $photo) {?>
+				<li class="<?=((($count % 7) == 0) ? 'last' :'')?>">
+					<a href="<?=substr($photo['src'], 0, strlen($photo['src']) - 6).'.jpg'?>">
+						<img src="<?=substr($photo['src'], 0, strlen($photo['src']) - 6).'_s.jpg'?>" />
+					</a>
+				</li>
+			<?$count++;
+			}?>
+		</ul>
+		<?
+		return ob_get_clean();
+	}
+}
+add_shortcode('flickr-gallery', 'sc_flickr_gallery');
 ?>

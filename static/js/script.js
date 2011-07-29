@@ -252,43 +252,53 @@ var slideshow = function($){
 };
 
 (function($){
-	slideshow($);
-	chartbeat($);
-	analytics($);
-	handleExternalLinks($);
-	$('.events').each(function(){eventsCallback($, $(this));});
+	$().ready(function() {
+		slideshow($);
+		chartbeat($);
+		analytics($);
+		handleExternalLinks($);
+		$('.events').each(function(){eventsCallback($, $(this));});
 	
-	(function() {
-		$('#newsletter_signup input[type="text"]')
-			.focus(function() {
-				var email = $(this);
-				if(email.val() == 'Enter Email Address...') {
-					email.val('');
-					email.addClass('focus');
-				}
-			})
-			.blur(function() {
-				var email = $(this);
-				if(email.val() == '') {
-					email.val('Enter Email Address...');
-					email.removeClass('focus');
-				}
+		(function() {
+			$('#newsletter_signup input[type="text"]')
+				.focus(function() {
+					var email = $(this);
+					if(email.val() == 'Enter Email Address...') {
+						email.val('');
+						email.addClass('focus');
+					}
+				})
+				.blur(function() {
+					var email = $(this);
+					if(email.val() == '') {
+						email.val('Enter Email Address...');
+						email.removeClass('focus');
+					}
+				});
+			$('#search input[type="text"]')
+				.focus(function() {
+					var email = $(this);
+					if(email.val() == 'Enter Search Term...') {
+						email.val('');
+						email.addClass('focus');
+					}
+				})
+				.blur(function() {
+					var email = $(this);
+					if(email.val() == '') {
+						email.val('Enter Search Term...');
+						email.removeClass('focus');
+					}
+				});
+			
+			$('#flickr_gallery a').lightBox({
+				imageLoading:THEME_IMG_URL + '/lightbox/lightbox-ico-loading.gif',
+				imageBtnClose:THEME_IMG_URL + '/lightbox/lightbox-btn-close.gif',
+				imageBtnPrev:THEME_IMG_URL + '/lightbox/lightbox-btn-prev.gif',
+				imageBtnNext:THEME_IMG_URL + '/lightbox/lightbox-btn-next.gif',
+				imageBlank: THEME_IMG_URL + '/lightbox/lightbox-blank.gif',
 			});
-		$('#search input[type="text"]')
-			.focus(function() {
-				var email = $(this);
-				if(email.val() == 'Enter Search Term...') {
-					email.val('');
-					email.addClass('focus');
-				}
-			})
-			.blur(function() {
-				var email = $(this);
-				if(email.val() == '') {
-					email.val('Enter Search Term...');
-					email.removeClass('focus');
-				}
-			});
-	})();
-	loadMoreSearchResults($);
+		})();
+		loadMoreSearchResults($);
+	});
 })(jQuery);

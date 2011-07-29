@@ -147,6 +147,7 @@ Config::$styles = array(
 	THEME_CSS_URL.'/yahoo-fonts.css',
 	THEME_CSS_URL.'/webcom-base.css',
 	get_bloginfo('stylesheet_url'),
+	THEME_CSS_URL.'/jquery.lightbox-0.5.css',
 );
 
 Config::$scripts = array(
@@ -158,6 +159,7 @@ Config::$scripts = array(
 	THEME_JS_URL.'/jquery-uniform.js',
 	'http://events.ucf.edu/tools/script.js',
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
+	THEME_JS_URL.'/jquery.lightbox-0.5.pack.js',
 );
 
 Config::$metas = array(

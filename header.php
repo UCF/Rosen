@@ -18,8 +18,9 @@
 			var _sf_startpt     = (new Date()).getTime();
 			var _gaq            = _gaq || [];
 			<?php if(EVENT_PROXY_URL):?>
-			var EVENT_PROXY_URL      = '<?=EVENT_PROXY_URL?>';
+			var EVENT_PROXY_URL = '<?=EVENT_PROXY_URL?>';
 			<?php endif?>	
+			var THEME_IMG_URL   = '<?=THEME_IMG_URL?>';
 		</script>
 	</head>
 	<body class="<?=body_classes()?>" id="<?=is_front_page() ? 'home' : ''?><?=is_page() ? 'page' : ''?>">
