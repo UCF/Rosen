@@ -156,10 +156,17 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 .dept table .phones > ul > li {list-style-type:none;margin:0;padding:0;}
 .dept table .email {width:15%;}
 .dept table tr.odd {background-color:rgba(255, 255, 255, 0.4);}
+.trident .dept table tr.odd td {background: transparent;
+															-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#66FFFFFF,endColorstr=#66FFFFFF)"; /* IE8 */
+															filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66FFFFFF,endColorstr=#66FFFFFF);   /* IE6 & 7 */
+															zoom: 1;}
 
 .dept > ul {margin:0;padding:0;}
-.dept > ul > li {font-size:80%;margin:0;padding:0;float:left;list-style-type:none;width:110px;height:190px;margin-right:15px;}
-.dept > ul .title {margin-bottom:0;}
+.dept > ul > li {font-size:80%;margin:0 0 10px 0;padding:0;float:left;list-style-type:none;width:111px;margin-right:48px;}
+.dept > ul > li.last {margin-right:0;}
+.dept > ul img {display:block;width:109px;height:120px;border:1px solid #7e5e05;margin-bottom:5px;}
+.dept > ul .name {margin-bottom:0;}
+.dept > ul .title {margin-bottom:0;font-size:90%;}
 
 /*/ Footer /*/
 #footer {position:relative;z-index:1;background-color:#706355;color:#FFF;padding-bottom:20px;margin-bottom:0;padding-top:35px;margin-top:0px;}

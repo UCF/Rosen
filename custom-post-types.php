@@ -258,9 +258,9 @@ class Page extends CustomPostType{
 	}
 }
 
-abstract class RosenLink extends CustomPostType{
+abstract class Link extends CustomPostType{
 	public
-		$name           = 'rosen_link',
+		$name           = 'link',
 		$plural_name    = 'Forms',
 		$singular_name  = 'Form',
 		$add_new_item   = 'Add Form',
@@ -282,9 +282,9 @@ abstract class RosenLink extends CustomPostType{
 	}
 }
 
-class RosenForm extends RosenLink{
+class Form extends Link{
 	public
-		$name           = 'rosen_form',
+		$name           = 'form',
 		$plural_name    = 'Forms',
 		$singular_name  = 'Form',
 		$add_new_item   = 'Add Form',
@@ -306,8 +306,8 @@ class RosenForm extends RosenLink{
 	}
 	
 	static function get_url($form){
-		$x = get_post_meta($form->ID, 'rosen_form_url', True);
-		$y = wp_get_attachment_url(get_post_meta($form->ID, 'rosen_form_file', True));
+		$x = get_post_meta($form->ID, 'form_url', True);
+		$y = wp_get_attachment_url(get_post_meta($form->ID, 'form_file', True));
 		
 		return ($y) ? $y : $x;
 	}
@@ -318,10 +318,10 @@ class RosenForm extends RosenLink{
  *
  * @author Chris Conover
  **/
-class RosenPerson extends CustomPostType
+class Person extends CustomPostType
 {
 	public
-		$name           = 'rosen_person',
+		$name           = 'person',
 		$plural_name    = 'People',
 		$singular_name  = 'Person',
 		$add_new_item   = 'Add Person',
@@ -329,7 +329,9 @@ class RosenPerson extends CustomPostType
 		$new_item       = 'New Person',
 		$public         = True,
 		$use_shortcode  = True,
-		$use_metabox   = True,
+		$use_metabox    = True,
+		$use_thumbnails = True,
+		$use_order      = True,
 		$taxonomies     = Array('rosen_org_groups');
 		
 		public function fields(){

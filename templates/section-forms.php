@@ -24,7 +24,7 @@
 		<?php foreach($forms as $form):?>
 		<?php
 			$url  = get_post_meta($form->ID, $rosen_forms->options('name').'_url', True);
-			$file = get_post_meta($form->ID, 'rosen_form_file', true);
+			$file = get_post_meta($form->ID, 'form_file', true);
 			if ($file){
 				$url = wp_get_attachment_url(get_post($file)->ID);
 			}

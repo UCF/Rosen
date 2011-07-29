@@ -12,7 +12,6 @@ define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
 define('EVENT_PROXY_URL', THEME_STATIC_URL.'/event_proxy.php');
 
 add_image_size('sidebar-feature', 303, 9999, True);
-add_image_size('sidebar-profile', 109, 9999, True);
 
 require_once('functions-base.php');     # Base theme functions
 require_once('custom-taxonomies.php');	# Where per theme custom taxonomies are defined
@@ -33,7 +32,7 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
  * object.
  **/
 Config::$custom_post_types = array(
-	'Page', 'RosenForm', 'RosenPerson'
+	'Page', 'Form', 'Person'
 );
 
 Config::$custom_taxonomies = array(
@@ -96,11 +95,19 @@ Config::$theme_settings = array(
 		'value'       => $theme_options['promo_post_num']
 	)),
 	new TextField(array(
-		'name'        => 'UCF Today Rosen News RSS URL :',
+		'name'        => 'UCF Today Rosen News RSS URL:',
 		'id'          => THEME_OPTIONS_NAME.'[today_rosen_rss]',
 		'description' => 'URL of the Rosen RSS feed on UCF Today that populated the sidebar news item.',
 		'default'     => null,
 		'value'       => $theme_options['today_rosen_rss']
+	)),
+	new TextField(array(
+		'name'        => 'About Us Page Featured Group Name:',
+		'id'          => THEME_OPTIONS_NAME.'[aboutus_featured_group]',
+		'description' => 'The group name specified here will be featured on the About Us page as a series of 
+											images and titles rather than the default table format.',
+		'default'     => 'Dean\'s Suite',
+		'value'       => $theme_options['aboutus_featured_group']
 	)),
 );
 
