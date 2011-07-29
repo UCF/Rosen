@@ -144,13 +144,25 @@ function sc_staff($atts = Array())
 						$img = get_the_post_thumbnail($person->ID, 'full');
 						?>
 					<li class="<?=((($count % 4) == 0) ? 'last':'')?>">
-						<? if($img == '') {?>
-							<img src="<?=bloginfo('stylesheet_directory')?>/static/img/no-photo.jpg" alt="not photo available"/>
-						<? } else {?> 
-							<?=$img?>
-						<? } ?>
-						<p class="name"><strong><?=get_person_name($person)?></strong></p>
-						<p class="title"><?=get_post_meta($person->ID, 'person_jobtitle', True)?></p>
+						<a href="<?=get_permalink($person->ID)?>">
+							<? if($img == '') {?>
+								<img src="<?=bloginfo('stylesheet_directory')?>/static/img/no-photo.jpg" alt="not photo available"/>
+							<? } else {?> 
+								<?=$img?>
+							<? } ?>
+						</a>
+							<p class="name">
+								<strong>
+									<a href="<?=get_permalink($person->ID)?>">
+										<?=get_person_name($person)?>
+									</a>
+								</strong>
+							</p>
+							<p class="title">
+								<a href="<?=get_permalink($person->ID)?>">
+									<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
+								</a>
+							</p>
 					</li>
 				<?$count++; 
 					} ?>
@@ -180,16 +192,30 @@ function sc_staff($atts = Array())
 								$email = get_post_meta($person->ID, 'person_email', True);
 							?>
 								<tr class="sans <?=((($count % 2) == 0) ? 'even' : 'odd')?>">
-									<td class="name"><?=get_person_name($person)?></td>
-									<td class="job_title"><?=get_post_meta($person->ID, 'person_jobtitle', True)?></td>
+									<td class="name">
+										<a href="<?=get_permalink($person->ID)?>">
+											<?=get_person_name($person)?>
+										</a>
+									</td>
+									<td class="job_title">
+										<a href="<?=get_permalink($person->ID)?>">
+											<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
+											</a>
+										</td>
 									<td class="phones">
 										<ul>
 											<? foreach(get_person_phones($person->ID) as $phone) { ?>
-											<li><?=$phone?></li>
+											<li>
+												<a href="<?=get_permalink($person->ID)?>">
+													<?=$phone?>
+												</a>
+											</li>
 											<? } ?>
 										</ul>
 									</td>
-									<td class="email"><?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?></td>
+									<td class="email">
+										<?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?>
+									</td>
 								</tr>
 						<? } ?>
 					</body>

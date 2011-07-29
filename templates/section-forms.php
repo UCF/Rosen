@@ -1,5 +1,5 @@
 <?php
-	$rosen_forms = new RosenForm();
+	$rosen_forms = new Form();
 	$categories    = get_categories(array(
 		'orderby' => 'name',
 		'order'   => 'ASC',
@@ -17,7 +17,7 @@
 				'numberposts' => -1,
 				'orderby'     => 'title',
 				'order'       => 'ASC',
-				'post_type'   => 'rosen_form',
+				'post_type'   => 'form',
 				'category'    => $category->term_id,
 			));
 		?>
