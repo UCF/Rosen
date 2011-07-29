@@ -292,7 +292,7 @@ class Form extends Link{
 		$new_item       = 'New Form',
 		$public         = True,
 		$use_shortcode  = True,
-		$taxonomies     = Array('post_tag', 'categories');
+		$taxonomies     = Array('post_tag', 'category');
 	
 	public function fields(){
 		$fields   = parent::fields();
