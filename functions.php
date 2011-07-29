@@ -109,6 +109,13 @@ Config::$theme_settings = array(
 		'default'     => 'Dean\'s Suite',
 		'value'       => $theme_options['aboutus_featured_group']
 	)),
+	new TextField(array(
+		'name'        => 'Gallery Feed URL:',
+		'id'          => THEME_OPTIONS_NAME.'[aboutus_featured_group]',
+		'description' => 'Expects a Flickr RSS feed URL.',
+		'default'     => 'http://api.flickr.com/services/feeds/photoset.gne?set=72157624283202883&nsid=36226710@N08&lang=en-us',
+		'value'       => $theme_options['gallery_feed_url']
+	)),
 );
 
 if(get_option(THEME_OPTIONS_NAME) === False) {
