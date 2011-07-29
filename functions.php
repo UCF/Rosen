@@ -11,6 +11,18 @@ define('THEME_OPTIONS_NAME', 'theme');
 define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
 define('EVENT_PROXY_URL', THEME_STATIC_URL.'/event_proxy.php');
 
+// Allow input and select tags in post bodies
+$allowedposttags['input'] = Array('type'  => array(),
+																	'value' => array(),
+																	'id'    => array(),
+																	'name'  => array(),
+																	'class' => array());
+$allowedposttags['select'] = Array('id'   => array(),
+																	'name'  => array());
+$allowedposttags['option'] = Array('id'   => array(),
+																	'name'  => array(),
+																	'value' => array());
+//Custom Image Sizes
 add_image_size('sidebar-feature', 303, 360, True);
 
 require_once('functions-base.php');     # Base theme functions
