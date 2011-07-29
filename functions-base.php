@@ -389,7 +389,8 @@ function __init__(){
 	register_nav_menu('academic-degrees', __('Academic Degrees'));
 	register_nav_menu('sidebar-nav-menu', __('Sidebar Navigation Menu'));
 	register_nav_menu('sidebar-social-menu', __('Sidebar Social Menu'));
-	register_nav_menu('footer-menu', __('Footer Menu'));
+	register_nav_menu('footer-menu-left', __('Footer Menu Left'));
+	register_nav_menu('footer-menu-right', __('Footer Menu Right'));
 	register_sidebar(array(
 		'name'					=> __('Sidebar'),
 		'id'						=> 'sidebar',

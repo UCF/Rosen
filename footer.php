@@ -15,7 +15,12 @@
 					</p>
 				</div>
 				<div class="span-10">
-					<?=get_menu('footer-menu', 'menu vertical clearfix', 'footer-menu', NULL, 1)?>
+					<div class="span-5">
+						<?=get_menu('footer-menu-left', 'menu vertical clearfix footer-menu', 'footer-menu-left', NULL, 1)?>
+					</div>
+					<div class="span-5 last">
+						<?=get_menu('footer-menu-right', 'menu vertical clearfix footer-menu', 'footer-menu-right', NULL, 0)?>
+					</div>
 				</div>
 				<div class="span-7 last" id="newsletter_signup">
 					<h3 class="serif">Sign Up for  the Newsletter:</h3>

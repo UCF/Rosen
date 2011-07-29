@@ -196,6 +196,6 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 #footer #newsletter_signup > form > input[type="submit"] {margin:1px 0 0 5px;color:#fff;background-color:#706355;border:1px solid #706355;padding:5px;font-size:100%;}
 .gecko #footer #newsletter_signup > form > input[type="submit"] {padding-top:4px;padding-bottom:4px;}
 .msie7 #footer #newsletter_signup > form > input[type="submit"] {padding:3px 0 3px 0;}
-#footer #footer-menu {margin-top:0;}
-#footer #footer-menu li {list-style-type:none;}
-#footer #footer-menu li > a {color:#FFF;text-decoration:underline;font-weight:100;}
+#footer .footer-menu {margin-top:0;}
+#footer .footer-menu li {list-style-type:none;}
+#footer .footer-menu li > a {color:#FFF;text-decoration:underline;font-weight:100;}
