@@ -1214,4 +1214,38 @@ function get_today_news()
 		}
 	}
 }
+
+/**
+ * Get meta info for a person.
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function get_person_meta($post_id)
+{
+	$img    = get_the_post_thumbnail($post_id, 'full');
+	$title  = get_post_meta($post_id, 'person_jobtitle', True);
+	$phones = get_post_meta($post_id, 'person_phones', True);
+	$phones = ($phones != '') ? explode(',', $phones) : Array();
+	$email  = get_post_meta($post_id, 'person_email', True);
+	
+	ob_start()?>
+	<div id="person-meta">
+		<? if($img == '') {?>
+			<img src="<?=bloginfo('stylesheet_directory')?>/static/img/no-photo.jpg" alt="not photo available"/>
+		<? } else {?> 
+			<?=get_the_post_thumbnail($post_id, 'full')?>
+		<? } ?>
+		<p class="title"><?=$title?></p>
+		<ul class="phones">
+			<? foreach($phones as $phone) { ?>
+			<li>
+				<?=$phone?>
+			</li>
+			<? } ?>
+		</ul>
+		<?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?>
+	</div><?
+	return ob_get_clean();
+}
 ?>
