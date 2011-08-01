@@ -20,8 +20,6 @@ h2 > a:hover {text-decoration:underline;color:#313130;}
 
 .large {font-size:130%;}
 
-label {font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";font-weight:normal;font-size:100%;}
-
 #sidebar {position:relative;top:-65px;}
 #sidebar-nav-menu {margin:0 0 35px -10px;padding: 15px 0 105px 45px;background-color:rgba(204, 193, 163, 0.45);}
 .trident #sidebar-nav-menu { background: transparent;
@@ -66,11 +64,11 @@ li.youtube > a {background-image:url('static/img/social/youtube.png');}
 .forms > ul {padding-left:0;margin-left:5px;padding-top:0;margin-top:0;}
 .forms > ul > li {list-style-type:none;margin-left:0;padding-left:0;}
 
-form table th {font-size:110%;}
-form table tr td {padding-bottom:15px;}
-form textarea {height:5em;}
+form .uberlabel {font-size:100%;text-align:right;font-weight:bold;}
+form .fields input {display:block;margin-bottom:10px;width:200px;}
+form .fields label {display:block;padding-bottom:0px;margin-bottom:0;}
 form input[type="text"].short {width:25px !important;}
-form input[type="submit"] {background-color:#706355;color:#FFF;border:1px solid #706355;padding:5px;	}
+form input[type="submit"] {background-color:#706355;color:#FFF;border:1px solid #706355;padding:5px;border-radius:3px;font-size:110%;margin-top:10px;}
 
 /*/ Header /*/
 #header {border-bottom:0;}
@@ -198,12 +196,6 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 #flickr_gallery > li.last {margin-right:0;}
 #flickr_gallery > li > a {display:block;}
 #flickr_gallery > li > a > img {width:75px;height:75px;border:1px solid #7e5e05;}
-
-/*/ Open House at Rosen - Rosen Campus Tour /*/
-#open-house-at-rosen table th,
- 		#rosen-campus-tour table th {width:200px;}
-#open-house-at-rosen table input[type="text"],
- 		#rosen-campus-tour table input[type="text"] {width:250px;}
 
 /*/ Footer /*/
 #footer {position:relative;z-index:1;background-color:#706355;color:#FFF;padding-bottom:20px;margin-bottom:0;padding-top:35px;margin-top:0px;}
