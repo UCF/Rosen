@@ -298,6 +298,18 @@ var slideshow = function($){
 				imageBtnNext:THEME_IMG_URL + '/lightbox/lightbox-btn-next.gif',
 				imageBlank: THEME_IMG_URL + '/lightbox/lightbox-blank.gif',
 			});
+			
+			// Hide all main nav submenus that are not direct children of 
+			// the current page. Should eventually be moved server-side
+			if(CURRENT_PAGE_NAME != undefined) {
+				$('#sidebar-nav-menu')
+					.find('a')
+						.each(function(count, element) {
+							if($(element).text() != CURRENT_PAGE_NAME) {
+								$(element).parent().find('.sub-menu').hide();
+							}
+						});
+			}
 		})();
 		loadMoreSearchResults($);
 	});

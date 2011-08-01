@@ -1,3 +1,12 @@
+<? if(is_front_page()) {
+		$page_posts = query_posts(array(	'numberposts' => 1,
+																			'orderby'     => 'rand',
+																			'post_type'   => 'page',
+																			'meta_key'    => 'page_frontpage',
+																			'meta_value'  => 'on'));
+		$post = $page_posts[0];
+		setup_postdata($post);?>
+<? } ?>
 <!DOCTYPE html>
 <html lang="en-US">
 	<head>
@@ -20,19 +29,13 @@
 			<?php if(EVENT_PROXY_URL):?>
 			var EVENT_PROXY_URL = '<?=EVENT_PROXY_URL?>';
 			<?php endif?>	
-			var THEME_IMG_URL   = '<?=THEME_IMG_URL?>';
+			var THEME_IMG_URL     = '<?=THEME_IMG_URL?>';
+			var CURRENT_PAGE_NAME = '<?=$post->post_title?>';
 		</script>
 	</head>
 	<body class="<?=body_classes()?>" id="<?=is_front_page() ? 'home' : ''?><?=is_page() ? 'page' : ''?>">
 	<div id="blueprint-container" class="container">
-	<? if(is_front_page()) {
-			$page_posts = query_posts(array(	'numberposts' => 1,
-																				'orderby'     => 'rand',
-																				'post_type'   => 'page',
-																				'meta_key'    => 'page_frontpage',
-																				'meta_value'  => 'on'));
-			$post = $page_posts[0];
-			setup_postdata($post);?>
+	<? if(is_front_page()) { ?>
 		<div id="splash-container">
 			<?=get_the_post_thumbnail($post->ID, 'full')?>
 		</div>
