@@ -2,22 +2,23 @@
 
 abstract class CustomPostType{
 	public 
-		$name           = 'custom_post_type',
-		$plural_name    = 'Custom Posts',
-		$singular_name  = 'Custom Post',
-		$add_new_item   = 'Add New Custom Post',
-		$edit_item      = 'Edit Custom Post',
-		$new_item       = 'New Custom Post',
-		$public         = True,  # I dunno...leave it true
-		$use_title      = True,  # Title field
-		$use_editor     = True,  # WYSIWYG editor, post content field
-		$use_revisions  = True,  # Revisions on post content and titles
-		$use_thumbnails = False, # Featured images
-		$use_order      = False, # Wordpress built-in order meta data
-		$use_metabox    = False, # Enable if you have custom fields to display in admin
-		$use_shortcode  = False, # Auto generate a shortcode for the post type (see also toHTML method)
-		$_builtin       = False, # True when extending built-in post type (post, page, etc.)
-		$taxonomies     = Array(); # Taxonomies associated with this post type (e.g. post_tag, category)
+		$name              = 'custom_post_type',
+		$plural_name       = 'Custom Posts',
+		$singular_name     = 'Custom Post',
+		$add_new_item      = 'Add New Custom Post',
+		$edit_item         = 'Edit Custom Post',
+		$new_item          = 'New Custom Post',
+		$public            = True,  # I dunno...leave it true
+		$use_title         = True,  # Title field
+		$use_editor        = True,  # WYSIWYG editor, post content field
+		$use_revisions     = True,  # Revisions on post content and titles
+		$use_thumbnails    = False, # Featured images
+		$use_order         = False, # Wordpress built-in order meta data
+		$use_metabox       = False, # Enable if you have custom fields to display in admin
+		$use_shortcode     = False, # Auto generate a shortcode for the post type (see also toHTML method)
+		$use_hierarchical  = False, # Must be true to see Parent field in Page Attributes
+		$_builtin          = False, # True when extending built-in post type (post, page, etc.)
+		$taxonomies        = Array(); # Taxonomies associated with this post type (e.g. post_tag, category)
 	/**
 	 * Wrapper for get_posts function, that predefines post_type for this
 	 * custom post type.  Any options valid in get_posts can be passed as an
@@ -158,11 +159,12 @@ abstract class CustomPostType{
 	 **/
 	public function register(){
 		$registration = array(
-			'labels'     => $this->labels(),
-			'supports'   => $this->supports(),
-			'public'     => $this->options('public'),
-			'taxonomies' => $this->options('taxonomies'),
-			'_builtin'   => $this->options('_builtin'),
+			'labels'       => $this->labels(),
+			'supports'     => $this->supports(),
+			'public'       => $this->options('public'),
+			'taxonomies'   => $this->options('taxonomies'),
+			'_builtin'     => $this->options('_builtin'),
+			'hierarchical' => $this->options('hierarchical')
 		);
 		
 		if ($this->options('use_order')){
@@ -225,6 +227,7 @@ class Page extends CustomPostType{
 		$use_shortcode  = True,
 		$use_metabox    = True,
 		$_builtin       = True,
+		$hierarchical   = True,
 		
 		$taxonomies     = Array('categories');
 		
