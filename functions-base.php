@@ -565,7 +565,33 @@ function get_custom_post_type($name){
 	return null;
 }
 
-
+class RosenWalkerNavMenu extends Walker_Nav_Menu {
+	
+	function start_lvl(&$output, $depth) {
+		$indent = str_repeat("\t", $depth);
+		$output .= "\n$indent<ul class=\"sub-menu\">\n";
+	}
+	
+	function start_el(&$output, $item, $depth, $args) {
+		global $post;
+		
+		if(!isset($this->prev_depth)) $this->prev_depth = 0;
+		if(!isset($this->ref_item)) $this->ref_item = $item;
+		
+		if($this->prev_depth != $depth) { // Depth change
+			$this->ref_item = $this->prev_item;
+		}
+		
+		if((int)$this->ref_item->object_id == $post->ID || 
+					(int)$item->object_id == $post->ID || 
+						$depth == 0) {
+			parent::start_el($output, $item, $depth, $args);
+		}
+		
+		$this->prev_item = $item;
+		$this->prev_depth = $depth;
+	}
+}
 /**
  * Wraps wordpress' native functions, allowing you to get a menu defined by
  * its location rather than the name given to the menu.	 The argument $classes
@@ -578,6 +604,8 @@ function get_custom_post_type($name){
  * menu in question.
  **/
 function get_menu($name, $classes=null, $id=null, $callback=null, $depth = 0){
+	global $post;
+	
 	$locations = get_nav_menu_locations();
 	$menu			 = @$locations[$name];
 	
@@ -585,19 +613,18 @@ function get_menu($name, $classes=null, $id=null, $callback=null, $depth = 0){
 		return "<div class='error'>No menu location found with name '{$name}'.</div>";
 	}
 	
-	//$items = wp_get_nav_menu_items($menu);
-	
 	$args = Array('menu' => $menu, 
 								'container' => '',
 								'menu_class' => $classes,
 								'menu_id' => $id,
-								'depth' => $depth);
+								'depth' => $depth,
+								'echo' => False,
+								'walker' => new RosenWalkerNavMenu());
+								
+	$menu_output = wp_nav_menu($args);
 	
-	//var_dump($items);
 	if ($callback === null){
-		ob_start();
-		wp_nav_menu($args);
-		$menu = ob_get_clean();
+		return $menu_output;
 	}else{
 		$menu = (is_array($callback)) ?
 			call_user_func_array($callback, array($items)) :
@@ -607,7 +634,6 @@ function get_menu($name, $classes=null, $id=null, $callback=null, $depth = 0){
 	return $menu;
 	
 }
-
 
 /**
  * Creates an arbitrary html element.	 $tag defines what element will be created
