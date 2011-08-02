@@ -296,7 +296,7 @@ var slideshow = function($){
 				imageBtnClose:THEME_IMG_URL + '/lightbox/lightbox-btn-close.gif',
 				imageBtnPrev:THEME_IMG_URL + '/lightbox/lightbox-btn-prev.gif',
 				imageBtnNext:THEME_IMG_URL + '/lightbox/lightbox-btn-next.gif',
-				imageBlank: THEME_IMG_URL + '/lightbox/lightbox-blank.gif',
+				imageBlank: THEME_IMG_URL + '/lightbox/lightbox-blank.gif'
 			});
 		})();
 		loadMoreSearchResults($);
