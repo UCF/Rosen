@@ -69,7 +69,7 @@ form .uberlabel {font-size:100%;text-align:right;font-weight:bold;}
 form .fields input {display:block;margin-bottom:10px;width:200px;}
 form .fields label {display:block;padding-bottom:0px;margin-bottom:0;}
 form input[type="text"].short {width:25px !important;}
-form input[type="submit"] {background-color:#706355;color:#FFF;border:1px solid #706355;padding:5px;border-radius:3px;font-size:110%;margin-top:10px;}
+form input[type="submit"], .search-submit {text-shadow:none;background-color:#706355;color:#FFF;border:1px solid #706355;padding:5px;border-radius:3px;font-size:110%;margin-top:10px;}
 
 /*/ Header /*/
 #header {border-bottom:0;}

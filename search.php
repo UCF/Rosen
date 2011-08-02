@@ -6,7 +6,7 @@
 ?>
 <?php get_header();?>
 	<div class="page-content" id="search-results">
-		<div class="results span-16 append-2">
+		<div class="results span-15 append-1">
 			<h2>Search results</h2>
 			<?php get_search_form()?>
 			
@@ -49,7 +49,7 @@
 			get_sidebar();
 			$sidebar = str_replace($search, '', ob_get_clean());
 		?>
-		<div id="sidebar" class="span-6 last">
+		<div id="sidebar" class="span-8 last">
 			<?=$sidebar?>
 		</div>
 		

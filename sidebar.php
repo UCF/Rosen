@@ -7,8 +7,8 @@
 <?=get_menu('sidebar-nav-menu', 'menu vertical sans', 'sidebar-nav-menu', (is_front_page() ? True : False))?>
 <div class="sidebar-pub" id="search">
 	<h3 class="serif">Search Rosen College:</h3>
-	<form>
-	  <input type="text" name="q" value="Enter Search Term..."/>
+	<form method="get" action="<?=home_url( '/' )?>" role="search" id="search">
+		<input type="text" value="<?=isset($_GET['s']) ? htmlentities($_GET['s']) : 'Enter Search Term...'?>" name="s"  />
 		<input type="submit" value="Search" />
 	</form>
 </div>
