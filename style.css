@@ -89,7 +89,8 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 #home h2:first-child {margin-bottom:0;}
 #home #subtitle {font-size:120%;margin-bottom:270px;}
 
-#home .page-content > div:first-child {background-color:transparent;}
+#home .page-content > div:first-child {background-color:transparent !important;}
+.trident #home .page-content > div:first-child {-ms-filter: none !important;filter: none !important;}
 
 #home #promos {margin:0 0 35px 0;padding:0;}
 #home #promos > li {list-style-type:none;background-color:rgba(255, 255, 255, .6);padding:20px;}
