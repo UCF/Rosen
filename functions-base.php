@@ -594,17 +594,13 @@ class RosenWalkerNavMenu extends Walker_Nav_Menu {
 	}
 }
 /**
- * Wraps wordpress' native functions, allowing you to get a menu defined by
- * its location rather than the name given to the menu.	 The argument $classes
- * lets you define a custom class(es) to place on the list generated, $id does
- * the same but with an id attribute.
+ * Custom function using some of WordPreses buit-ins. Only displays
+ * submenus of the link of the current page.
+ * 
+ * TODO: Clean up and make submenu exclusion optional.
  *
- * If you require more customization of the output, a final optional argument
- * $callback lets you specify a function that will generate the output. Any
- * callback passed should accept one argument, which will be the items for the
- * menu in question.
  **/
-function get_menu($name, $classes=null, $id=null, $callback=null, $depth = 0){
+function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 	global $post;
 	
 	$locations = get_nav_menu_locations();
@@ -623,45 +619,46 @@ function get_menu($name, $classes=null, $id=null, $callback=null, $depth = 0){
 		$prev = isset($items[$i - 1]) ? $items[$i - 1] : null;
 		$next = isset($items[$i + 1]) ? $items[$i + 1] : null;
 		$menu_item_parent = (int)$item->menu_item_parent;
-				
-		if($menu_item_parent == 0 || (count($parents) > 0 && $menu_item_parent == $parents[count($parents) - 1]->ID) ) {
-			
-			$output .= '<li class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
+		
+		if($top_level_only) {
+			if($menu_item_parent == 0) {
+				$output .= '<li class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
+			}
 		} else {
-			array_push($parents, $prev);
-			
-			$parent_object_ids = array();
-			foreach($parents as $parent) array_push($parent_object_ids, (int)$parent->object_id);			
-			$hide =  (in_array($post->ID, $parent_object_ids) || $post->ID == (int)$item->object_id) ? False : True;
-			$output .= '<ul class="'.($hide ? 'hide': '').'"><li  class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
-		}
-		
-		if(!is_null($next) && (int)$next->menu_item_parent != $item->ID) {
-		
-			if( count($parents) > 0 && !is_null($next) && (int)$next->menu_item_parent == $parents[count($parents) - 1]->ID) {
-				$output .= '</li>';
+			if($menu_item_parent == 0 || (count($parents) > 0 && $menu_item_parent == $parents[count($parents) - 1]->ID) ) {	
+				$output .= '<li class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
 			} else {
-			
-				while(count($parents) > 0) {
-				
-					$output .= '</ul></li>';
-					array_pop($parents);
-					if(!is_null($next) && count($parents) > 0 && (int)$next->menu_item_parent == $parents[count($parents) - 1]->ID) {
-						break;
+				array_push($parents, $prev);
+				$parent_object_ids = array();
+				foreach($parents as $parent) array_push($parent_object_ids, (int)$parent->object_id);			
+				$hide =  (in_array($post->ID, $parent_object_ids) || $post->ID == (int)$item->object_id) ? False : True;
+				$output .= '<ul class="'.($hide ? 'hide': '').'"><li  class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
+			}
+		
+			if(!is_null($next) && (int)$next->menu_item_parent != $item->ID) {
+		
+				if( count($parents) > 0 && !is_null($next) && (int)$next->menu_item_parent == $parents[count($parents) - 1]->ID) {
+					$output .= '</li>';
+				} else {
+					while(count($parents) > 0) {
+						$output .= '</ul></li>';
+						array_pop($parents);
+						if(!is_null($next) && count($parents) > 0 && (int)$next->menu_item_parent == $parents[count($parents) - 1]->ID) {
+							break;
+						}
 					}
 				}
 			}
-		}
 		
-		if(is_null($next)) {
-			while(count($parents) > 0) {
-				$output .= '</ul></li>';
-				array_pop($parents);
+			if(is_null($next)) {
+				while(count($parents) > 0) {
+					$output .= '</ul></li>';
+					array_pop($parents);
+				}
+				$output .= '</li>';
 			}
-			$output .= '</li>';
 		}
 	}
-	
 	
 	$output = '<ul id="'.$id.'" class="'.$classes.'">'.$output.'</ul>';
 	return $output;

@@ -17,9 +17,9 @@
 				<div class="span-7 last">
 				  <div class="widget">
 						<h3 class="serif">Student Resources</h3>
-						<?=get_menu('student-resources', 'menu vertical sans', '')?>
+						<?=get_menu('student-resources', 'menu vertical sans')?>
 						<h3 class="serif">Academic Degress</h3>
-							<?=get_menu('academic-degrees', 'menu vertical sans last', '')?>
+							<?=get_menu('academic-degrees', 'menu vertical sans last')?>
  					</div>
 				</div>
 			</article>

@@ -16,10 +16,10 @@
 				</div>
 				<div class="span-10">
 					<div class="span-5">
-						<?=get_menu('footer-menu-left', 'menu vertical clearfix footer-menu', 'footer-menu-left', NULL, 1)?>
+						<?=get_menu('footer-menu-left', 'menu vertical clearfix footer-menu', 'footer-menu-left', True)?>
 					</div>
 					<div class="span-5 last">
-						<?=get_menu('footer-menu-right', 'menu vertical clearfix footer-menu', 'footer-menu-right', NULL, 0)?>
+						<?=get_menu('footer-menu-right', 'menu vertical clearfix footer-menu', 'footer-menu-right', True)?>
 					</div>
 				</div>
 				<div class="span-7 last" id="newsletter_signup">

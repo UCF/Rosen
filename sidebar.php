@@ -4,7 +4,7 @@
 <? if(is_page()) {?>
 	<?=get_the_post_thumbnail($post->ID, 'sidebar-feature')?>
 <? } ?>
-<?=get_menu('sidebar-nav-menu', 'menu vertical sans', 'sidebar-nav-menu', NULL, (is_front_page() ? 1 : 0))?>
+<?=get_menu('sidebar-nav-menu', 'menu vertical sans', 'sidebar-nav-menu', (is_front_page() ? True : False))?>
 <div class="sidebar-pub" id="search">
 	<h3 class="serif">Search Rosen College:</h3>
 	<form>
