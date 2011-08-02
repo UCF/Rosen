@@ -584,7 +584,8 @@ class RosenWalkerNavMenu extends Walker_Nav_Menu {
 		
 		if((int)$this->ref_item->object_id == $post->ID || 
 					(int)$item->object_id == $post->ID || 
-						$depth == 0) {
+						$depth == 0 ||
+							$this->prev_depth == $depth) {
 			parent::start_el($output, $item, $depth, $args);
 		}
 		
@@ -613,26 +614,57 @@ function get_menu($name, $classes=null, $id=null, $callback=null, $depth = 0){
 		return "<div class='error'>No menu location found with name '{$name}'.</div>";
 	}
 	
-	$args = Array('menu' => $menu, 
-								'container' => '',
-								'menu_class' => $classes,
-								'menu_id' => $id,
-								'depth' => $depth,
-								'echo' => False,
-								'walker' => new RosenWalkerNavMenu());
-								
-	$menu_output = wp_nav_menu($args);
+	$items = wp_get_nav_menu_items($menu);
 	
-	if ($callback === null){
-		return $menu_output;
-	}else{
-		$menu = (is_array($callback)) ?
-			call_user_func_array($callback, array($items)) :
-			call_user_func($callback, array($items));
+	$output = '';
+	$parents = array();
+	for($i = 0; $i < count($items);$i++) {
+		$item = $items[$i];
+		$prev = isset($items[$i - 1]) ? $items[$i - 1] : null;
+		$next = isset($items[$i + 1]) ? $items[$i + 1] : null;
+		$menu_item_parent = (int)$item->menu_item_parent;
+				
+		if($menu_item_parent == 0 || (count($parents) > 0 && $menu_item_parent == $parents[count($parents) - 1]->ID) ) {
+			
+			$output .= '<li class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
+		} else {
+			array_push($parents, $prev);
+			
+			$parent_object_ids = array();
+			foreach($parents as $parent) array_push($parent_object_ids, (int)$parent->object_id);			
+			$hide =  (in_array($post->ID, $parent_object_ids) || $post->ID == (int)$item->object_id) ? False : True;
+			$output .= '<ul class="'.($hide ? 'hide': '').'"><li  class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
+		}
+		
+		if(!is_null($next) && (int)$next->menu_item_parent != $item->ID) {
+		
+			if( count($parents) > 0 && !is_null($next) && (int)$next->menu_item_parent == $parents[count($parents) - 1]->ID) {
+				$output .= '</li>';
+			} else {
+			
+				while(count($parents) > 0) {
+				
+					$output .= '</ul></li>';
+					array_pop($parents);
+					if(!is_null($next) && count($parents) > 0 && (int)$next->menu_item_parent == $parents[count($parents) - 1]->ID) {
+						break;
+					}
+				}
+			}
+		}
+		
+		if(is_null($next)) {
+			while(count($parents) > 0) {
+				$output .= '</ul></li>';
+				array_pop($parents);
+			}
+			$output .= '</li>';
+		}
 	}
 	
-	return $menu;
 	
+	$output = '<ul id="'.$id.'" class="'.$classes.'">'.$output.'</ul>';
+	return $output;
 }
 
 /**
