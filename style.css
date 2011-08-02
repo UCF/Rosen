@@ -21,12 +21,13 @@ h2 > a:hover {text-decoration:underline;color:#313130;}
 .large {font-size:130%;}
 
 #sidebar {position:relative;top:-65px;}
-#sidebar-nav-menu {margin:0 0 35px -10px;padding: 15px 0 105px 45px;background-color:rgba(204, 193, 163, 0.45);}
+#sidebar-nav-menu {margin:0 0 35px -10px;padding: 15px 0 15px 45px;background-color:rgba(204, 193, 163, 0.45);}
 .trident #sidebar-nav-menu { background: transparent;
 													-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#72CCC1A3,endColorstr=#72CCC1A3)"; /* IE8 */
 													filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#A5CCC1A3,endColorstr=#A5CCC1A3);	 /* IE6 & 7 */
 													zoom: 1;}
 #sidebar-nav-menu li {list-style-type:none;}
+#sidebar-nav-menu li:last-child {margin-bottom:0px;}
 #sidebar-nav-menu > li > ul {margin-left:0px;padding-left:20px;}
 #sidebar-nav-menu li > a {color:#FFF;font-size:160%;font-weight:300;}
 
