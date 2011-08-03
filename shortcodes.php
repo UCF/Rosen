@@ -133,6 +133,29 @@ function sc_object($attr){
 }
 add_shortcode('sc-object', 'sc_object');
 
+
+/**
+ * Outputs forms, organized by the sub-category of 'Forms' they are related to.
+ * Uncategorized forms will not display.
+ *
+ * Example:
+ * [sc-forms category="Test"]
+ **/
+function sc_forms($atts = Array()){
+	
+	$category_name = (isset($atts['category'])) ? $atts['category'] : False;
+	if($category_name !== False) {
+		if(($category = get_term_by('name', $category_name, 'category')) !== False) {
+			$categories = Array($category);
+		}	
+		unset($category);
+	}
+	ob_start();
+	include('templates/section-forms.php');
+	return ob_get_clean();
+}
+add_shortcode('sc-forms', 'sc_forms');
+
 /**
  * Build staff list
  *
