@@ -82,6 +82,8 @@ table > thead > tr > th {padding:5px;font-size: 100%;padding-bottom:5px;font-wei
 table > tbody {}
 table td {padding:5px 5px;text-align:left;font-size:100%;color:#333;font-weight:500;}
 
+article ul, article ol {margin-top:0;}
+
 /*/ Header /*/
 #header {border-bottom:0;}
 h1 {padding:6px 10px 10px 10px;background-color:rgba(255, 255, 255,.53);z-index:2;position:relative;}
