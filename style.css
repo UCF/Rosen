@@ -12,7 +12,7 @@ body {}
 ul {font-size:16px;}
 
 h2 {font-weight:normal;font-size:350%;margin-top:10px;}
-h2 > a {text-decoration:none;}
+h2 > a {text-decoration:none;text-shadow:rgba(255,255,255,0.4) 1px 1px;}
 h2 > a:hover {text-decoration:underline;color:#313130;}
 h3 {margin:1em 0 .5em 0;}
 
@@ -73,6 +73,13 @@ form input[type="text"].short {width:25px !important;}
 form input[type="submit"], .search-submit {text-shadow:none;background-color:#706355;color:#FFF;border:1px solid #706355;padding:5px;border-radius:3px;font-size:110%;margin-top:10px;}
 
 .forms > h3 {font-family:"Helvetica Neue", Helvetica, sans-serif;font-weight:bold !important;font-size:140% !important;}
+
+table {font-family:"Helvetica Neue", Helvetica, sans-serif;}
+table > thead {}
+table > thead > tr {border-bottom: 1px solid rgba(204, 193, 163, 0.65);background-color:#DDCB9A;color:#775224}
+table > thead > tr > th {padding:5px;font-size: 100%;padding-bottom:5px;font-weight:bold;text-align:left;}
+table > tbody {}
+table td {padding:5px 5px;text-align:left;font-size:100%;color:#333;font-weight:500;}
 
 /*/ Header /*/
 #header {border-bottom:0;}
@@ -157,11 +164,6 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 #page #sidebar > img {margin-left:7px;margin-bottom:15px;}
 
 /*/ About Us /*/
-.dept table {}
-.dept table > thead {}
-.dept table > thead > tr {border-bottom: 1px solid rgba(204, 193, 163, 0.65);}
-.dept table > thead > tr > th {font-size: 110%;padding-bottom:5px;}
-.dept table td {padding:10px 5px;}
 .dept table .name a,
 	.dept table .job_title a,
 		.dept table .phones a {color:#333 !important;text-decoration:none;}
@@ -174,11 +176,6 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 .dept table .phones > ul {margin:0;padding:0;font-size:100%;}
 .dept table .phones > ul > li {list-style-type:none;margin:0;padding:0;}
 .dept table .email {width:15%;}
-.dept table tr.odd {background-color:rgba(255, 255, 255, 0.4);}
-.trident .dept table tr.odd td {background: transparent;
-															-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#66FFFFFF,endColorstr=#66FFFFFF)"; /* IE8 */
-															filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66FFFFFF,endColorstr=#66FFFFFF);   /* IE6 & 7 */
-															zoom: 1;}
 
 .dept > ul {margin:0;padding:0;}
 .dept > ul > li {font-size:80%;margin:0 0 10px 0;padding:0;float:left;list-style-type:none;width:111px;margin-right:48px;}
