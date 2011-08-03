@@ -10,9 +10,10 @@ html {background:#fcdd88 url('static/img/iron.gif') repeat-y top center;}
 body {}
 
 ul {font-size:16px;}
+p {font-size:16px;}
 
 h2 {font-weight:normal;font-size:350%;margin-top:10px;}
-h2 > a {text-decoration:none;text-shadow:rgba(255,255,255,0.4) 1px 1px;}
+h2 > a {text-decoration:none;}
 h2 > a:hover {text-decoration:underline;color:#313130;}
 h3 {margin:1em 0 .5em 0;}
 
@@ -22,15 +23,15 @@ h3 {margin:1em 0 .5em 0;}
 .large {font-size:130%;}
 
 #sidebar {position:relative;top:-65px;}
-#sidebar-nav-menu {margin:0 0 35px -10px;padding: 15px 0 15px 45px;background-color:rgba(204, 193, 163, 0.45);}
+#sidebar-nav-menu {margin:0 0 35px -10px;padding: 15px 15px 15px 45px;background-color:rgba(204, 193, 163, 0.45);}
 .trident #sidebar-nav-menu { background: transparent;
 													-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#72CCC1A3,endColorstr=#72CCC1A3)"; /* IE8 */
 													filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#A5CCC1A3,endColorstr=#A5CCC1A3);	 /* IE6 & 7 */
 													zoom: 1;}
 #sidebar-nav-menu li {list-style-type:none;}
 #sidebar-nav-menu li:last-child {margin-bottom:0px;}
-#sidebar-nav-menu > li > ul {margin-left:0px;padding-left:20px;}
-#sidebar-nav-menu li > a {color:#FFF;font-size:160%;font-weight:300;}
+#sidebar-nav-menu > li ul {border-left: 2px solid #FCDD88;margin-left:10px;padding-left:15px;font-size:90%;}
+#sidebar-nav-menu li > a {color:#FFF;font-size:150%;font-weight:300;}
 
 .sidebar-pub {background-color:rgba(255,255,255,.6);padding:15px;margin:0 0 35px 8px;box-shadow:0px 0px	 5px #666;}
 .trident .sidebar-pub { background: transparent;
