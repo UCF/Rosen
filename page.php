@@ -7,7 +7,7 @@
 				<h2><?php the_title();?></h2>
 				<?php the_content();?>
 				<? if( ($_quote = get_post_meta($post->ID, 'page_quote', True)) != '') {?>
-					<p class="quote"><?=$_quote?></p>
+					<p class="quote clear"><?=$_quote?></p>
 				<? } ?>
 			</article>
 		</div>
