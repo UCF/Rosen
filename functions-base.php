@@ -1406,15 +1406,18 @@ function submit_cc_signup()
 					curl_setopt($ch, CURLOPT_POSTFIELDS, str_replace("\t", '', sprintf($xml, date('c'), $email, $username, $list)));
 					curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:application/atom+xml"));
 					curl_setopt($ch, CURLOPT_HEADER, false); // Do not return headers
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // If you set this to 0, it will take you to a page with the http response
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, True); // If you set this to 0, it will take you to a page with the http response
 					
 					$response = curl_exec($ch);
 					curl_close($ch);
-					
 					//$response = http_put_data($url, );
 					
-					if($response === False || is_numeric($response)) {
-						$_SESSION['cc_error'] = $base_error.' (submission failed)';
+					if($response === False || !is_numeric($response)) {
+						if(strpos($response, 'Error') == 0 && ($msg = substr($response, strpos($response, ':') + 1)) != '') {
+							$_SESSION['cc_error'] = $base_error.' '.$msg.'.';
+						} else {
+							$_SESSION['cc_error'] = $base_error.' (submission failed)';
+						}
 					} else {
 						$_SESSION['cc_success'] = 'Success: Your email address was added to the mailing list. Thank You.';
 					}
