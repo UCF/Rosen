@@ -14,6 +14,7 @@ ul {font-size:16px;}
 h2 {font-weight:normal;font-size:350%;margin-top:10px;}
 h2 > a {text-decoration:none;}
 h2 > a:hover {text-decoration:underline;color:#313130;}
+h3 {margin:1em 0 .5em 0;}
 
 .sans{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
 .serif{font-family: "Georgia", "serif";}
@@ -70,6 +71,8 @@ form .fields input {display:block;margin-bottom:10px;width:200px;}
 form .fields label {display:block;padding-bottom:0px;margin-bottom:0;}
 form input[type="text"].short {width:25px !important;}
 form input[type="submit"], .search-submit {text-shadow:none;background-color:#706355;color:#FFF;border:1px solid #706355;padding:5px;border-radius:3px;font-size:110%;margin-top:10px;}
+
+.forms > h3 {font-family:"Helvetica Neue", Helvetica, sans-serif;font-weight:bold !important;font-size:140% !important;}
 
 /*/ Header /*/
 #header {border-bottom:0;}
