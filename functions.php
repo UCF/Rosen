@@ -128,6 +128,20 @@ Config::$theme_settings = array(
 		'default'     => 'http://api.flickr.com/services/feeds/photoset.gne?set=72157624283202883&nsid=36226710@N08&lang=en-us',
 		'value'       => $theme_options['gallery_feed_url']
 	)),
+	new TextField(array(
+		'name'        => 'Search Domain',
+		'id'          => THEME_OPTIONS_NAME.'[search_domain]',
+		'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example <em>some.domain.com</em>',
+		'default'     => null,
+		'value'       => $theme_options['search_domain'],
+		)),
+	new TextField(array(
+		'name'        => 'Search Results Per Page',
+		'id'          => THEME_OPTIONS_NAME.'[search_per_page]',
+		'description' => 'Number of search results to show per page of results',
+		'default'     => 10,
+		'value'       => $theme_options['search_per_page'],
+	)),
 );
 
 /**
