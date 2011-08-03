@@ -24,8 +24,8 @@
 				</div>
 				<div class="span-7 last" id="newsletter_signup">
 					<h3 class="serif">Sign Up for  the Newsletter:</h3>
-					<form>
-						<input type="text" value="Enter Email Address..." />
+					<form action="<?=bloginfo('url')?>" method="post">
+						<input type="text" name="cc_email" value="Enter Email Address..." />
 						<input type="submit" value="Submit" />
 					</form>
 				</div>

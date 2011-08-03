@@ -11,6 +11,10 @@ define('THEME_OPTIONS_NAME', 'theme');
 define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
 define('EVENT_PROXY_URL', THEME_STATIC_URL.'/event_proxy.php');
 
+// Constant Contact add contact API url
+// The username, pass and api key are contained in theme options
+define('CC_ADD_CONTACT_API_URL', 'https://api.constantcontact.com/ws/customers/%s/contacts');
+
 // Allow input and select tags in post bodies
 $allowedposttags['input'] = Array('type'  => array(),
 																	'value' => array(),
@@ -86,19 +90,6 @@ Config::$theme_settings = array(
 		'default'     => null,
 		'value'       => $theme_options['cb_domain'],
 	)),
-	/*
-	new RadioField(array(
-		'name'        => 'Radio Example',
-		'id'          => THEME_OPTIONS_NAME.'[radio]',
-		'description' => 'Radio example, shows you some radio field stuff',
-		'default'     => 1,
-		'choices'     => array(
-			'Choice One' => 1,
-			'Choice Two' => 2,
-		),
-		'value'       => $theme_options['radio'],
-	)),
-	*/
 	new TextField(array(
 		'name'        => 'Number of Home Page Promos:',
 		'id'          => THEME_OPTIONS_NAME.'[promo_post_num]',
@@ -127,6 +118,34 @@ Config::$theme_settings = array(
 		'description' => 'Expects a Flickr RSS feed URL.',
 		'default'     => 'http://api.flickr.com/services/feeds/photoset.gne?set=72157624283202883&nsid=36226710@N08&lang=en-us',
 		'value'       => $theme_options['gallery_feed_url']
+	)),
+	new TextField(array(
+		'name'        => 'Constant Contact Username:',
+		'id'          => THEME_OPTIONS_NAME.'[constant_contact_username]',
+		'description' => '',
+		'default'     => null,
+		'value'       => $theme_options['constant_contact_username']
+	)),
+	new TextField(array(
+		'name'        => 'Constant Contact Password:',
+		'id'          => THEME_OPTIONS_NAME.'[constant_contact_password]',
+		'description' => '',
+		'default'     => null,
+		'value'       => $theme_options['constant_contact_password']
+	)),
+	new TextField(array(
+		'name'        => 'Constant Contact API Key:',
+		'id'          => THEME_OPTIONS_NAME.'[constant_contact_api_key]',
+		'description' => '',
+		'default'     => null,
+		'value'       => $theme_options['constant_contact_api_key']
+	)),
+	new TextField(array(
+		'name'        => 'Constant Contact List ID:',
+		'id'          => THEME_OPTIONS_NAME.'[constant_contact_list]',
+		'description' => 'ID of the email to add users to when they sign up for the newsletter. Defaults to 2 (Primary E-Mail List).',
+		'default'     => null,
+		'value'       => $theme_options['constant_contact_list']
 	)),
 	new TextField(array(
 		'name'        => 'Search Domain',

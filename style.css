@@ -207,7 +207,7 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 #footer #logo {text-indent:-500em;display:block; background: url('static/img/logo.png') no-repeat top center;height:55px;width:150px;}
 #footer #contact {margin:10px 0 0 15px;font-weight:100;}
 #footer #newsletter_signup {margin-left:15px;padding:15px 0 15px 15px;background-color:#ddcb9a;}
-#footer #newsletter_signup > h3 {color:#775224;margin-bottom:10px;font-weight:normal;font-size:120%;}
+#footer #newsletter_signup > h3 {color:#775224;margin-bottom:10px;margin-top:0;font-weight:normal;font-size:120%;}
 #footer #newsletter_signup > form > input[type="text"] {height:21px;width:180px;display:block;padding:3px;color:#666;font-style:italic;float:left;}
 .webkit #footer #newsletter_signup > form > input[type="text"] {width:190px;}
 #footer #newsletter_signup > form > input[type="text"].focus {color:#000;font-style:normal;}

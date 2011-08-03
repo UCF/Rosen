@@ -556,7 +556,6 @@ function slug($s, $spaces='-'){
  **/
 function get_custom_post_type($name){
 	$installed = installed_custom_post_types();
-	var_dump($installed);
 	foreach($installed as $object){
 		if ($object->options('name') == $name){
 			return get_class($object);
@@ -1322,4 +1321,107 @@ function get_person_meta($post_id)
 	</div><?
 	return ob_get_clean();
 }
+
+/**
+ * Extract form file extension
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function get_form_class($form_id)
+{
+	$rosen_forms = new Form();
+	$url  = get_post_meta($form_id, $rosen_forms->options('name').'_url', True);
+	$file = get_post_meta($form_id, 'form_file', true);
+	if ($file){
+		$url = wp_get_attachment_url(get_post($file)->ID);
+	}
+	if($url=="#"){
+		$class = 'missing';
+	} else {
+		preg_match('/\.(?<file_ext>[^.]+)$/', $url, $matches);
+		$class = isset($matches['file_ext']) ? $matches['file_ext'] : 'file';
+	}
+	return $class;
+}
+
+/**
+ * Submit constant contact sign up
+ *
+ * @return bool
+ * @author Chris Conover
+ **/
+function submit_cc_signup()
+{
+	
+	if(isset($_POST['cc_email'])) {
+		
+		$email = $_POST['cc_email'];
+		
+		$base_error = 'Error: Adding your email addresss to the mailing list failed.';
+		
+		$username = get_theme_option('constant_contact_username');
+		$password = get_theme_option('constant_contact_password');
+		$api_key  = get_theme_option('constant_contact_api_key');
+		$list     = get_theme_option('constant_contact_list');
+	
+		if( ($username === False || $password === False || $api_key === False) ||
+					($username == '' || $password == '' || $api_key == '')) {
+			$_SESSION['cc_error'] = $base_error.' (misconfiguraiton)';
+		} else {
+			if($email == '') {
+				$_SESSION['cc_error'] = $base_error.' Your email address cannot be blank.';
+			} else {
+				$xml = '
+					<entry xmlns="http://www.w3.org/2005/Atom">
+						<title type="text"></title>
+						<updated>%s</updated>
+						<author></author>
+						<id>urn:uuid:E8553C09F4xcvxCCC53F481214230867087</id>
+						<summary type="text">Contact</summary>
+						<content type="application/vnd.ctct+xml">
+							<Contact xmlns="http://ws.constantcontact.com/ns/1.0/">
+								<EmailAddress>%s</EmailAddress>
+								<OptInSource>ACTION_BY_CUSTOMER</OptInSource>
+								<ContactLists>
+									<ContactList id="http://api.constantcontact.com/ws/customers/%s/lists/%d"></ContactList>
+								</ContactLists>
+							</Contact>
+						</content>
+					</entry>';
+					
+					if($list === False || !is_numeric($list)) {
+						$list = 2;
+					}
+					
+					$auth = trim($api_key).'%'.$username.':'.$password;
+					$email = html_entity_decode($email, ENT_COMPAT);
+					
+					$ch = curl_init();
+					
+					curl_setopt($ch, CURLOPT_URL, sprintf(CC_ADD_CONTACT_API_URL, $username));
+					curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+					curl_setopt($ch, CURLOPT_USERPWD, $auth);
+					curl_setopt($ch, CURLOPT_POST, 1);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, str_replace("\t", '', sprintf($xml, date('c'), $email, $username, $list)));
+					curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:application/atom+xml"));
+					curl_setopt($ch, CURLOPT_HEADER, false); // Do not return headers
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // If you set this to 0, it will take you to a page with the http response
+					
+					$response = curl_exec($ch);
+					curl_close($ch);
+					
+					//$response = http_put_data($url, );
+					
+					if($response === False || is_numeric($response)) {
+						$_SESSION['cc_error'] = $base_error.' (submission failed)';
+					} else {
+						$_SESSION['cc_success'] = 'Success: Your email address was added to the mailing list. Thank You.';
+					}
+			}
+		}
+	}
+}
+add_action('wp_loaded', 'submit_cc_signup');
+
 ?>

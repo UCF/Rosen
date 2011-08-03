@@ -41,6 +41,16 @@
 		</div>
 	<? } ?>
 		<div id="content-container">
+			<? if(isset($_SESSION['cc_error'])) {?>
+				<div class="error">
+					<? echo $_SESSION['cc_error']; unset($_SESSION['cc_error']);?>
+				</div>
+			<? } ?>
+			<? if(isset($_SESSION['cc_success'])) {?>
+				<div class="success">
+					<? echo $_SESSION['cc_success']; unset($_SESSION['cc_success']);?>
+				</div>
+			<? } ?>
 			<div id="header" class="span-15 last">
 				<h1 class="span-15 last sans"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
 			</div>
