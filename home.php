@@ -3,8 +3,15 @@
 	<div class="span-24 last page-content" id="<?=$post->post_name?>">
 		<div class="span-15 append-1">
 			<article>
-				<h2 class="serif"><a href="<?=get_permalink($post->ID)?>"><?php the_title();?></a></h2>
-				<p id="subtitle" class="serif"><?=get_post_meta($post->ID, 'page_subtitle', True)?></p>
+				<? $title_color = get_post_meta($post->ID, 'page_titlecolor', True); ?>
+				<h2 class="serif">
+					<a<?=($title_color != '' ? ' style="color:'.$title_color.'"' : '')?> href="<?=get_permalink($post->ID)?>">
+						<?php the_title();?>
+					</a>
+				</h2>
+				<p <?=($title_color != '' ? ' style="color:'.$title_color.'"' : '')?> id="subtitle" class="serif">
+					<?=get_post_meta($post->ID, 'page_subtitle', True)?>
+				</p>
 				<ul id="promos">
 				  <?=get_promo_html()?>
 				</ul>

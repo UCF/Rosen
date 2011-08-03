@@ -253,8 +253,14 @@ class Page extends CustomPostType{
 			),
 			array(
 				'name'  => 'Alternate New Feed URL:',
-				'desc'  => 'Overrid theme options news feed URL.',
+				'desc'  => 'Override theme options news feed URL.',
 				'id'    => $this->options('name').'_feed',
+				'type'  => 'text',
+			),
+			array(
+				'name'  => 'Front Page Title Color:',
+				'desc'  => 'Override title and subtitle color on front page only. Example: #FFFFFF',
+				'id'    => $this->options('name').'_titlecolor',
 				'type'  => 'text',
 			),
 		);
