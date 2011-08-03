@@ -42,7 +42,7 @@ h3 {margin:1em 0 .5em 0;}
 .webkit .sidebar-pub {-webkit-box-shadow: 0px 0px	 5px #666;}
 .sidebar-pub > h3 {font-size:140%;color:#ad834e;margin-bottom:5px;margin-top:0;line-height:1.3em;}
 .sidebar-pub > h3 > a {color:#ad834e;text-decoration:none;}
-.sidebar-pub > p {color:#000;}
+.sidebar-pub > p {color:#000;font-size:110%;}
 
 #sidebar-social {padding-left:20px;}
 #sidebar-social > h3 {color: #000;font-size:140%;font-weight:normal;margin-bottom:10px;}
