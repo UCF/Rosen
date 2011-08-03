@@ -203,94 +203,14 @@ function sc_staff($atts = Array())
 		$dean_suite = get_term_by('name', 'Dean\'s Suite', 'rosen_org_groups');
 		if($dean_suite !== False) {
 			$people = get_term_people($dean_suite->term_id, 'menu_order'); 
-			?>
-			<div class="dept">
-				<h3><?=$term->name?></h3>
-				<ul class="sans clearfix">
-				<?$count = 1; 
-					foreach($people as $person) {
-						
-						$email = get_post_meta($person->ID, 'person_email', True);
-						$img = get_the_post_thumbnail($person->ID, 'full');
-						?>
-					<li class="<?=((($count % 4) == 0) ? 'last':'')?>">
-						<a href="<?=get_permalink($person->ID)?>">
-							<? if($img == '') {?>
-								<img src="<?=bloginfo('stylesheet_directory')?>/static/img/no-photo.jpg" alt="not photo available"/>
-							<? } else {?> 
-								<?=$img?>
-							<? } ?>
-						</a>
-							<p class="name">
-								<strong>
-									<a href="<?=get_permalink($person->ID)?>">
-										<?=get_person_name($person)?>
-									</a>
-								</strong>
-							</p>
-							<p class="title">
-								<a href="<?=get_permalink($person->ID)?>">
-									<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
-								</a>
-							</p>
-					</li>
-				<?$count++; 
-					} ?>
-				</ul>
-			</div><?
+			include('templates/staff-pics.php');
 		}
 	}
 	$terms = get_terms('rosen_org_groups', Array('orderby' => 'name'));
 	foreach($terms as $term) {
 		if($dean_suite_name === False || $dean_suite === False || $term->term_id != $dean_suite->term_id) {
-			$people = get_term_people($term->term_id, 'title'); ?>
-			<div class="dept">
-				<h3><?=$term->name?></h3>
-				<table>
-					<thead class="sans">
-						<tr>
-							<th scope="col">Name</th>
-							<th scope="col">Title</th>
-							<th scope="col">Phone(s)</th>
-							<th scope="col">E-Mail</th>
-						</tr>
-					</thead>
-					<tbody class="serif">
-						<?$count = 0;
-							foreach($people as $person) {
-								$count++;
-								$email = get_post_meta($person->ID, 'person_email', True);
-							?>
-								<tr class="sans <?=((($count % 2) == 0) ? 'even' : 'odd')?>">
-									<td class="name">
-										<a href="<?=get_permalink($person->ID)?>">
-											<?=get_person_name($person)?>
-										</a>
-									</td>
-									<td class="job_title">
-										<a href="<?=get_permalink($person->ID)?>">
-											<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
-											</a>
-										</td>
-									<td class="phones">
-										<ul>
-											<? foreach(get_person_phones($person->ID) as $phone) { ?>
-											<li>
-												<a href="<?=get_permalink($person->ID)?>">
-													<?=$phone?>
-												</a>
-											</li>
-											<? } ?>
-										</ul>
-									</td>
-									<td class="email">
-										<?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?>
-									</td>
-								</tr>
-						<? } ?>
-					</body>
-				</table>
-			</div><?
+			$people = get_term_people($term->term_id, 'title');
+			include('templates/staff-table.php');
 		}
 	}
 	return ob_get_clean();
