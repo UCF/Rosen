@@ -611,56 +611,55 @@ function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 	
 	$items = wp_get_nav_menu_items($menu);
 	
-	$output = '';
-	$parents = array();
+	$output           = '';
+	$parent_ids       = array();
+	$top_level_obj_id = 0;
+	$top_count        = 0;
+	$show_num         = 0;
 	for($i = 0; $i < count($items);$i++) {
 		$item = $items[$i];
 		$prev = isset($items[$i - 1]) ? $items[$i - 1] : null;
 		$next = isset($items[$i + 1]) ? $items[$i + 1] : null;
 		$menu_item_parent = (int)$item->menu_item_parent;
 		
-		if($top_level_only) {
-			if($menu_item_parent == 0) {
-				$output .= '<li class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
+		if($menu_item_parent == 0) {
+			$top_count++;
+			// Going all the way up
+			while(count($parent_ids) > 0) {
+				array_pop($parent_ids);
+				$output .= '</ul></li>';
 			}
-		} else {
-			if($menu_item_parent == 0 || (count($parents) > 0 && $menu_item_parent == $parents[count($parents) - 1]->ID) ) {	
-				$output .= '<li class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
-			} else {
-				array_push($parents, $prev);
-				$parent_object_ids = array();
-				foreach($parents as $parent) array_push($parent_object_ids, (int)$parent->object_id);			
-				$hide =  (in_array($post->ID, $parent_object_ids) || $post->ID == (int)$item->object_id) ? False : True;
-				$output .= '<ul class="'.($hide ? 'hide': '').'"><li  class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
-			}
-		
-			if(!is_null($next) && (int)$next->menu_item_parent != $item->ID) {
-		
-				if( count($parents) > 0 && !is_null($next) && (int)$next->menu_item_parent == $parents[count($parents) - 1]->ID) {
-					$output .= '</li>';
-				} else {
-					while(count($parents) > 0) {
-						$output .= '</ul></li>';
-						array_pop($parents);
-						if(!is_null($next) && count($parents) > 0 && (int)$next->menu_item_parent == $parents[count($parents) - 1]->ID) {
-							break;
-						}
-					}
+			$output .= '<li><a href="'.$item->url.'">'.$item->title.'</a>';
+			$top_level_obj_id = (int)$item->object_id;
+		} else if(!$top_level_only){
+			if($menu_item_parent == (int)$prev->menu_item_parent) {
+				// Same level
+				$output .= '<li><a href="'.$item->url.'">'.$item->title.'</a>';
+			} else if(in_array($menu_item_parent, $parent_ids)) {
+				// Going Up
+				while($menu_item_parent != $parent_ids[count($parent_ids) - 1]) {
+					array_pop($parent_ids);
+					$output .= '</li></ul>';
 				}
-			}
-		
-			if(is_null($next)) {
-				while(count($parents) > 0) {
-					$output .= '</ul></li>';
-					array_pop($parents);
-				}
-				$output .= '</li>';
+			} else { // Going Down
+				array_push($parent_ids, $prev->ID);
+				$output .= '<ul class="__hide'.$top_count.'"><li  class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
 			}
 		}
+		if((int)$item->object_id == $post->ID) {
+			$show_num = $top_count;
+		}	
 	}
 	
-	$output = '<ul id="'.$id.'" class="'.$classes.'">'.$output.'</ul>';
-	return $output;
+	while(count($parent_ids) > 0) {
+		array_pop($parent_ids);
+		$output .= '</ul></li>';
+	}
+	
+	$output = str_replace('class="__hide'.$show_num.'"', '', $output);
+	$output = preg_replace('/__hide\d+/', 'hide', $output);
+	
+	return '<ul id="'.$id.'" class="'.$classes.'">'.$output.'</ul>';
 }
 
 /**
