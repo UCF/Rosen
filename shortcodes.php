@@ -134,29 +134,7 @@ function sc_object($attr){
 add_shortcode('sc-object', 'sc_object');
 
 /**
- * Outputs forms, organized by the sub-category of 'Forms' they are related to.
- * Uncategorized forms will not display.
- *
- * Example:
- * [sc-forms]
- **/
-function sc_forms($atts = Array()){
-	
-	$category_name = (isset($atts['category'])) ? $atts['category'] : False;
-	if($category_name !== False) {
-		if(($category = get_term_by('name', $category_name, 'category')) !== False) {
-			$categories = Array($category);
-		}	
-		unset($category);
-	}
-	ob_start();
-	include('templates/section-forms.php');
-	return ob_get_clean();
-}
-add_shortcode('sc-forms', 'sc_forms');
-
-/**
- * Builds staff list based on parameters
+ * Build staff list
  *
  * @return string
  * @author Chris Conover
@@ -296,7 +274,7 @@ function sc_staff($atts = Array())
 add_shortcode('sc-staff', 'sc_staff');
 
 /**
- * Get gallery images from Flickr RSS feed and render them
+ * Build gallery from Flickr RSS feed
  *
  * @return void
  * @author Chris Conover
