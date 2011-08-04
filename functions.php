@@ -62,118 +62,126 @@ Config::$body_classes = array();
  * available fields. -- functions-base.php
  **/
 Config::$theme_settings = array(
-	new TextField(array(
-		'name'        => 'Google Analytics Account',
-		'id'          => THEME_OPTIONS_NAME.'[ga_account]',
-		'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
-		'default'     => null,
-		'value'       => $theme_options['ga_account'],
-	)),
-	new TextField(array(
-		'name'        => 'Google WebMaster Verification',
-		'id'          => THEME_OPTIONS_NAME.'[gw_verify]',
-		'description' => 'Example <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
-		'default'     => null,
-		'value'       => $theme_options['gw_verify'],
-	)),
-	new TextField(array(
-		'name'        => 'Chartbeat UID',
-		'id'          => THEME_OPTIONS_NAME.'[cb_uid]',
-		'description' => 'Example <em>1842</em>',
-		'default'     => null,
-		'value'       => $theme_options['cb_uid'],
-	)),
-	new TextField(array(
-		'name'        => 'Chartbeat Domain',
-		'id'          => THEME_OPTIONS_NAME.'[cb_domain]',
-		'description' => 'Example <em>some.domain.com</em>',
-		'default'     => null,
-		'value'       => $theme_options['cb_domain'],
-	)),
-	new TextField(array(
-		'name'        => 'Number of Home Page Promos:',
-		'id'          => THEME_OPTIONS_NAME.'[promo_post_num]',
-		'description' => 'Controls how many promo posts will appear on the home page.',
-		'value'       => $theme_options['promo_post_num']
-	)),
-	new TextField(array(
-		'name'        => 'UCF Today Rosen News RSS URL:',
-		'id'          => THEME_OPTIONS_NAME.'[today_rosen_rss]',
-		'description' => 'URL of the Rosen RSS feed on UCF Today that populated the sidebar news item.',
-		'default'     => null,
-		'value'       => $theme_options['today_rosen_rss']
-	)),
-	new TextField(array(
-		'name'        => 'About Us Page Featured Group Name:',
-		'id'          => THEME_OPTIONS_NAME.'[aboutus_featured_group]',
-		'description' => 'The group name specified here will be featured on the About Us page as a series of 
-											images and titles rather than the default table format.',
-		'default'     => 'Dean\'s Suite',
-		'value'       => $theme_options['aboutus_featured_group']
-	)),
-	new TextField(array(
-		'name'        => 'Gallery Feed URL:',
-		'id'          => THEME_OPTIONS_NAME.'[gallery_feed_url]',
-		'description' => 'Expects a Flickr RSS feed URL.',
-		'default'     => 'http://api.flickr.com/services/feeds/photoset.gne?set=72157624283202883&nsid=36226710@N08&lang=en-us',
-		'value'       => $theme_options['gallery_feed_url']
-	)),
-	new TextField(array(
-		'name'        => 'Constant Contact Username:',
-		'id'          => THEME_OPTIONS_NAME.'[constant_contact_username]',
-		'description' => '',
-		'default'     => null,
-		'value'       => $theme_options['constant_contact_username']
-	)),
-	new TextField(array(
-		'name'        => 'Constant Contact Password:',
-		'id'          => THEME_OPTIONS_NAME.'[constant_contact_password]',
-		'description' => '',
-		'default'     => null,
-		'value'       => $theme_options['constant_contact_password']
-	)),
-	new TextField(array(
-		'name'        => 'Constant Contact API Key:',
-		'id'          => THEME_OPTIONS_NAME.'[constant_contact_api_key]',
-		'description' => '',
-		'default'     => null,
-		'value'       => $theme_options['constant_contact_api_key']
-	)),
-	new TextField(array(
-		'name'        => 'Constant Contact List ID:',
-		'id'          => THEME_OPTIONS_NAME.'[constant_contact_list]',
-		'description' => 'ID of the email to add users to when they sign up for the newsletter. Defaults to 2 (Primary E-Mail List).',
-		'default'     => null,
-		'value'       => $theme_options['constant_contact_list']
-	)),
-	new TextField(array(
-		'name'        => 'Search Domain',
-		'id'          => THEME_OPTIONS_NAME.'[search_domain]',
-		'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example <em>some.domain.com</em>',
-		'default'     => null,
-		'value'       => $theme_options['search_domain'],
+	'Google' => array(
+		new TextField(array(
+			'name'        => 'Analytics Account',
+			'id'          => THEME_OPTIONS_NAME.'[ga_account]',
+			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
+			'default'     => null,
+			'value'       => $theme_options['ga_account'],
 		)),
-	new TextField(array(
-		'name'        => 'Search Results Per Page',
-		'id'          => THEME_OPTIONS_NAME.'[search_per_page]',
-		'description' => 'Number of search results to show per page of results',
-		'default'     => 10,
-		'value'       => $theme_options['search_per_page'],
-	)),
-	new TextField(array(
-		'name'        => 'Catering Spotlight Title',
-		'id'          => THEME_OPTIONS_NAME.'[catering_spotlight_title]',
-		'description' => 'Title will be contained in an H3.',
-		'default'     => null,
-		'value'       => $theme_options['catering_spotlight_title'],
-	)),
-	new TextareaField(array(
-		'name'        => 'Catering Spotlight Content',
-		'id'          => THEME_OPTIONS_NAME.'[catering_spotlight_content]',
-		'description' => '',
-		'default'     => null,
-		'value'       => $theme_options['catering_spotlight_content'],
-	)),
+		new TextField(array(
+			'name'        => 'WebMaster Verification',
+			'id'          => THEME_OPTIONS_NAME.'[gw_verify]',
+			'description' => 'Example <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
+			'default'     => null,
+			'value'       => $theme_options['gw_verify'],
+		)),
+		new TextField(array(
+			'name'        => 'GSA Search Domain',
+			'id'          => THEME_OPTIONS_NAME.'[search_domain]',
+			'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example <em>some.domain.com</em>',
+			'default'     => null,
+			'value'       => $theme_options['search_domain'],
+			)),
+		new TextField(array(
+			'name'        => 'GSA Search Results Per Page',
+			'id'          => THEME_OPTIONS_NAME.'[search_per_page]',
+			'description' => 'Number of search results to show per page of results',
+			'default'     => 10,
+			'value'       => $theme_options['search_per_page'],
+		)),
+	),
+	'Chartbeat' => array(
+		new TextField(array(
+			'name'        => 'Chartbeat UID',
+			'id'          => THEME_OPTIONS_NAME.'[cb_uid]',
+			'description' => 'Example <em>1842</em>',
+			'default'     => null,
+			'value'       => $theme_options['cb_uid'],
+		)),
+		new TextField(array(
+			'name'        => 'Chartbeat Domain',
+			'id'          => THEME_OPTIONS_NAME.'[cb_domain]',
+			'description' => 'Example <em>some.domain.com</em>',
+			'default'     => null,
+			'value'       => $theme_options['cb_domain'],
+		)),
+	),
+	'Constant Contact' => array(
+		new TextField(array(
+			'name'        => 'Username:',
+			'id'          => THEME_OPTIONS_NAME.'[constant_contact_username]',
+			'description' => '',
+			'default'     => null,
+			'value'       => $theme_options['constant_contact_username']
+		)),
+		new TextField(array(
+			'name'        => 'Password:',
+			'id'          => THEME_OPTIONS_NAME.'[constant_contact_password]',
+			'description' => '',
+			'default'     => null,
+			'value'       => $theme_options['constant_contact_password']
+		)),
+		new TextField(array(
+			'name'        => 'API Key:',
+			'id'          => THEME_OPTIONS_NAME.'[constant_contact_api_key]',
+			'description' => '',
+			'default'     => null,
+			'value'       => $theme_options['constant_contact_api_key']
+		)),
+		new TextField(array(
+			'name'        => 'List ID:',
+			'id'          => THEME_OPTIONS_NAME.'[constant_contact_list]',
+			'description' => 'ID of the email to add users to when they sign up for the newsletter. Defaults to 2 (Primary E-Mail List).',
+			'default'     => null,
+			'value'       => $theme_options['constant_contact_list']
+		)),
+	),
+	'Miscellaneous' => array(
+		new TextField(array(
+			'name'        => 'Number of Home Page Promos:',
+			'id'          => THEME_OPTIONS_NAME.'[promo_post_num]',
+			'description' => 'Controls how many promo posts will appear on the home page.',
+			'value'       => $theme_options['promo_post_num']
+		)),
+		new TextField(array(
+			'name'        => 'UCF Today Rosen News RSS URL:',
+			'id'          => THEME_OPTIONS_NAME.'[today_rosen_rss]',
+			'description' => 'URL of the Rosen RSS feed on UCF Today that populated the sidebar news item.',
+			'default'     => null,
+			'value'       => $theme_options['today_rosen_rss']
+		)),
+		new TextField(array(
+			'name'        => 'About Us Page Featured Group Name:',
+			'id'          => THEME_OPTIONS_NAME.'[aboutus_featured_group]',
+			'description' => 'The group name specified here will be featured on the About Us page as a series of 
+												images and titles rather than the default table format.',
+			'default'     => 'Dean\'s Suite',
+			'value'       => $theme_options['aboutus_featured_group']
+		)),
+		new TextField(array(
+			'name'        => 'Gallery Feed URL:',
+			'id'          => THEME_OPTIONS_NAME.'[gallery_feed_url]',
+			'description' => 'Expects a Flickr RSS feed URL.',
+			'default'     => 'http://api.flickr.com/services/feeds/photoset.gne?set=72157624283202883&nsid=36226710@N08&lang=en-us',
+			'value'       => $theme_options['gallery_feed_url']
+		)),
+		new TextField(array(
+			'name'        => 'Catering Spotlight Title',
+			'id'          => THEME_OPTIONS_NAME.'[catering_spotlight_title]',
+			'description' => 'Title will be contained in an H3.',
+			'default'     => null,
+			'value'       => $theme_options['catering_spotlight_title'],
+		)),
+		new TextareaField(array(
+			'name'        => 'Catering Spotlight Content',
+			'id'          => THEME_OPTIONS_NAME.'[catering_spotlight_content]',
+			'description' => '',
+			'default'     => null,
+			'value'       => $theme_options['catering_spotlight_content'],
+		)),
+	)
 );
 
 Config::$links = array(
