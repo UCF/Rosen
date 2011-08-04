@@ -99,6 +99,8 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 #home #spalsh-container > img {position:absolute;top:0;right:0;}
 #home #content-container {position:relative;z-index:1;}
 
+#home h2:first-child a,
+	#home #subtitle {text-shadow:rgba(255,255,255, 0.7) 2px 2px 2px;}
 #home h2:first-child {margin-bottom:0;}
 #home #subtitle {font-size:120%;margin-bottom:270px;}
 
