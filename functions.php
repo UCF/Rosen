@@ -161,6 +161,20 @@ Config::$theme_settings = array(
 		'default'     => 10,
 		'value'       => $theme_options['search_per_page'],
 	)),
+	new TextField(array(
+		'name'        => 'Catering Spotlight Title',
+		'id'          => THEME_OPTIONS_NAME.'[catering_spotlight_title]',
+		'description' => 'Title will be contained in an H3.',
+		'default'     => null,
+		'value'       => $theme_options['catering_spotlight_title'],
+	)),
+	new TextareaField(array(
+		'name'        => 'Catering Spotlight Content',
+		'id'          => THEME_OPTIONS_NAME.'[catering_spotlight_content]',
+		'description' => '',
+		'default'     => null,
+		'value'       => $theme_options['catering_spotlight_content'],
+	)),
 );
 
 /**

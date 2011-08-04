@@ -13,14 +13,19 @@
 	</form>
 </div>
 <?=get_today_news()?>
+<?
+	$catering_title = get_theme_option('catering_spotlight_title'); 
+	$catering_content = get_theme_option('catering_spotlight_content');
+	if($catering_title !== FALSE && $catering_content !== FALSE &&
+			$catering_title != '' && $catering_content != ''):
+?>
 <div class="sidebar-pub">
-	<h3 class="serif">Let us Cater to You</h3>
+	<h3 class="serif"><?=$catering_title?></h3>
 	<p class="serif">
-		Choose our Mediterranean-style venue for your next meeting or event.  
-		Our professional staff will add a personal touch and demonstrate 
-		service that is beyond compare
+		<?=$catering_content?>
 	</p>
 </div>
+<? endif; ?>
 <div id="sidebar-social">
 	<h3>Get Social:</h3>
 	<?=get_menu('sidebar-social-menu', 'menu vertical sans', 'sidebar-social-menu')?>
