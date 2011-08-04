@@ -19,6 +19,7 @@ abstract class CustomPostType{
 		$use_hierarchical  = False, # Must be true to see Parent field in Page Attributes
 		$_builtin          = False, # True when extending built-in post type (post, page, etc.)
 		$taxonomies        = Array(); # Taxonomies associated with this post type (e.g. post_tag, category)
+
 	/**
 	 * Wrapper for get_posts function, that predefines post_type for this
 	 * custom post type.  Any options valid in get_posts can be passed as an
@@ -193,19 +194,42 @@ abstract class CustomPostType{
 		}else{
 			$attr = $default;
 		}
-		return sc_object($attr);
+		return sc_object_list($attr);
+	}
+	
+	
+	/**
+	 * Handles output for a list of objects, can be overridden for descendants.
+	 * If you want to override how a list of objects are outputted, override
+	 * this, if you just want to override how a single object is outputted, see
+	 * the toHTML method.
+	 **/
+	public function objectsToHTML($objects){
+		if (count($objects) < 1){ return '';}
+		
+		$class = get_custom_post_type($objects[0]->post_type);
+		$class = new $class;
+		
+		ob_start();
+		?>
+		<ul class="<?=$class->options('name')?>-list">
+			<?php foreach($objects as $o):?>
+			<li>
+				<?=$class->toHTML($o)?>
+			</li>
+			<?php endforeach;?>
+		</ul>
+		<?php
+		$html = ob_get_clean();
+		return $html;
 	}
 	
 	
 	/**
 	 * Outputs this item in HTML.  Can be overridden for descendants.
 	 **/
-	public function toHTML($post){
-		if (is_int($post)){
-			$post = get_post($post);
-		}
-		
-		$html = '<a href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';
+	public function toHTML($object){
+		$html = '<a href="'.get_permalink($object->ID).'">'.$object->post_title.'</a>';
 		return $html;
 	}
 }
@@ -231,6 +255,25 @@ class Page extends CustomPostType{
 		
 		$taxonomies     = Array('categories');
 		
+	
+	
+	public function objectsToHTML($objects){
+		$class = get_custom_post_type($objects[0]->post_type);
+		$class = new $class;
+		
+		$outputs = array();
+		foreach($objects as $o){
+			$outputs[] = $class->toHTML($o);
+		}
+		
+		return implode(', ', $outputs);
+	}
+	
+	
+	public function toHTML($object){
+		return $object->post_title;
+	}
+	
 	public function fields(){
 		return array(
 			array(

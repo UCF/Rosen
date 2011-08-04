@@ -30,7 +30,7 @@
 					</form>
 				</div>
 			</div>
-		</div>
-		<?=footer_()?>
+		</div><!-- #blueprint-container -->
+		<?="\n".footer_()."\n"?>
 	</body>
 </html>

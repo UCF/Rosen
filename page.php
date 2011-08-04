@@ -15,9 +15,9 @@
 			<?=get_sidebar();?>
 		</div>
 		
-		<div class="clear"></div>
-		<?php get_template_part('templates/below-the-fold'); ?>
-		
+		<div id="below-the-fold" class="clear">
+			<?php get_template_part('templates/below-the-fold'); ?>
+		</div>
 	</div>
 
 <?php get_footer();?>

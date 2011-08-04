@@ -94,7 +94,6 @@ Config::$theme_settings = array(
 		'name'        => 'Number of Home Page Promos:',
 		'id'          => THEME_OPTIONS_NAME.'[promo_post_num]',
 		'description' => 'Controls how many promo posts will appear on the home page.',
-		'default'     => 1,
 		'value'       => $theme_options['promo_post_num']
 	)),
 	new TextField(array(
@@ -177,11 +176,6 @@ Config::$theme_settings = array(
 	)),
 );
 
-/**
- * Configure theme settings, see abstract class Field's descendants for
- * available fields. -- functions-base.php
- **/
-
 Config::$links = array(
 	array('rel' => 'shortcut icon', 'href' => THEME_IMG_URL.'/favicon.ico',),
 	array('rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => get_bloginfo('rss_url'),),
@@ -209,6 +203,7 @@ Config::$scripts = array(
 	THEME_JS_URL.'/jquery-browser.js',
 	THEME_JS_URL.'/jquery-uniform.js',
 	'http://events.ucf.edu/tools/script.js',
+	array('name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js',),
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
 	THEME_JS_URL.'/jquery.lightbox-0.5.pack.js',
 );
