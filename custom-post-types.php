@@ -300,7 +300,7 @@ class Form extends Link{
 		$edit_item      = 'Edit Form',
 		$new_item       = 'New Form',
 		$public         = True,
-		$use_shortcode  = True,
+		$use_shortcode  = False,
 		$taxonomies     = Array('post_tag', 'category');
 	
 	public function fields(){
