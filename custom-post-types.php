@@ -341,7 +341,7 @@ class Person extends CustomPostType
 		$use_metabox    = True,
 		$use_thumbnails = True,
 		$use_order      = True,
-		$taxonomies     = Array('rosen_org_groups');
+		$taxonomies     = Array('rosen_org_groups', 'category');
 		
 		public function fields(){
 			$fields = array(
