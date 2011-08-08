@@ -19,7 +19,7 @@
 	if($catering_title !== FALSE && $catering_content !== FALSE &&
 			$catering_title != '' && $catering_content != ''):
 ?>
-<div class="sidebar-pub">
+<div class="sidebar-pub" id="theme-shoutout">
 	<h3 class="serif"><?=$catering_title?></h3>
 	<p class="serif">
 		<?=$catering_content?>
