@@ -13,25 +13,19 @@
 			<?$count = 0;
 				foreach($people as $person) {
 					$count++;
-					$job_title = get_post_meta($person->ID, 'person_jobtitle', True);
 					$email     = get_post_meta($person->ID, 'person_email', True);
-					$phones    = get_person_phones($person->ID);
 				?>
-					<tr class="sans <?=((($count % 2) == 0) ? 'even' : 'odd')?>">
+					<tr class="sans <?=((($count % 2) == 0) ? 'even' : 'odd')?>" data-profile-url="<?=get_permalink($person->ID);?>">
 						<td class="name">
 								<?=get_person_name($person)?>
 						</td>
 						<td class="job_title">
-						<?=$job_title?>
+						<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
 						</td> 
 						<td class="phones">
 							<ul>
-								<? foreach($phones as $phone) { ?>
-								<li>
-									<a href="<?=get_permalink($person->ID)?>">
-										<?=$phone?>
-									</a>
-								</li>
+								<? foreach(get_person_phones($person->ID) as $phone) { ?>
+								<li><?=$phone?></li>
 								<? } ?>
 							</ul>
 						</td>

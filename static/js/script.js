@@ -46,5 +46,14 @@ jQuery(document).ready(function($) {
 			imageBtnNext:THEME_IMG_URL + '/lightbox/lightbox-btn-next.gif',
 			imageBlank: THEME_IMG_URL + '/lightbox/lightbox-blank.gif'
 		});
+		
+		$('.dept > table > tbody > tr')
+			.each(function(index, row) {
+				row = $(row);
+				var profile_url = row.attr('data-profile-url');
+				if(profile_url != '') {
+					row.click(function() {window.location.href = profile_url});
+				}
+			})
 	})();
 });
