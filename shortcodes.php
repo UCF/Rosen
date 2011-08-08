@@ -116,7 +116,7 @@ function sc_staff($atts = Array())
 	if(!function_exists('get_person_phones'))	{
 		function get_person_phones($person_id) {
 			$phones = get_post_meta($person_id, 'person_phones', True);
-			return explode(',', $phones);
+			return ($phones != '') ? explode(',', $phones) : array();
 		}
 	}
 	

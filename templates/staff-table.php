@@ -3,32 +3,30 @@
 	<table>
 		<thead class="sans">
 			<tr>
-				<th scope="col">Name</th>
-				<th scope="col">Title</th>
-				<th scope="col">Phone(s)</th>
-				<th scope="col">E-Mail</th>
+				<th scope="col" class="name">Name</th>
+				<th scope="col" class="job_title">Title</th>
+				<th scope="col" class="phones">Phone(s)</th>
+				<th scope="col" class="email">E-Mail</th>
 			</tr>
 		</thead>
 		<tbody class="serif">
 			<?$count = 0;
 				foreach($people as $person) {
 					$count++;
-					$email = get_post_meta($person->ID, 'person_email', True);
+					$job_title = get_post_meta($person->ID, 'person_jobtitle', True);
+					$email     = get_post_meta($person->ID, 'person_email', True);
+					$phones    = get_person_phones($person->ID);
 				?>
 					<tr class="sans <?=((($count % 2) == 0) ? 'even' : 'odd')?>">
 						<td class="name">
-							<a href="<?=get_permalink($person->ID)?>">
 								<?=get_person_name($person)?>
-							</a>
 						</td>
 						<td class="job_title">
-							<a href="<?=get_permalink($person->ID)?>">
-								<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
-								</a>
-							</td>
+						<?=$job_title?>
+						</td> 
 						<td class="phones">
 							<ul>
-								<? foreach(get_person_phones($person->ID) as $phone) { ?>
+								<? foreach($phones as $phone) { ?>
 								<li>
 									<a href="<?=get_permalink($person->ID)?>">
 										<?=$phone?>
@@ -42,6 +40,6 @@
 						</td>
 					</tr>
 			<? } ?>
-		</body>
+		</tbody>
 	</table>
 </div>

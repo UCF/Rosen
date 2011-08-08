@@ -77,7 +77,7 @@ form input[type="submit"], .search-submit {text-shadow:none;background-color:#70
 
 table {font-family:"Helvetica Neue", Helvetica, sans-serif;}
 table > thead {}
-table > thead > tr {border-bottom: 1px solid rgba(204, 193, 163, 0.65);background-color:#DDCB9A;color:#775224}
+table > thead > tr {border-bottom: 1px solid rgba(204, 193, 163, 1);background-color:#DDCB9A;color:#775224}
 table > thead > tr > th {padding:5px;font-size: 100%;padding-bottom:5px;font-weight:bold;text-align:left;}
 table > tbody {}
 table td {padding:5px 5px;text-align:left;font-size:100%;color:#333;font-weight:500;}
@@ -177,12 +177,19 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 .dept table .name a:hover,
 	.dept table .job_title a:hover,
 		.dept table .phones a:hover {text-decoration:underline;}
-.dept table .name {width:20%;}
-.dept table .job_title {width:30%;}
-.dept table .phones {width:10%;}
+.dept table tbody,
+ 	.dept table thead {width:100%;}		
+
+.dept table th.name  {width:25%;}
+.dept table th.job_title {width:30%;}
+.dept table th.phones {width:20%;}
+.dept table th.email {width:25%;}
+
+.dept table td {vertical-align:top;}
+
 .dept table .phones > ul {margin:0;padding:0;font-size:100%;}
 .dept table .phones > ul > li {list-style-type:none;margin:0;padding:0;}
-.dept table .email {width:15%;}
+
 
 .dept > ul {margin:0;padding:0;}
 .dept > ul > li {font-size:80%;margin:0 0 10px 0;padding:0;float:left;list-style-type:none;width:111px;margin-right:48px;}
