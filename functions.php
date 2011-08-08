@@ -28,6 +28,7 @@ $allowedposttags['option'] = Array('id'   => array(),
 																	'value' => array());
 //Custom Image Sizes
 add_image_size('sidebar-feature', 303, 360, True);
+add_image_size('sidebar-rss-thumb', 272, 200, True);
 
 require_once('functions-base.php');     # Base theme functions
 require_once('custom-taxonomies.php');	# Where per theme custom taxonomies are defined
