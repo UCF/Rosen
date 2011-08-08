@@ -5,6 +5,7 @@ Github Theme URI: https://github.com/UCF/Rosen
 Version: v1.0.5
 */
 
+
 html {background:#fcdd88 url('static/img/iron.gif') repeat-y top center;}
 body {}
 
@@ -91,6 +92,7 @@ h1 {padding:6px 10px 10px 10px;background-color:rgba(255, 255, 255,.53);z-index:
 						-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#87FFFFFF,endColorstr=#87FFFFFF)"; /* IE8 */
 						filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#87FFFFFF,endColorstr=#87FFFFFF);	 /* IE6 & 7 */
 						zoom: 1;}
+.msie7 h1 {padding-top:13px;}
 h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important;letter-spacing:.9px;font-weight:300 !important;}
 
 /*/ Home /*/
@@ -98,7 +100,6 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 #home #splash-container {position:absolute;top:0;right:0;z-index:-1;margin-right:320px;}
 #home #spalsh-container > img {position:absolute;top:0;right:0;}
 #home #content-container {position:relative;z-index:1;}
-
 
 #home h2:first-child > a,
 	#home #subtitle {text-shadow:rgba(255,255,255, 0.7) 2px 2px 2px;}
@@ -148,8 +149,9 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 .msie7 #home .widget > .events > li > a {margin-top:5px;}
 
 /*/ Subpage /*/
-#page h1 {position:relative;left:-10px;}
-.page-content > div:first-child {background-color: rgba(255,255,255,0.6);position:relative;top:-88px;left:-30px;padding-top:78px;padding-left:30px;margin-right:-20px;padding-bottom:20px;}
+#page #blueprint-container {padding:0;}
+#page h1 {position:relative;left:-10px;top:30px;}
+.page-content > div:first-child {background-color: rgba(255,255,255,0.6);position:relative;left:-30px;padding-top:78px;padding-left:30px;margin-right:-20px;padding-bottom:20px;}
 .msie7 .page-content > div:first-child, .msie8 .page-content > div:first-child {background-color:#fdf1cf}
 #page article h2 {color:#8c5c12;margin-bottom:10px;}
 #page article h3 {color:#333;font-size:170%;font-weight:100;}
@@ -159,7 +161,7 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 															-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99394A30,endColorstr=#99394A30)"; /* IE8 */
 															filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99394A30,endColorstr=#99394A30);   /* IE6 & 7 */
 															zoom: 1;}
-#page #sidebar {top:-89px;}
+.page-content > div:first-child {position:relative;top:-65px;}
 
 #page .page-content > .span-15 .wp-caption-text {margin: 5px 20px;}
 
