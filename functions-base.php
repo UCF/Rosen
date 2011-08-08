@@ -1347,39 +1347,35 @@ function get_promo_html()
  **/
 function get_today_news()
 {
-	global $post;
+	global $post, $_wp_additional_image_sizes;
 	
 	if( ($feed_url = get_post_meta($post->ID, 'page_feed', True)) == '') {
 		$feed_url = get_theme_option('today_rosen_rss');
 	}
 	if($feed_url !== False && $feed_url != '') {
-		$rss = fetch_feed($feed_url);
+		
+		$dimensions = '';
+		if(isset($_wp_additional_image_sizes['sidebar-rss-thumb'])) {
+			$dimensions  = '?thumb='.$_wp_additional_image_sizes['sidebar-rss-thumb']['width'];
+			$dimensions .= 'x'.$_wp_additional_image_sizes['sidebar-rss-thumb']['height'];
+		}
+		
+		$rss = fetch_feed($feed_url.$dimensions	);
 		if(!is_wp_error($rss)) {
-			$item = $rss->get_item(0);
+			$item        = $rss->get_item(0);
 			$description = $item->get_description();
+			$enclosure   = $item->get_enclosure();
 			
-			// Try to extract the image from the post
-			$img = False;
-			if(preg_match('/<img([^>]+)>/', $description, $matches)) {
-				$img_src   = null;
-				$img_width = null;
-				$img_alt   = '';
-				
-				if(preg_match('/src="([^"]+)"/', $matches[1], $src_match) && preg_match('/width="(\d+)"/', $matches[1], $width_match)) {
-					$img_src   = $src_match[1];
-					$img_width = $width_match[1];
-					
-					if(preg_match('/alt="([^"]+)"/', $matches[1], $alt_match)) {
-						$img_alt = $alt_match[1];
-					}
-					
-					$img = '<img src="'.$img_src.'" width="'.(($img_width > 272) ? 272 : $img_width).'" alt="'.$alt.'" />';
+			if(method_exists($enclosure, 'get_thumbnail')) {
+				$img_src = $enclosure->get_thumbnail();
+				if($img_src != '') {
+					$img = '<img src="'.$img_src.'" width="272" alt="'.$item->get_title().' Thumbnail" />';
 				}
 			}
 			
 			ob_start();?>
 			<div class="sidebar-pub serif">
-				<?=($img !== False) ? $img : ''?>
+				<?=isset($img) ? $img : ''?>
 				<h3><a href="<?=$item->get_permalink()?>"><?=$item->get_title()?></a></h3>
 				<p><?=strip_tags($description)?></p>
 				<a href="<?=preg_replace('/feed\/?$/', '', $feed_url)?>">More Rosen College News &raquo;</a>
