@@ -1,4 +1,4 @@
-<div class="dept">
+<div class="dept clear">
 	<h3><?=$term->name?></h3>
 	<table>
 		<thead class="sans">
