@@ -36,7 +36,7 @@
 			var CURRENT_PAGE_NAME = '<?=$post->post_title?>';
 		</script>
 	</head>
-	<body class="<?=body_classes()?>" id="<?=is_front_page() ? 'home' : ''?><?=is_page() ? 'page' : ''?>">
+	<body class="<?=body_classes()?>" id="<?=is_front_page() ? 'home' : 'page'?>">
 	<div id="blueprint-container" class="container">
 	<? if(is_front_page()) { ?>
 		<div id="splash-container">

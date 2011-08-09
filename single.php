@@ -3,7 +3,7 @@
 	<div class="span-24 last page-content" id="<?=$post->post_name?>">
 		<div class="span-15 append-1">
 			<article>
-				<h1><?php the_title();?></h1>
+				<h2><?php the_title();?></h2>
 				<? if($post->post_type == 'person') echo get_person_meta($post->ID); ?>
 				<?php the_content();?>
 			</article>
