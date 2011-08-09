@@ -23,9 +23,6 @@
 		<div id="sidebar" class="span-8 last">
 			<?=get_sidebar();?>
 		</div>
-		
 		<div class="clear"><!-- --></div>
-		<?php get_template_part('templates/below-the-fold'); ?>
 	</div>
-
 <?php get_footer();?>

@@ -48,9 +48,6 @@
 			?>
 			<?=$sidebar?>
 		</div>
-		
-		<div id="below-the-fold" class="clear">
-			<?php get_template_part('templates/below-the-fold'); ?>
-		</div>
+		<div class="clear"><!-- --></div>
 	</div>
 <?php get_footer();?>
