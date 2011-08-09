@@ -666,34 +666,6 @@ function get_custom_post_type($name){
 	return null;
 }
 
-class RosenWalkerNavMenu extends Walker_Nav_Menu {
-	
-	function start_lvl(&$output, $depth) {
-		$indent = str_repeat("\t", $depth);
-		$output .= "\n$indent<ul class=\"sub-menu\">\n";
-	}
-	
-	function start_el(&$output, $item, $depth, $args) {
-		global $post;
-		
-		if(!isset($this->prev_depth)) $this->prev_depth = 0;
-		if(!isset($this->ref_item)) $this->ref_item = $item;
-		
-		if($this->prev_depth != $depth) { // Depth change
-			$this->ref_item = $this->prev_item;
-		}
-		
-		if((int)$this->ref_item->object_id == $post->ID || 
-					(int)$item->object_id == $post->ID || 
-						$depth == 0 ||
-							$this->prev_depth == $depth) {
-			parent::start_el($output, $item, $depth, $args);
-		}
-		
-		$this->prev_item = $item;
-		$this->prev_depth = $depth;
-	}
-}
 /**
  * Custom function using some of WordPreses buit-ins. Only displays
  * submenus of the link of the current page.
