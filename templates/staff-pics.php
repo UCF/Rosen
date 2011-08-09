@@ -1,5 +1,5 @@
 <div class="dept">
-	<h3><?=$term->name?></h3>
+	<h3><?=$dean_suite->name?></h3>
 	<ul class="sans clearfix">
 	<?$count = 1; 
 		foreach($people as $person) {
