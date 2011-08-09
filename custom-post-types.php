@@ -204,7 +204,7 @@ abstract class CustomPostType{
 	 * this, if you just want to override how a single object is outputted, see
 	 * the toHTML method.
 	 **/
-	public function objectsToHTML($objects){
+	public function objectsToHTML($objects, $tax_queries){
 		if (count($objects) < 1){ return '';}
 		
 		$class = get_custom_post_type($objects[0]->post_type);
@@ -257,7 +257,7 @@ class Page extends CustomPostType{
 		
 	
 	
-	public function objectsToHTML($objects){
+	public function objectsToHTML($objects, $tax_queries){
 		$class = get_custom_post_type($objects[0]->post_type);
 		$class = new $class;
 		
@@ -343,7 +343,7 @@ class Form extends Link{
 		$edit_item      = 'Edit Form',
 		$new_item       = 'New Form',
 		$public         = True,
-		$use_shortcode  = False,
+		$use_shortcode  = True,
 		$taxonomies     = Array('post_tag', 'category');
 	
 	public function fields(){
@@ -362,6 +362,64 @@ class Form extends Link{
 		$y = wp_get_attachment_url(get_post_meta($form->ID, 'form_file', True));
 		
 		return ($y) ? $y : $x;
+	}
+	
+	public function objectsToHTML($object, $tax_queries) {
+		$categories = array();
+		foreach($tax_queries as $query) {
+			if($query['taxonomy'] == 'category') {
+				foreach($query['terms'] as $term_slug) {
+					if( ($term = get_term_by('slug', $term_slug, 'category')) !== False) {
+						array_push($categories, $term);
+					}
+				}
+			}
+		}
+		if(count($categories) == 0) {
+			$categories    = get_categories(array(
+				'orderby' => 'name',
+				'order'   => 'ASC',
+				'parent'  => get_category_by_slug('forms')->term_id,
+			));
+		}
+		
+		ob_start();?>
+		<div class="forms">
+			<? foreach($categories as $category): ?>
+				<h3><?=$category->name?></h3>
+				<ul>
+					<?php
+						$forms = get_posts(array(
+							'numberposts' => -1,
+							'orderby'     => 'title',
+							'order'       => 'ASC',
+							'post_type'   => 'form',
+							'category'    => $category->term_id,
+						));
+					?>
+					<?php foreach($forms as $form):?>
+					<?php
+						$url  = get_post_meta($form->ID, 'form_url', True);
+						$file = get_post_meta($form->ID, 'form_file', true);
+						if ($file){
+							$url = wp_get_attachment_url(get_post($file)->ID);
+						}
+						if($url=="#"){
+							$class = 'missing';
+						} else {
+							preg_match('/\.(?<file_ext>[^.]+)$/', $url, $matches);
+							$class = isset($matches['file_ext']) ? $matches['file_ext'] : 'file';
+						}	
+					?>
+					<li class="document <?=$class?>">
+						<a href="<?=$url?>"><?=$form->post_title?></a>
+					</li>
+					<?php endforeach;?>
+				</ul>
+			<? endforeach;?>
+		</div>
+		<?
+		return ob_get_clean();
 	}
 }
 

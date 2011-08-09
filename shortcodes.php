@@ -60,29 +60,6 @@ function sc_slideshow($attr, $content=null){
 add_shortcode('slideshow', 'sc_slideshow');
 
 /**
- * Outputs forms organized by the sub-category of 'Forms' they are related to.
- * Uncategorized forms will not display.
- * Only show a certain category by specifiying it in the shortcode parameters.
- *
- * Example:
- * [sc-forms category="Test"]
- **/
-function sc_forms_pretty($atts = Array()){
-	
-	$category_name = (isset($atts['category'])) ? $atts['category'] : False;
-	if($category_name !== False) {
-		if(($category = get_term_by('name', $category_name, 'category')) !== False) {
-			$categories = Array($category);
-		}	
-		unset($category);
-	}
-	ob_start();
-	include('templates/section-forms.php');
-	return ob_get_clean();
-}
-add_shortcode('forms-pretty', 'sc_forms_pretty');
-
-/**
  * Build staff list
  *
  * @return string
