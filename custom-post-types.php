@@ -364,7 +364,7 @@ class Form extends Link{
 		return ($y) ? $y : $x;
 	}
 	
-	public function objectsToHTML($object, $tax_queries) {
+	public function objectsToHTML($objects, $tax_queries) {
 		$categories = array();
 		foreach($tax_queries as $query) {
 			if($query['taxonomy'] == 'category') {
