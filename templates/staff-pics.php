@@ -1,13 +1,15 @@
 <div class="dept">
 	<h3><?=$dean_suite->name?></h3>
 	<ul class="sans clearfix">
-	<?$count = 1; 
+	<?$count = 1;
+		$end  = False;
 		foreach($people as $person) {
 			
 			$email = get_post_meta($person->ID, 'person_email', True);
 			$img = get_the_post_thumbnail($person->ID, 'full');
+			$last = (($count % 4) == 0) ? True : False;
 			?>
-		<li class="<?=((($count % 4) == 0) ? 'last':'')?>">
+		<li class="<?=$last ? 'last': ''?><?=$end ? 'clear' : ''?>">
 			<a href="<?=get_permalink($person->ID)?>">
 				<? if($img == '') {?>
 					<img src="<?=bloginfo('stylesheet_directory')?>/static/img/no-photo.jpg" alt="not photo available"/>
@@ -28,7 +30,10 @@
 					</a>
 				</p>
 		</li>
-	<?$count++; 
+	<?
+		if($end) $end = False;
+		if($last) $end = True;
+		$count++; 
 		} ?>
 	</ul>
 </div>
