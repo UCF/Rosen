@@ -479,6 +479,77 @@ class Person extends CustomPostType
 			);
 			return $fields;
 		}
+	
+	public function objectsToHTML($objects, $tax_queries) {
+		# We could try to use the objects passed here but it simpler
+		# to just look them up again already split up into sections 
+		# based on the tax_queries array
+		
+		if(!function_exists('get_term_people')) {
+			function get_term_people($term_id, $order_by = 'menu_order') {
+				$posts = get_posts(Array(
+														'numberposts' => -1,
+														'order' => 'ASC',
+														'orderby' => $order_by,
+														'post_type' => 'person',
+														'tax_query' => Array(
+																							Array(
+																									'taxonomy' => 'rosen_org_groups',
+																									'field' =>  'id',
+																									'terms' => $term_id))));
+				return $posts;
+			}
+		}
+		if(!function_exists('get_person_name')) {
+			function get_person_name($person) {
+				$prefix = get_post_meta($person->ID, 'person_title_prefix', True);
+				$suffix = get_post_meta($person->ID, 'person_title_suffix', True);
+				$name = $person->post_title;
+				return $prefix.' '.$name.$suffix;
+			}
+		}
+		if(!function_exists('get_person_phones'))	{
+			function get_person_phones($person_id) {
+				$phones = get_post_meta($person_id, 'person_phones', True);
+				return ($phones != '') ? explode(',', $phones) : array();
+			}
+		}
+
+		ob_start();
+		if(count($tax_queries) ==0) {
+			// Dean's Suite is always first if everything is being displayed
+			$dean_suite_name = get_theme_option('aboutus_featured_group');
+			$dean_suite = False;
+			if($dean_suite_name !== False) {
+				$dean_suite = get_term_by('name', 'Dean\'s Suite', 'rosen_org_groups');
+				if($dean_suite !== False) {
+					$people = get_term_people($dean_suite->term_id, 'menu_order'); 
+					include('templates/staff-pics.php');
+				}
+			}
+		}
+		
+		if(count($tax_queries) == 0) {
+			$terms = get_terms('rosen_org_groups', Array('orderby' => 'name'));
+		} else {
+			$terms = array();
+			foreach($tax_queries as $key=>$query) {
+				foreach($query['terms'] as $term_slug) {
+					$term = get_term_by('slug', $term_slug, $query['taxonomy']);
+					if($term !== False) {
+						array_push($terms, $term);
+					}
+				}
+			}
+		}
+		foreach($terms as $term) {
+			if(count($tax_queries) > 0 || ($dean_suite_name === False || $dean_suite === False || $term->term_id != $dean_suite->term_id)) {
+				$people = get_term_people($term->term_id, 'title');
+				include('templates/staff-table.php');
+			}
+		}
+		return ob_get_clean();
+	}
 } // END class 
 
 ?>

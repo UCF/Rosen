@@ -363,6 +363,7 @@ function sc_object_list($attr, $default_content=null){
 	}
 	wp_reset_postdata();
 	
+	array_shift($tax_queries);
 	if (count($objects)){
 		$html = $class->objectsToHTML($objects, $tax_queries);
 	}else{

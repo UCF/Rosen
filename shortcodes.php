@@ -60,69 +60,9 @@ function sc_slideshow($attr, $content=null){
 add_shortcode('slideshow', 'sc_slideshow');
 
 /**
- * Build staff list
- *
- * @return string
- * @author Chris Conover
- **/
-function sc_staff($atts = Array())
-{
-	if(!function_exists('get_term_people')) {
-		function get_term_people($term_id, $order_by = 'menu_order') {
-			$posts = get_posts(Array(
-													'numberposts' => -1,
-													'order' => 'ASC',
-													'orderby' => $order_by,
-													'post_type' => 'person',
-													'tax_query' => Array(
-																						Array(
-																								'taxonomy' => 'rosen_org_groups',
-																								'field' =>  'id',
-																								'terms' => $term_id))));
-			return $posts;
-		}
-	}
-	if(!function_exists('get_person_name')) {
-		function get_person_name($person) {
-			$prefix = get_post_meta($person->ID, 'person_title_prefix', True);
-			$suffix = get_post_meta($person->ID, 'person_title_suffix', True);
-			$name = $person->post_title;
-			return $prefix.' '.$name.$suffix;
-		}
-	}
-	if(!function_exists('get_person_phones'))	{
-		function get_person_phones($person_id) {
-			$phones = get_post_meta($person_id, 'person_phones', True);
-			return ($phones != '') ? explode(',', $phones) : array();
-		}
-	}
-	
-	ob_start();
-	// Dean's Suite is always first
-	$dean_suite_name = get_theme_option('aboutus_featured_group');
-	$dean_suite = False;
-	if($dean_suite_name !== False) {
-		$dean_suite = get_term_by('name', 'Dean\'s Suite', 'rosen_org_groups');
-		if($dean_suite !== False) {
-			$people = get_term_people($dean_suite->term_id, 'menu_order'); 
-			include('templates/staff-pics.php');
-		}
-	}
-	$terms = get_terms('rosen_org_groups', Array('orderby' => 'name'));
-	foreach($terms as $term) {
-		if($dean_suite_name === False || $dean_suite === False || $term->term_id != $dean_suite->term_id) {
-			$people = get_term_people($term->term_id, 'title');
-			include('templates/staff-table.php');
-		}
-	}
-	return ob_get_clean();
-}
-add_shortcode('sc-staff', 'sc_staff');
-
-/**
  * Build gallery from Flickr RSS feed
  *
- * @return void
+ * @return string
  * @author Chris Conover
  **/
 function sc_flickr_gallery($atts = Array())
