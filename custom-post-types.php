@@ -448,7 +448,7 @@ class Person extends CustomPostType
 			$fields = array(
 				array(
 					'name'    => __('Title Prefix'),
-					'desc'    => __('Be sure to include trailing space if neccessary.'),
+					'desc'    => '',
 					'id'      => $this->options('name').'_title_prefix',
 					'type'    => 'text',
 				),
