@@ -1570,7 +1570,7 @@ function person_content_filter($content)
 {
 	global $post;
 	if($post->post_type == 'person') {
-		return get_person_meta($post).'<div class="span-11 last">'.$content.'</div>';
+		return get_person_meta($post->ID).'<div class="span-11 last">'.$content.'</div>';
 	} else {
 		return $content;
 	}
