@@ -150,4 +150,18 @@ function sc_feed_list($atts = array())
 	}
 }
 add_shortcode('feed-list', 'sc_feed_list');
+
+/**
+ * Outputs Google directions widget. Takes optional width and height parameters.
+ *
+ * Example: [google-directions width="320" height="55"]
+ **/
+function sc_google_directions($atts = Array())
+{
+	$height = isset($atts['height']) && intval($atts['height']) > 0 ? $atts['height'] : 55;
+	$width  = isset($atts['width']) && intval($atts['width']) > 0 ? $atts['width'] : 320;
+	
+	return '<script src="http://www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/114281111391296844949/driving-directions.xml&amp;up_fromLocation=&amp;up_myLocations=Rosen%20College%20of%20Hospitality%20Management%2C9700%20Universal%20Blvd%2C%20Orlando%2C%20Florida%2032819&amp;up_defaultDirectionsType=&amp;up_autoExpand=&amp;synd=open&amp;w='.$width.'&amp;h='.$height.'&amp;brand=light&amp;lang=en&amp;country=US&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>';
+}
+add_shortcode('google-directions', 'sc_google_directions');
 ?>
