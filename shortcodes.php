@@ -60,10 +60,7 @@ function sc_slideshow($attr, $content=null){
 add_shortcode('slideshow', 'sc_slideshow');
 
 /**
- * Build gallery from Flickr RSS feed
- *
- * @return string
- * @author Chris Conover
+ * Create a gallery based on a Flickr RSS feed. The feed URL is sourced from the theme options.
  **/
 function sc_flickr_gallery($atts = Array())
 {
@@ -117,4 +114,40 @@ function sc_flickr_gallery($atts = Array())
 	}
 }
 add_shortcode('flickr-gallery', 'sc_flickr_gallery');
+
+/**
+ * Outputs an unordered list of items for a specified RSS feed URL.
+ *
+ * Example: [feed-list url="http://today.ucf.edu/feed" num="10"]
+ *
+ * The `url` parameter is required. If ommitted, the `num` parameter defaults to 5.
+ **/
+function sc_feed_list($atts = array())
+{
+	$feed_url  = isset($atts['url']) ? $atts['url'] : null;
+	$item_num  = isset($atts['num']) && intval($atts['num']) > 0 ? intval($atts['item_num']) : 5;
+	$empty_txt = isset($atts['empty']) ? $atts['empty'] : '';
+	
+	if(!is_null($feed_url)) {
+		$rss = fetch_feed($feed_url);
+		if(!is_wp_error($rss)) {
+			$items = $rss->get_items(0, $rss->get_item_quantity($item_num));
+			ob_start();?>
+			<ul class="feed-list">
+			<?
+			if(count($items) == 0):
+				if($empty_text != ''):?>
+				<p><?=$empty_txt?></p>
+			<?endif;
+			else:
+				foreach($items as $item): ?>
+				<li><a href="<?=$item->get_link()?>"><?=$item->get_title()?></a></li>
+			<? endforeach; 
+			endif; ?>
+			</ul><?
+			return ob_get_clean();
+		}
+	}
+}
+add_shortcode('feed-list', 'sc_feed_list');
 ?>
