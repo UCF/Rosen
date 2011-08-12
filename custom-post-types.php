@@ -522,4 +522,59 @@ class Person extends CustomPostType
 	}
 } // END class 
 
+/**
+ * Desribes a Rosen College venue
+ *
+ * @author Chris Conover
+ **/
+class Venue extends CustomPostType
+{
+	public
+		$name           = 'venue',
+		$plural_name    = 'Venue',
+		$singular_name  = 'Venue',
+		$add_new_item   = 'Add Venue',
+		$edit_item      = 'Edit Venue',
+		$new_item       = 'New Venue',
+		$public         = True,
+		$use_shortcode  = True,
+		$use_metabox    = True,
+		$use_thumbnails = True,
+		$use_order      = True,
+		$taxonomies     = Array('category');
+		
+		public function fields(){
+			$fields = array();
+			return $fields;
+		}
+		
+		public function objectsToHTML($objects, $tax_queries) {
+			if(count($objects) > 0) {
+				ob_start();?>
+				<ul class="venue-list clearfix">
+				<?
+					$count = 0;
+					foreach($objects as $object) { 
+						$attach_id = get_post_thumbnail_id($object->ID);
+						if($attach_id !== False && 
+								($small_img_atts = wp_get_attachment_image_src($attach_id, 'thumbnail')) !== False &&
+									($full_img_atts = wp_get_attachment_image_src($attach_id, 'large'))) { 
+				?>
+					<li<?=($count + 1) == count($objects) ? ' class="last"' : ''?>>
+						<h4 class="sans"><?=$object->post_title?></h4>
+						<a href="<?=$full_img_atts[0]?>">
+							<img src="<?=$small_img_atts[0]?>" height="<?=$small_img_atts[1]?>" width="<?=$small_img_atts[2]?>" alt="<?=$post->title?> Venue Thumbnail" />
+						</a>
+						<?=apply_filters('the_content', $object->post_content) ?>
+					</li>
+				<? }
+					$count++;
+				} 
+				?>
+				</ul><?
+				return ob_get_clean();
+			}
+		}
+} // END class 
+
 ?>

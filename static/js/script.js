@@ -39,7 +39,7 @@ jQuery(document).ready(function($) {
 				}
 			});
 		
-		$('#flickr_gallery a').lightBox({
+		$('#flickr_gallery a, .venue-list a:has("img")').lightBox({
 			imageLoading:THEME_IMG_URL + '/lightbox/lightbox-ico-loading.gif',
 			imageBtnClose:THEME_IMG_URL + '/lightbox/lightbox-btn-close.gif',
 			imageBtnPrev:THEME_IMG_URL + '/lightbox/lightbox-btn-prev.gif',
