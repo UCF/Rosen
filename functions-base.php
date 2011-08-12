@@ -1499,7 +1499,7 @@ function submit_cc_signup()
 add_action('wp_loaded', 'submit_cc_signup');
 
 /**
- * undocumented function
+ * Apply Person object name formatting to profile page titles
  *
  * @return string
  * @author Chris Conover
