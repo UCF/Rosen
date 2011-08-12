@@ -1524,15 +1524,15 @@ add_filter('single_post_title', 'person_title_filter');
  **/
 function get_term_people($term_id, $order_by = 'menu_order') {
 	$posts = get_posts(Array(
-											'numberposts' => -1,
-											'order' => 'ASC',
-											'orderby' => $order_by,
-											'post_type' => 'person',
-											'tax_query' => Array(
-																				Array(
-																						'taxonomy' => 'rosen_org_groups',
-																						'field' =>  'id',
-																						'terms' => $term_id))));
+		'numberposts' => -1,
+		'order'       => 'ASC',
+		'orderby'     => $order_by,
+		'post_type'   => 'person',
+		'tax_query'   => Array(
+			Array(
+				'taxonomy' => 'rosen_org_groups',
+				'field' =>  'id',
+				'terms' => $term_id))));
 	return $posts;
 }
 
