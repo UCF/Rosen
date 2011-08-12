@@ -485,36 +485,6 @@ class Person extends CustomPostType
 		# to just look them up again already split up into sections 
 		# based on the tax_queries array
 		
-		if(!function_exists('get_term_people')) {
-			function get_term_people($term_id, $order_by = 'menu_order') {
-				$posts = get_posts(Array(
-														'numberposts' => -1,
-														'order' => 'ASC',
-														'orderby' => $order_by,
-														'post_type' => 'person',
-														'tax_query' => Array(
-																							Array(
-																									'taxonomy' => 'rosen_org_groups',
-																									'field' =>  'id',
-																									'terms' => $term_id))));
-				return $posts;
-			}
-		}
-		if(!function_exists('get_person_name')) {
-			function get_person_name($person) {
-				$prefix = get_post_meta($person->ID, 'person_title_prefix', True);
-				$suffix = get_post_meta($person->ID, 'person_title_suffix', True);
-				$name = $person->post_title;
-				return $prefix.' '.$name.$suffix;
-			}
-		}
-		if(!function_exists('get_person_phones'))	{
-			function get_person_phones($person_id) {
-				$phones = get_post_meta($person_id, 'person_phones', True);
-				return ($phones != '') ? explode(',', $phones) : array();
-			}
-		}
-
 		ob_start();
 		if(count($tax_queries) ==0) {
 			// Dean's Suite is always first if everything is being displayed

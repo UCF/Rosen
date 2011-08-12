@@ -1374,7 +1374,7 @@ function get_person_meta($post_id)
 	$email  = get_post_meta($post_id, 'person_email', True);
 	
 	ob_start()?>
-	<div id="person-meta">
+	<div id="person-meta" class="span-4">
 		<? if($img == '') {?>
 			<img src="<?=bloginfo('stylesheet_directory')?>/static/img/no-photo.jpg" alt="not photo available"/>
 		<? } else {?> 
@@ -1498,4 +1498,63 @@ function submit_cc_signup()
 }
 add_action('wp_loaded', 'submit_cc_signup');
 
+/**
+ * undocumented function
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function person_title_filter($title)
+{
+	global $post;
+	if($post->post_type == 'person') {
+		return get_person_name($post);
+	}
+}
+add_filter('the_title', 'person_title_filter');
+add_filter('single_post_title', 'person_title_filter');
+
+/**
+ * List of Person post objects based on a rosen_org_groups term
+ *
+ * @return array
+ * @author Chris Conover
+ **/
+function get_term_people($term_id, $order_by = 'menu_order') {
+	$posts = get_posts(Array(
+											'numberposts' => -1,
+											'order' => 'ASC',
+											'orderby' => $order_by,
+											'post_type' => 'person',
+											'tax_query' => Array(
+																				Array(
+																						'taxonomy' => 'rosen_org_groups',
+																						'field' =>  'id',
+																						'terms' => $term_id))));
+	return $posts;
+}
+
+/**
+ * Formats a Person object's name adding prefix and suffix
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function get_person_name($person) {
+	$prefix = get_post_meta($person->ID, 'person_title_prefix', True);
+	$suffix = get_post_meta($person->ID, 'person_title_suffix', True);
+	$name = $person->post_title;
+	return $prefix.' '.$name.$suffix;
+}
+
+/**
+ * Format a list of Person object's phone numbers into an unordered list
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function get_person_phones($person_id) {
+	$phones = get_post_meta($person_id, 'person_phones', True);
+	return ($phones != '') ? explode(',', $phones) : array();
+}
 ?>
