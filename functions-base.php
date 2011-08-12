@@ -1570,7 +1570,11 @@ function person_content_filter($content)
 {
 	global $post;
 	if($post->post_type == 'person') {
+		if($content == '') {
+			$content = '<p>There is no profile information available at this time.</p>';
+		}
 		return get_person_meta($post->ID).'<div class="span-11 last">'.$content.'</div>';
+		
 	} else {
 		return $content;
 	}
