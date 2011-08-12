@@ -173,7 +173,7 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 															zoom: 1;}
 .page-content > div:first-child {position:relative;top:-65px;}
 
-#page .page-content > .span-15 .wp-caption-text {margin: 5px 20px;}
+#page .page-content > .span-15 .wp-caption-text {margin: 5px 20px;font-size:105%;}
 
 #page #sidebar-nav-menu {margin-bottom:20px;margin-left:7px;}
 #page .sidebar-pub {margin-bottom:20px;}
