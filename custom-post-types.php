@@ -391,8 +391,8 @@ class Form extends Link{
 					<?php
 						$forms = get_posts(array(
 							'numberposts' => -1,
-							'orderby'     => 'title',
-							'order'       => 'ASC',
+							'orderby'     => 'date', // Newest first always
+							'order'       => 'desc', //
 							'post_type'   => 'form',
 							'category'    => $category->term_id,
 						));
