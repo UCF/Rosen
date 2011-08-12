@@ -4,9 +4,7 @@
 		<div class="span-15 append-1">
 			<article>
 				<h2><?php the_title();?></h2>
-				<? if($post->post_type == 'person') echo get_person_meta($post->ID).'<div class="span-11 last">'; ?>
 				<?php the_content();?>
-				<? if($post->post_type == 'person') echo '</div>';?>
 			</article>
 		</div>
 		<div id="sidebar" class="span-8 last">

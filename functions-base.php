@@ -1509,6 +1509,8 @@ function person_title_filter($title)
 	global $post;
 	if($post->post_type == 'person') {
 		return get_person_name($post);
+	} else {
+		return $title;
 	}
 }
 add_filter('the_title', 'person_title_filter');
@@ -1557,4 +1559,21 @@ function get_person_phones($person_id) {
 	$phones = get_post_meta($person_id, 'person_phones', True);
 	return ($phones != '') ? explode(',', $phones) : array();
 }
+
+/**
+ * Adds person meta info to Person profile page
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function person_content_filter($content)
+{
+	global $post;
+	if($post->post_type == 'person') {
+		return get_person_meta($post).'<div class="span-11 last">'.$content.'</div>';
+	} else {
+		return $content;
+	}
+}
+add_filter('the_content', 'person_content_filter')
 ?>
