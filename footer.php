@@ -7,7 +7,7 @@
 					<p id="contact">
 						UCF Rosen College of Hospitality Management
 						<br />
-						9007 Universal Blvd.
+						9907 Universal Blvd.
 						<br />
 						Orlando, Florida 32819
 						<br />
