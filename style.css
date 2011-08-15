@@ -221,12 +221,11 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 .dept > ul .title {margin-bottom:0;font-size:90%;}
 
 /*/ Profile /*/
-#person-meta {margin-right:15px;margin-bottom:15px;}
-#person-meta img {float:left;}
-#person-meta > div {float:left;margin-left:20px;}
-#person-meta > div > p  {margin-bottom:5px;font-weight:bold;}
-#person-meta > div > ul {margin:0;padding:0;}
-#person-meta > div > ul > li {list-style-type:none;margin:0;padding:0 0 5px 0;}
+#person-meta {margin-bottom:15px;}
+#person-meta #details {float:left;margin-left:20px;}
+#person-meta #details > p  {margin-bottom:5px;font-weight:bold;}
+#person-meta #details > ul {margin:0;padding:0;}
+#person-meta #details > ul > li {list-style-type:none;margin:0;padding:0 0 5px 0;}
 
 /*/ Gallery /*/
 #flickr_gallery {margin:0;padding:0;}

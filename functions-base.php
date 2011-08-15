@@ -1375,12 +1375,14 @@ function get_person_meta($post_id)
 	
 	ob_start()?>
 	<div id="person-meta" class="span-15 append-1 last">
-		<? if($img == '') {?>
-			<img src="<?=bloginfo('stylesheet_directory')?>/static/img/no-photo.jpg" alt="not photo available"/>
-		<? } else {?> 
-			<?=get_the_post_thumbnail($post_id, 'full')?>
-		<? } ?>
-		<div id="details">
+		<div id="headshot" class="span-3">
+			<? if($img == '') {?>
+				<img src="<?=bloginfo('stylesheet_directory')?>/static/img/no-photo.jpg" alt="not photo available"/>
+			<? } else {?> 
+				<?=get_the_post_thumbnail($post_id, 'full')?>
+			<? } ?>
+		</div>
+		<div id="details" class="span-11 last">
 			<p><?=$title?></p>
 			<ul>
 				<? foreach($phones as $phone) { ?>
