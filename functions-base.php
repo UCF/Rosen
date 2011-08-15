@@ -1530,6 +1530,7 @@ function get_term_people($term_id, $order_by = 'menu_order') {
 		'order'       => 'ASC',
 		'orderby'     => $order_by,
 		'post_type'   => 'person',
+		'meta_key'    => 'person_orderby_name',
 		'tax_query'   => Array(
 			Array(
 				'taxonomy' => 'rosen_org_groups',

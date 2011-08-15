@@ -430,6 +430,24 @@ class Form extends Link{
  **/
 class Person extends CustomPostType
 {
+	/*
+	The following query will pre-populate the person_orderby_name
+	meta field with a guess of the last name extracted from the post title.
+	
+	>>>BE SURE TO REPLACE wp_<number>_... WITH THE APPROPRIATE SITE ID<<<
+	
+	INSERT INTO wp_29_postmeta(post_id, meta_key, meta_value) 
+	(	SELECT	id AS post_id, 
+						'person_orderby_name' AS meta_key, 
+						REVERSE(SUBSTR(REVERSE(post_title), 1, LOCATE(' ', REVERSE(post_title)))) AS meta_value
+		FROM		wp_29_posts AS posts
+		WHERE		post_type = 'person' AND
+						(	SELECT meta_id 
+							FROM wp_29_postmeta 
+							WHERE post_id = posts.id AND
+										meta_key = 'person_orderby_name') IS NULL)
+	*/
+	
 	public
 		$name           = 'person',
 		$plural_name    = 'People',
@@ -476,6 +494,12 @@ class Person extends CustomPostType
 					'id'      => $this->options('name').'_email',
 					'type'    => 'text',
 				),
+				array(
+					'name'    => __('Order By Name'),
+					'desc'    => __('Name used for sorting. Leaving this field blank may lead to an unexpected sort order.'),
+					'id'      => $this->options('name').'_orderby_name',
+					'type'    => 'text',
+				),
 			);
 			return $fields;
 		}
@@ -514,7 +538,7 @@ class Person extends CustomPostType
 		}
 		foreach($terms as $term) {
 			if(count($tax_queries) > 0 || ($dean_suite_name === False || $dean_suite === False || $term->term_id != $dean_suite->term_id)) {
-				$people = get_term_people($term->term_id, 'title');
+				$people = get_term_people($term->term_id, 'meta_value');
 				include('templates/staff-table.php');
 			}
 		}
