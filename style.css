@@ -113,7 +113,8 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 .msie7 #home h2:first-child > a,
 	.msie8 #home h2:first-child > a,
 		.msie7 #home #subtitle,
-				.msie8 #home #subtitle { 
+				.msie8 #home #subtitle {
+					display:block;
 					zoom: 1;
 					background-color: #aaaaaa;
 					-ms-filter: "progid:DXImageTransform.Microsoft.Chroma(Color=#cccccc) progid:DXImageTransform.Microsoft.DropShadow(OffX=1, OffY=1, Color=#ffffff)";
