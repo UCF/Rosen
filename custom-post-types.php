@@ -578,20 +578,23 @@ class Venue extends CustomPostType
 				<ul class="venue-list clearfix">
 				<?
 					$count = 0;
+					$end = False;
 					foreach($objects as $object) { 
 						$attach_id = get_post_thumbnail_id($object->ID);
 						if($attach_id !== False && 
 								($small_img_atts = wp_get_attachment_image_src($attach_id, 'thumbnail')) !== False &&
-									($full_img_atts = wp_get_attachment_image_src($attach_id, 'large'))) { 
+									($full_img_atts = wp_get_attachment_image_src($attach_id, 'large'))) {
+							$last = (($count + 1) % 3) == 0 ? True : False;
 				?>
-					<li<?=($count + 1) == count($objects) ? ' class="last"' : ''?>>
+					<li<?=$last ? ' class="last"' : ''?><?=$end ? ' class="clear"' : ''?>>
 						<h4 class="sans"><?=$object->post_title?></h4>
 						<a href="<?=$full_img_atts[0]?>">
 							<img src="<?=$small_img_atts[0]?>" height="<?=$small_img_atts[1]?>" width="<?=$small_img_atts[2]?>" alt="<?=$post->title?> Venue Thumbnail" />
 						</a>
 						<?=apply_filters('the_content', $object->post_content) ?>
 					</li>
-				<? }
+				<?	$end = ($last) ? True : False;
+						}
 					$count++;
 				} 
 				?>
