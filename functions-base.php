@@ -1374,21 +1374,23 @@ function get_person_meta($post_id)
 	$email  = get_post_meta($post_id, 'person_email', True);
 	
 	ob_start()?>
-	<div id="person-meta" class="span-4">
+	<div id="person-meta" class="span-15 append-1 last">
 		<? if($img == '') {?>
 			<img src="<?=bloginfo('stylesheet_directory')?>/static/img/no-photo.jpg" alt="not photo available"/>
 		<? } else {?> 
 			<?=get_the_post_thumbnail($post_id, 'full')?>
 		<? } ?>
-		<p class="title"><?=$title?></p>
-		<ul class="phones">
-			<? foreach($phones as $phone) { ?>
-			<li>
-				<?=$phone?>
-			</li>
-			<? } ?>
-		</ul>
-		<?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?>
+		<div id="details">
+			<p><?=$title?></p>
+			<ul>
+				<? foreach($phones as $phone) { ?>
+				<li>
+					<?=$phone?>
+				</li>
+				<? } ?>
+			</ul>
+			<?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?>
+		</div>
 	</div><?
 	return ob_get_clean();
 }
@@ -1570,11 +1572,7 @@ function person_content_filter($content)
 {
 	global $post;
 	if($post->post_type == 'person') {
-		if($content == '') {
-			$content = '<p>There is no profile information available at this time.</p>';
-		}
-		return get_person_meta($post->ID).'<div class="span-11 last">'.$content.'</div>';
-		
+		return get_person_meta($post->ID).'<div class="span-15 append-1 last clear">'.$content.'</div>';
 	} else {
 		return $content;
 	}
