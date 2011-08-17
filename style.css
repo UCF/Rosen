@@ -173,7 +173,7 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 .page-content > div:first-child {background-color: rgba(255,255,255,0.6);position:relative;left:-30px;padding-top:78px;padding-left:30px;margin-right:-20px;padding-bottom:20px;}
 .msie7 .page-content > div:first-child, .msie8 .page-content > div:first-child {background-color:#fdf1cf}
 #page article h2 {color:#8c5c12;margin-bottom:10px;}
-#page article h3 {color:#333;font-size:170%;font-weight:100;}
+#page article h3 {color:#333;font-size:170%;font-weight:normal;}
 #page article  a {color:#7e5e05;}
 #page article .quote {background-color:rgba(57,74,48, 0.6);padding:15px;color:#fff;font-size:105%;margin-bottom:0;}
 .trident #page article .quote {background: transparent;
