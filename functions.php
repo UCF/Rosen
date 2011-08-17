@@ -139,6 +139,15 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['constant_contact_list']
 		)),
 	),
+	'Events' => array(
+		new TextField(array(
+			'name'        => 'Calendar ID',
+			'id'          => THEME_OPTIONS_NAME.'[events_calendar_id]',
+			'description' => 'Identifier of the event system calendar that poulates the event widget.',
+			'default'     => 1,
+			'value'       => $theme_options['events_calendar_id']
+		)),
+	),
 	'Miscellaneous' => array(
 		new TextField(array(
 			'name'        => 'Number of Home Page Promos:',

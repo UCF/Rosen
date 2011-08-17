@@ -18,7 +18,7 @@
 				<div class="span-7 append-1">
 				  <div class="widget">
 					<h3 class="serif">Events</h3>
-						<ul class="events clearfix"></ul>
+						<ul class="events clearfix" data-calendar-id="<?=get_theme_option('events_calendar_id')?>"></ul>
 				</div>
 				</div>
 				<div class="span-7 last">
