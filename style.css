@@ -149,6 +149,8 @@ h1 > a {font-size:75%;margin:0;padding:0;line-heigh:1em;color:#764e19 !important
 .gecko #home .widget {-moz-box-shadow: 0px 0px 5px #333;}
 .webkit #home .widget {-webkit-box-shadow: 0px 0px 5px #333;}
 #home .widget > h3 {margin-bottom:9px;margin-top:10px;color:#FFF;font-size:160%;font-weight:normal;letter-spacing:1.1px}
+#home .widget #more_events {color:#FFF;text-decoration:none;}
+#home .widget #more_events:hover {text-decoration:underline;cursor:pointer;}
 #home .widget > ul {margin:0 0 15px 10px;padding:0;}
 #home .widget > ul.last {margin-bottom:15px;}
 #home .widget > ul > li {list-style-type:none;margin:6px 0;}

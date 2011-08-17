@@ -274,7 +274,7 @@ Webcom.events = {
 				var date  = $('<div />', {'class' : 'date'});
 				var month = $('<span />', {'class' : 'month'});
 				var day   = $('<span />', {'class' : 'day'});
-				var title = $('<a>', {'class' : 'title', 'href' : url + '?eventdatetime_id='+e.id});
+				var title = $('<a>', {'class' : 'title', 'href' : url + '?eventdatetime_id='+e.id + '&calendar_id=' + calendar});
 				var end   = $('<div>', {'class' : 'end'});
 
 				title.text(e.title);

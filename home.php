@@ -17,9 +17,10 @@
 				</ul>
 				<div class="span-7 append-1">
 				  <div class="widget">
-					<h3 class="serif">Events</h3>
-						<ul class="events clearfix" data-calendar-id="<?=get_theme_option('events_calendar_id')?>"></ul>
-				</div>
+						<h3 class="serif">Events</h3>
+							<ul class="events clearfix" data-calendar-id="<?=get_theme_option('events_calendar_id')?>"></ul>
+							<a id="more_events" href="http://events.ucf.edu/?calendar_id=<?=get_theme_option('events_calendar_id')?>&upcoming=upcoming">More Events</a>
+					</div>
 				</div>
 				<div class="span-7 last">
 				  <div class="widget">
