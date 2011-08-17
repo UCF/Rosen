@@ -7,7 +7,7 @@
 			<article>
 				<h2>Page Not Found</h2>
 				<?php 
-					$page = get_page_by_title('404');
+					$page = get_page_by_title('Page Not Found');
 					if($page){
 						$content = $page->post_content;
 						$content = apply_filters('the_content', $content);
