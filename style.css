@@ -53,11 +53,11 @@ article ul, article ol {margin-top:0;}
 
 /*/ Sidebar /*/
 #sidebar {position:relative;top:-65px;}
-#sidebar-nav-menu {margin:0 0 35px -10px;padding: 15px 15px 15px 45px;background-color:rgba(206,170,72,.55)}
-.trident #sidebar-nav-menu { background: transparent;
-													-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#72CCC1A3,endColorstr=#72CCC1A3)"; /* IE8 */
-													filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#A5CCC1A3,endColorstr=#A5CCC1A3);	 /* IE6 & 7 */
-													zoom: 1;}
+#sidebar-nav-menu {margin:0 0 35px -10px;padding: 15px 15px 15px 45px;background-color:rgba(206,170,72,0.55)}
+.trident #sidebar-nav-menu {background: transparent;
+														-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#8CCEAA48,endColorstr=#8CCEAA48)"; /* IE8 */
+														filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#8CCEAA48,endColorstr=#8CCEAA48);   /* IE6 & 7 */
+														zoom: 1;}
 #sidebar-nav-menu li {list-style-type:none;}
 #sidebar-nav-menu li:last-child {margin-bottom:0px;}
 #sidebar-nav-menu > li ul {border-left: 2px solid #FCDD88;margin-left:10px;padding-left:15px;font-size:90%;}
