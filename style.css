@@ -53,7 +53,7 @@ article ul, article ol {margin-top:0;}
 
 /*/ Sidebar /*/
 #sidebar {position:relative;top:-65px;}
-#sidebar-nav-menu {margin:0 0 35px -10px;padding: 15px 15px 15px 45px;background-color:rgba(204, 193, 163, 0.45);}
+#sidebar-nav-menu {margin:0 0 35px -10px;padding: 15px 15px 15px 45px;background-color:rgba(206,170,72,.55)}
 .trident #sidebar-nav-menu { background: transparent;
 													-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#72CCC1A3,endColorstr=#72CCC1A3)"; /* IE8 */
 													filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#A5CCC1A3,endColorstr=#A5CCC1A3);	 /* IE6 & 7 */
