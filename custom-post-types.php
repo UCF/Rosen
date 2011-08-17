@@ -515,7 +515,7 @@ class Person extends CustomPostType
 			$dean_suite_name = get_theme_option('aboutus_featured_group');
 			$dean_suite = False;
 			if($dean_suite_name !== False) {
-				$dean_suite = get_term_by('name', 'Dean\'s Suite', 'rosen_org_groups');
+				$dean_suite = get_term_by('name', $dean_suite_name, 'rosen_org_groups');
 				if($dean_suite !== False) {
 					$people = get_term_people($dean_suite->term_id, 'menu_order'); 
 					include('templates/staff-pics.php');
@@ -555,7 +555,7 @@ class Venue extends CustomPostType
 {
 	public
 		$name           = 'venue',
-		$plural_name    = 'Venue',
+		$plural_name    = 'Venues',
 		$singular_name  = 'Venue',
 		$add_new_item   = 'Add Venue',
 		$edit_item      = 'Edit Venue',
