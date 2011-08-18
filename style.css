@@ -47,7 +47,7 @@ article ul, article ol {margin-top:0;}
 .venue-list {padding-left:0;}
 .venue-list > li {float:left;list-style-type:none;padding-left:0;padding-right:35px; width:150px;}
 .venue-list > li.last {padding-right:0;}
-.venue-list > li > h4 {margin-bottom:3px;}
+.venue-list > li > h4 {margin-top:3px;margin-bottom:3px;font-size:100%;}
 .venue-list > li > p {margin-bottom:0px;}
 .venue-list > li > a > img {border-radius:2px;box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);}
 

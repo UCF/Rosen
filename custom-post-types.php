@@ -587,10 +587,10 @@ class Venue extends CustomPostType
 							$last = (($count + 1) % 3) == 0 ? True : False;
 				?>
 					<li<?=$last ? ' class="last"' : ''?><?=$end ? ' class="clear"' : ''?>>
-						<h4 class="sans"><?=$object->post_title?></h4>
 						<a href="<?=$full_img_atts[0]?>">
 							<img src="<?=$small_img_atts[0]?>" height="<?=$small_img_atts[1]?>" width="<?=$small_img_atts[2]?>" alt="<?=$post->title?> Venue Thumbnail" />
 						</a>
+						<h4 class="sans"><?=$object->post_title?></h4>
 						<?=apply_filters('the_content', $object->post_content) ?>
 					</li>
 				<?	$end = ($last) ? True : False;
