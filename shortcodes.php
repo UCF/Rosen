@@ -164,4 +164,22 @@ function sc_google_directions($atts = Array())
 	return '<script src="http://www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/114281111391296844949/driving-directions.xml&amp;up_fromLocation=&amp;up_myLocations=Rosen%20College%20of%20Hospitality%20Management%2C9700%20Universal%20Blvd%2C%20Orlando%2C%20Florida%2032819&amp;up_defaultDirectionsType=&amp;up_autoExpand=&amp;synd=open&amp;w='.$width.'&amp;h='.$height.'&amp;brand=light&amp;lang=en&amp;country=US&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>';
 }
 add_shortcode('google-directions', 'sc_google_directions');
+
+/**
+* Include the defined publication, referenced by pub title:
+*
+* Example: [publication name="Where are the robots Magazine"]
+**/
+function sc_publication($atts = Array()){
+	
+	$name = isset($atts['name']) ? $atts['name'] : False;
+	
+	if($name !== False && $name != '') {
+		$posts = get_posts(Array('post_type'=>'publication', 'name'=>$name));
+		if(count($posts) == 1) {
+			return $posts[0]->post_content;
+		}
+	}
+}
+add_shortcode('publication', 'sc_publication');
 ?>

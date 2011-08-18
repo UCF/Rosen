@@ -49,7 +49,7 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
  * object.
  **/
 Config::$custom_post_types = array(
-	'Page', 'Form', 'Person', 'Venue'
+	'Page', 'Form', 'Person', 'Venue', 'Publication'
 );
 
 Config::$custom_taxonomies = array(

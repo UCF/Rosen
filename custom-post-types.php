@@ -604,4 +604,32 @@ class Venue extends CustomPostType
 		}
 } // END class 
 
+/**
+ * Desribes a Issuu publication
+ *
+ * @author Chris Conover
+ **/
+class Publication extends CustomPostType
+{
+	public
+		$name           = 'publication',
+		$plural_name    = 'Publications',
+		$singular_name  = 'Publication',
+		$add_new_item   = 'Add Publication',
+		$edit_item      = 'Edit Publication',
+		$new_item       = 'New Publication',
+		$public         = True,
+		$use_shortcode  = False,
+		$use_metabox    = False,
+		$use_thumbnails = False,
+		$use_order      = False,
+		$taxonomies     = Array();
+		
+		public function fields(){
+			$fields = array();
+			return $fields;
+		}
+		
+} // END class
+
 ?>
