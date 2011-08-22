@@ -738,6 +738,23 @@ function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 }
 
 /**
+ * Get the title of a menu specified by it's slug
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function get_menu_title($name)
+{
+	$locations = get_nav_menu_locations();
+	if(isset($locations[$name])) {
+		$menu_id = $locations[$name];
+		if( ($term = get_term_by('id', $menu_id, 'nav_menu')) !== False) {
+			return $term->name;
+		}
+	}
+}
+
+/**
  * Creates an arbitrary html element.	 $tag defines what element will be created
  * such as a p, h1, or div.	 $attr is an array defining attributes and their
  * associated values for the tag created. $content determines what data the tag

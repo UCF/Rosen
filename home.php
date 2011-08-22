@@ -24,10 +24,10 @@
 				</div>
 				<div class="span-7 last">
 				  <div class="widget">
-						<h3 class="serif">Student Resources</h3>
+						<h3 class="serif"><?=get_menu_title('student-resources');?></h3>
 						<?=get_menu('student-resources', 'menu vertical sans')?>
-						<h3 class="serif">Academic Degrees</h3>
-							<?=get_menu('academic-degrees', 'menu vertical sans last')?>
+						<h3 class="serif"><?=get_menu_title('academic-degrees');?></h3>
+						<?=get_menu('academic-degrees', 'menu vertical sans last')?>
  					</div>
 				</div>
 			</article>
