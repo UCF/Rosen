@@ -27,7 +27,7 @@
 </div>
 <? endif; ?>
 <div id="sidebar-social">
-	<h3>Get Social:</h3>
+	<h3><?=get_menu_title('sidebar-social-menu')?></h3>
 	<?=get_menu('sidebar-social-menu', 'menu vertical sans', 'sidebar-social-menu')?>
 </div>
 <?php endif;?>
