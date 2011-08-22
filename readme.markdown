@@ -1,5 +1,6 @@
 # Rosen College of Hospitality Management Theme
 
+
 ## Notes
 
 The content on the front page of this them rotates through
