@@ -26,7 +26,7 @@
 				  <div class="widget">
 						<h3 class="serif">Student Resources</h3>
 						<?=get_menu('student-resources', 'menu vertical sans')?>
-						<h3 class="serif">Academic Degress</h3>
+						<h3 class="serif">Academic Degrees</h3>
 							<?=get_menu('academic-degrees', 'menu vertical sans last')?>
  					</div>
 				</div>
