@@ -1491,6 +1491,7 @@ function submit_cc_signup()
 					
 					$ch = curl_init();
 					
+					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, False);
 					curl_setopt($ch, CURLOPT_URL, sprintf(CC_ADD_CONTACT_API_URL, $username));
 					curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 					curl_setopt($ch, CURLOPT_USERPWD, $auth);
@@ -1504,7 +1505,7 @@ function submit_cc_signup()
 					curl_close($ch);
 					//$response = http_put_data($url, );
 					
-					if($response === False || !is_numeric($response)) {
+					if($response === False || @simplexml_load_string($response) === False) {
 						if(strpos($response, 'Error') == 0 && ($msg = substr($response, strpos($response, ':') + 1)) != '') {
 							$_SESSION['cc_error'] = $base_error.' '.$msg.'.';
 						} else {
