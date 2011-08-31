@@ -412,7 +412,7 @@ class Form extends Link{
 						}	
 					?>
 					<li class="document <?=$class?>">
-						<a href="<?=$url?>"><?=$form->post_title?></a>
+						<a href="<?=$url?>" target="_blank"><?=$form->post_title?></a>
 					</li>
 					<?php endforeach;?>
 				</ul>
