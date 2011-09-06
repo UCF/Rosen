@@ -573,7 +573,7 @@ function get_search_results(
 			if ($total){
 				foreach($items as $result){
 					$item            = array();
-					$item['url']     = $result->U;
+					$item['url']     = str_replace('https', 'http', $result->U);
 					$item['title']   = $result->T;
 					$item['rank']    = $result->RK;
 					$item['snippet'] = $result->S;
