@@ -31,7 +31,7 @@ form .uberlabel {font-size:100%;text-align:right;font-weight:bold;}
 form .fields input {display:block;margin-bottom:10px;width:200px;}
 form .fields label {display:block;padding-bottom:0px;margin-bottom:0;}
 form input[type="text"].short {width:25px !important;}
-form input[type="submit"], .search-submit {text-shadow:none;background-color:#706355;color:#FFF;border:1px solid #706355;padding:5px;border-radius:3px;font-size:110%;margin-top:10px;}
+form input[type="submit"], .search-submit, a.button {font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";text-shadow:none;background-color:#706355;color:#FFF !important;border:1px solid #706355;padding:5px;border-radius:3px;font-size:110%;margin-top:10px;}
 
 .forms > h3 {font-family:"Helvetica Neue", Helvetica, sans-serif;font-weight:bold !important;font-size:140% !important;}
 
