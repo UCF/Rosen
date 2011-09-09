@@ -235,9 +235,3 @@ if ((bool)$theme_options['gw_verify']){
 		'content' => htmlentities($theme_options['gw_verify']),
 	);
 }
-
-#Add custom javascript to admin
-function provost_admin_scripts(){
-	wp_enqueue_script('custom-admin', PROVOST_JS_URL.'/admin.js', array('jquery'), False, True);
-}
-add_action('admin_enqueue_scripts', 'provost_admin_scripts');
