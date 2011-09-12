@@ -17,17 +17,19 @@
 				?>
 					<tr class="sans <?=((($count % 2) == 0) ? 'even' : 'odd')?>" data-profile-url="<?=get_permalink($person->ID);?>">
 						<td class="name">
-								<?=get_person_name($person)?>
+							<a href="<?=get_permalink($person->ID)?>"><?=get_person_name($person)?></a>
 						</td>
 						<td class="job_title">
-						<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
+							<a href="<?=get_permalink($person->ID)?>"><?=get_post_meta($person->ID, 'person_jobtitle', True)?></a>
 						</td> 
 						<td class="phones">
-							<ul>
-								<? foreach(get_person_phones($person->ID) as $phone) { ?>
-								<li><?=$phone?></li>
-								<? } ?>
-							</ul>
+							<a href="<?=get_permalink($person->ID)?>">
+								<ul>
+									<? foreach(get_person_phones($person->ID) as $phone) { ?>
+									<li><?=$phone?></li>
+									<? } ?>
+								</ul>
+							</a>
 						</td>
 						<td class="email">
 							<?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?>
