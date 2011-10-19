@@ -621,7 +621,7 @@ remove_filter('the_excerpt', 'wpautop');
 
 
 /**
- * Really get the post type.	A post type of revision will return it's parent
+ * Really get the post type. A post type of revision will return it's parent
  * post type.
  **/
 function post_type($post){
@@ -633,7 +633,7 @@ function post_type($post){
 	$post_type = $post->post_type;
 	
 	if ($post_type === 'revision'){
-		$parent		 = (int)$post->post_parent;
+		$parent    = (int)$post->post_parent;
 		$post_type = post_type($parent);
 	}
 	
@@ -1175,18 +1175,19 @@ function save_file($post_id, $field){
 		# TODO: Pass reason for error back to frontend
 		if ($uploaded_file['error']){return;}
 		
+		
 		$attachment = array(
 			'post_title'     => $file['name'],
-			'post_content'   => '',
 			'post_type'      => 'attachment',
 			'post_parent'    => $post_id,
 			'post_mime_type' => $file['type'],
 			'guid'           => $uploaded_file['url'],
 		);
-		$id = wp_insert_attachment($attachment, $file['file'], $post_id);
+		$id = wp_insert_attachment($attachment, $uploaded_file['file'], $post_id);
+		
 		wp_update_attachment_metadata(
 			$id,
-			wp_generate_attachment_metadata($id, $file['file'])
+			wp_generate_attachment_metadata($id, $uploaded_file['file'])
 		);
 		update_post_meta($post_id, $field['id'], $id);
 	}
@@ -1285,7 +1286,6 @@ function _show_meta_boxes($post, $meta_box){
 								$document = null;
 							}
 							?>
-							<label for="file_<?=$post->ID?>"><?=$field['desc'];?></label><br />
 							<?php if($document):?>
 							Current file:
 							<a href="<?=$url?>"><?=$document->post_title?></a><br /><br />
