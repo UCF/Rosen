@@ -313,11 +313,11 @@ class Page extends CustomPostType{
 abstract class Link extends CustomPostType{
 	public
 		$name           = 'link',
-		$plural_name    = 'Forms',
-		$singular_name  = 'Form',
-		$add_new_item   = 'Add Form',
-		$edit_item      = 'Edit Form',
-		$new_item       = 'New Form',
+		$plural_name    = 'Documents',
+		$singular_name  = 'Document',
+		$add_new_item   = 'Add Document',
+		$edit_item      = 'Edit Document',
+		$new_item       = 'New Document',
 		$public         = True,
 		$use_title      = True,
 		$use_metabox    = True;
@@ -336,12 +336,12 @@ abstract class Link extends CustomPostType{
 
 class Form extends Link{
 	public
-		$name           = 'form',
-		$plural_name    = 'Forms',
-		$singular_name  = 'Form',
-		$add_new_item   = 'Add Form',
-		$edit_item      = 'Edit Form',
-		$new_item       = 'New Form',
+		$name           = 'document',
+		$plural_name    = 'Documents',
+		$singular_name  = 'Document',
+		$add_new_item   = 'Add Document',
+		$edit_item      = 'Edit Document',
+		$new_item       = 'New Document',
 		$public         = True,
 		$use_shortcode  = True,
 		$taxonomies     = Array('post_tag', 'category');
@@ -379,7 +379,7 @@ class Form extends Link{
 			$categories    = get_categories(array(
 				'orderby' => 'name',
 				'order'   => 'ASC',
-				'parent'  => get_category_by_slug('forms')->term_id,
+				'parent'  => get_category_by_slug('documents')->term_id,
 			));
 		}
 		
