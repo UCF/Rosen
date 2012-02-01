@@ -393,7 +393,7 @@ class Form extends Link{
 							'numberposts' => -1,
 							'orderby'     => 'date', // Newest first always
 							'order'       => 'desc', //
-							'post_type'   => 'form',
+							'post_type'   => 'document',
 							'category'    => $category->term_id,
 						));
 					?>
