@@ -389,7 +389,7 @@ class Document extends Link{
 				<h3><?=$category->name?></h3>
 				<ul>
 					<?php
-						$forms = get_posts(array(
+						$documents = get_posts(array(
 							'numberposts' => -1,
 							'orderby'     => 'date', // Newest first always
 							'order'       => 'desc', //
@@ -412,7 +412,7 @@ class Document extends Link{
 						}	
 					?>
 					<li class="document <?=$class?>">
-						<a href="<?=$url?>" target="_blank"><?=$form->post_title?></a>
+						<a href="<?=$url?>" target="_blank"><?=$document->post_title?></a>
 					</li>
 					<?php endforeach;?>
 				</ul>
