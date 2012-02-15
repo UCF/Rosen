@@ -357,9 +357,9 @@ class Form extends Link{
 		return $fields;
 	}
 	
-	static function get_url($form){
-		$x = get_post_meta($form->ID, 'form_url', True);
-		$y = wp_get_attachment_url(get_post_meta($form->ID, 'form_file', True));
+	static function get_url($document){
+		$x = get_post_meta($document->ID, 'document_url', True);
+		$y = wp_get_attachment_url(get_post_meta($document->ID, 'document_file', True));
 		
 		return ($y) ? $y : $x;
 	}
@@ -397,10 +397,10 @@ class Form extends Link{
 							'category'    => $category->term_id,
 						));
 					?>
-					<?php foreach($forms as $form):?>
+					<?php foreach($documents as $document):?>
 					<?php
-						$url  = get_post_meta($form->ID, 'form_url', True);
-						$file = get_post_meta($form->ID, 'form_file', true);
+						$url  = get_post_meta($document->ID, 'document_url', True);
+						$file = get_post_meta($document->ID, 'document_file', true);
 						if ($file){
 							$url = wp_get_attachment_url(get_post($file)->ID);
 						}
