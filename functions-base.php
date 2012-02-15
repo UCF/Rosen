@@ -1442,7 +1442,7 @@ function get_form_class($form_id)
 {
 	$rosen_forms = new Form();
 	$url  = get_post_meta($form_id, $rosen_forms->options('name').'_url', True);
-	$file = get_post_meta($form_id, 'form_file', true);
+	$file = get_post_meta($form_id, 'document_file', true);
 	if ($file){
 		$url = wp_get_attachment_url(get_post($file)->ID);
 	}
