@@ -334,7 +334,7 @@ abstract class Link extends CustomPostType{
 	}
 }
 
-class Form extends Link{
+class Document extends Link{
 	public
 		$name           = 'document',
 		$plural_name    = 'Documents',
