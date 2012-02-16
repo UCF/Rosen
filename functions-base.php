@@ -1182,6 +1182,7 @@ function save_file($post_id, $field){
 			'post_parent'    => $post_id,
 			'post_mime_type' => $file['type'],
 			'guid'           => $uploaded_file['url'],
+			'post_content'   => ''
 		);
 		$id = wp_insert_attachment($attachment, $uploaded_file['file'], $post_id);
 		
