@@ -1348,6 +1348,13 @@ function get_promo_html()
 	return ob_get_clean();
 }
 
+
+function return_7200( $seconds ) {
+	// change the default feed cache recreation period to 10 minutes
+	return 600;
+}
+
+
 /**
  * Fetch UCF Today Rosen News
  *
@@ -1369,7 +1376,10 @@ function get_today_news()
 			$dimensions .= 'x'.$_wp_additional_image_sizes['sidebar-rss-thumb']['height'];
 		}
 		
+		add_filter( 'wp_feed_cache_transient_lifetime' , 'return_7200' );
 		$rss = fetch_feed($feed_url.$dimensions	);
+		remove_filter( 'wp_feed_cache_transient_lifetime' , 'return_7200' );
+		
 		if(!is_wp_error($rss)) {
 			$item        = $rss->get_item(0);
 			$description = $item->get_description();
