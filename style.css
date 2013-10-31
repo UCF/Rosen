@@ -78,7 +78,8 @@ article ul, article ol {margin-top:0;}
 #sidebar-social > ul > li {list-style-type:none;float:left;}
 li.facebook > a,
 	li.twitter > a,
-		li.youtube > a {display:block;background-position:center center;background-repeat:no-repeat;width:51px;height:51px;text-indent:-500em;}
+		li.youtube > a,
+		li.instagram > a {display:block;background-position:center center;background-repeat:no-repeat;width:51px;height:51px;text-indent:-500em;}
 li.facebook > a {background-image:url('static/img/social/facebook.png');}
 li.twitter > a {background-image:url('static/img/social/twitter.png');}
 li.youtube > a {background-image:url('static/img/social/youtube.png');}
