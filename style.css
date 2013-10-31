@@ -82,7 +82,7 @@ li.facebook > a,
 li.facebook > a {background-image:url('static/img/social/facebook.png');}
 li.twitter > a {background-image:url('static/img/social/twitter.png');}
 li.youtube > a {background-image:url('static/img/social/youtube.png');}
-li.instagram > a {background-image:url('static/img/social/instagram.png');}
+li.instagram > a {background-image:url('static/img/social/instagram-icon.png');}
 
 #sidebar #search > form > input[type="text"] {height:20px;width:199px;display:block;padding:3px;color:#666;font-style:italic;float:left;}
 .webkit #sidebar #search > form > input[type="text"] {width:205px;height:19px;}
