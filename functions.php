@@ -1,6 +1,6 @@
 <?php
 # Define stuff
-define('THEME_URL', get_bloginfo('stylesheet_directory'));
+define('THEME_URL', get_stylesheet_directory_uri());
 define('THEME_DIR', get_stylesheet_directory());
 define('THEME_STATIC_URL', THEME_URL.'/static');
 define('THEME_IMG_URL', THEME_STATIC_URL.'/img');
@@ -165,7 +165,7 @@ Config::$theme_settings = array(
 		new TextField(array(
 			'name'        => 'About Us Page Featured Group Name:',
 			'id'          => THEME_OPTIONS_NAME.'[aboutus_featured_group]',
-			'description' => 'The group name specified here will be featured on the About Us page as a series of 
+			'description' => 'The group name specified here will be featured on the About Us page as a series of
 												images and titles rather than the default table format.',
 			'default'     => 'Dean\'s Suite',
 			'value'       => $theme_options['aboutus_featured_group']
@@ -201,7 +201,6 @@ Config::$links = array(
 
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
-	'http://universityheader.ucf.edu/bar/css/bar.css',
 	THEME_CSS_URL.'/jquery-ui.css',
 	THEME_CSS_URL.'/jquery-uniform.css',
 	THEME_CSS_URL.'/blueprint-screen.css',
@@ -215,12 +214,12 @@ Config::$styles = array(
 
 Config::$scripts = array(
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
-	'http://universityheader.ucf.edu/bar/js/university-header.js',
-	array('name' => 'jquery', 'src' => 'http://code.jquery.com/jquery-1.6.1.min.js',),
+	'//universityheader.ucf.edu/bar/js/university-header.js',
+	array('name' => 'jquery', 'src' => '//code.jquery.com/jquery-1.6.1.min.js',),
 	THEME_JS_URL.'/jquery-ui.js',
 	THEME_JS_URL.'/jquery-browser.js',
 	THEME_JS_URL.'/jquery-uniform.js',
-	'http://events.ucf.edu/tools/script.js',
+	'//events.ucf.edu/tools/script.js',
 	array('name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js',),
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
 	THEME_JS_URL.'/jquery.lightbox-0.5.pack.js',
@@ -235,3 +234,11 @@ if ((bool)$theme_options['gw_verify']){
 		'content' => htmlentities($theme_options['gw_verify']),
 	);
 }
+
+function protocol_relative_attachment_url($url, $id) {
+    if (is_ssl()) {
+        $url = str_replace('http://', 'https://', $url);
+    }
+    return $url;
+}
+add_filter('wp_get_attachment_url', 'protocol_relative_attachment_url');
