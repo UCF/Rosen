@@ -1,7 +1,7 @@
 <?php
 
 abstract class CustomPostType{
-	public 
+	public
 		$name              = 'custom_post_type',
 		$plural_name       = 'Custom Posts',
 		$singular_name     = 'Custom Post',
@@ -36,8 +36,8 @@ abstract class CustomPostType{
 		$objects = get_posts($options);
 		return $objects;
 	}
-	
-	
+
+
 	/**
 	 * Similar to get_objects, but returns array of key values mapping post
 	 * title to id if available, otherwise it defaults to id=>id.
@@ -57,8 +57,8 @@ abstract class CustomPostType{
 		}
 		return $opt;
 	}
-	
-	
+
+
 	/**
 	 * Return the instances values defined by $key.
 	 **/
@@ -66,8 +66,8 @@ abstract class CustomPostType{
 		$vars = get_object_vars($this);
 		return $vars[$key];
 	}
-	
-	
+
+
 	/**
 	 * Additional fields on a custom post type may be defined by overriding this
 	 * method on an descendant object.
@@ -75,8 +75,8 @@ abstract class CustomPostType{
 	public function fields(){
 		return array();
 	}
-	
-	
+
+
 	/**
 	 * Using instance variables defined, returns an array defining what this
 	 * custom post type supports.
@@ -101,8 +101,8 @@ abstract class CustomPostType{
 		}
 		return $supports;
 	}
-	
-	
+
+
 	/**
 	 * Creates labels array, defining names for admin panel.
 	 **/
@@ -115,8 +115,8 @@ abstract class CustomPostType{
 			'new_item'      => __($this->options('new_item')),
 		);
 	}
-	
-	
+
+
 	/**
 	 * Creates metabox array for custom post type. Override method in
 	 * descendants to add or modify metaboxes.
@@ -134,8 +134,8 @@ abstract class CustomPostType{
 		}
 		return null;
 	}
-	
-	
+
+
 	/**
 	 * Registers metaboxes defined for custom post type.
 	 **/
@@ -152,8 +152,8 @@ abstract class CustomPostType{
 			);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Registers the custom post type and any other ancillary actions that are
 	 * required for the post to function properly.
@@ -167,19 +167,19 @@ abstract class CustomPostType{
 			'_builtin'     => $this->options('_builtin'),
 			'hierarchical' => $this->options('hierarchical')
 		);
-		
+
 		if ($this->options('use_order')){
 			$regisration = array_merge($registration, array('hierarchical' => True,));
 		}
-		
+
 		register_post_type($this->options('name'), $registration);
-		
+
 		if ($this->options('use_shortcode')){
 			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
 		}
 	}
-	
-	
+
+
 	/**
 	 * Shortcode for this custom post type.  Can be overridden for descendants.
 	 * Defaults to just outputting a list of objects outputted as defined by
@@ -196,8 +196,8 @@ abstract class CustomPostType{
 		}
 		return sc_object_list($attr);
 	}
-	
-	
+
+
 	/**
 	 * Handles output for a list of objects, can be overridden for descendants.
 	 * If you want to override how a list of objects are outputted, override
@@ -206,10 +206,10 @@ abstract class CustomPostType{
 	 **/
 	public function objectsToHTML($objects, $tax_queries){
 		if (count($objects) < 1){ return '';}
-		
+
 		$class = get_custom_post_type($objects[0]->post_type);
 		$class = new $class;
-		
+
 		ob_start();
 		?>
 		<ul class="<?=$class->options('name')?>-list">
@@ -223,8 +223,8 @@ abstract class CustomPostType{
 		$html = ob_get_clean();
 		return $html;
 	}
-	
-	
+
+
 	/**
 	 * Outputs this item in HTML.  Can be overridden for descendants.
 	 **/
@@ -236,7 +236,7 @@ abstract class CustomPostType{
 
 
 class Page extends CustomPostType{
-	public 
+	public
 		$name           = 'page',
 		$plural_name    = 'pages',
 		$singular_name  = 'Page',
@@ -252,28 +252,28 @@ class Page extends CustomPostType{
 		$use_metabox    = True,
 		$_builtin       = True,
 		$hierarchical   = True,
-		
+
 		$taxonomies     = Array('categories');
-		
-	
-	
+
+
+
 	public function objectsToHTML($objects, $tax_queries){
 		$class = get_custom_post_type($objects[0]->post_type);
 		$class = new $class;
-		
+
 		$outputs = array();
 		foreach($objects as $o){
 			$outputs[] = $class->toHTML($o);
 		}
-		
+
 		return implode(', ', $outputs);
 	}
-	
-	
+
+
 	public function toHTML($object){
 		return $object->post_title;
 	}
-	
+
 	public function fields(){
 		return array(
 			array(
@@ -321,7 +321,7 @@ abstract class Link extends CustomPostType{
 		$public         = True,
 		$use_title      = True,
 		$use_metabox    = True;
-	
+
 	public function fields(){
 		return array(
 			array(
@@ -345,7 +345,7 @@ class Document extends Link{
 		$public         = True,
 		$use_shortcode  = True,
 		$taxonomies     = Array('post_tag', 'category');
-	
+
 	public function fields(){
 		$fields   = parent::fields();
 		$fields[] = array(
@@ -356,14 +356,14 @@ class Document extends Link{
 		);
 		return $fields;
 	}
-	
+
 	static function get_url($document){
 		$x = get_post_meta($document->ID, 'document_url', True);
 		$y = wp_get_attachment_url(get_post_meta($document->ID, 'document_file', True));
-		
+
 		return ($y) ? $y : $x;
 	}
-	
+
 	public function objectsToHTML($objects, $tax_queries) {
 		$categories = array();
 		foreach($tax_queries as $query) {
@@ -382,7 +382,7 @@ class Document extends Link{
 				'parent'  => get_category_by_slug('documents')->term_id,
 			));
 		}
-		
+
 		ob_start();?>
 		<div class="forms">
 			<? foreach($categories as $category): ?>
@@ -409,7 +409,7 @@ class Document extends Link{
 						} else {
 							preg_match('/\.(?<file_ext>[^.]+)$/', $url, $matches);
 							$class = isset($matches['file_ext']) ? $matches['file_ext'] : 'file';
-						}	
+						}
 					?>
 					<li class="document <?=$class?>">
 						<a href="<?=$url?>" target="_blank"><?=$document->post_title?></a>
@@ -433,21 +433,21 @@ class Person extends CustomPostType
 	/*
 	The following query will pre-populate the person_orderby_name
 	meta field with a guess of the last name extracted from the post title.
-	
+
 	>>>BE SURE TO REPLACE wp_<number>_... WITH THE APPROPRIATE SITE ID<<<
-	
-	INSERT INTO wp_29_postmeta(post_id, meta_key, meta_value) 
-	(	SELECT	id AS post_id, 
-						'person_orderby_name' AS meta_key, 
+
+	INSERT INTO wp_29_postmeta(post_id, meta_key, meta_value)
+	(	SELECT	id AS post_id,
+						'person_orderby_name' AS meta_key,
 						REVERSE(SUBSTR(REVERSE(post_title), 1, LOCATE(' ', REVERSE(post_title)))) AS meta_value
 		FROM		wp_29_posts AS posts
 		WHERE		post_type = 'person' AND
-						(	SELECT meta_id 
-							FROM wp_29_postmeta 
+						(	SELECT meta_id
+							FROM wp_29_postmeta
 							WHERE post_id = posts.id AND
 										meta_key = 'person_orderby_name') IS NULL)
 	*/
-	
+
 	public
 		$name           = 'person',
 		$plural_name    = 'People',
@@ -461,7 +461,7 @@ class Person extends CustomPostType
 		$use_thumbnails = True,
 		$use_order      = True,
 		$taxonomies     = Array('rosen_org_groups', 'category');
-		
+
 		public function fields(){
 			$fields = array(
 				array(
@@ -503,12 +503,12 @@ class Person extends CustomPostType
 			);
 			return $fields;
 		}
-	
+
 	public function objectsToHTML($objects, $tax_queries) {
 		# We could try to use the objects passed here but it simpler
-		# to just look them up again already split up into sections 
+		# to just look them up again already split up into sections
 		# based on the tax_queries array
-		
+
 		ob_start();
 		if(count($tax_queries) ==0) {
 			// Dean's Suite is always first if everything is being displayed
@@ -517,12 +517,12 @@ class Person extends CustomPostType
 			if($dean_suite_name !== False) {
 				$dean_suite = get_term_by('name', $dean_suite_name, 'rosen_org_groups');
 				if($dean_suite !== False) {
-					$people = get_term_people($dean_suite->term_id, 'menu_order'); 
+					$people = get_term_people($dean_suite->term_id, 'menu_order');
 					include('templates/staff-pics.php');
 				}
 			}
 		}
-		
+
 		if(count($tax_queries) == 0) {
 			$terms = get_terms('rosen_org_groups', Array('orderby' => 'name'));
 		} else {
@@ -544,7 +544,7 @@ class Person extends CustomPostType
 		}
 		return ob_get_clean();
 	}
-} // END class 
+} // END class
 
 /**
  * Desribes a Rosen College venue
@@ -566,12 +566,12 @@ class Venue extends CustomPostType
 		$use_thumbnails = True,
 		$use_order      = True,
 		$taxonomies     = Array('category');
-		
+
 		public function fields(){
 			$fields = array();
 			return $fields;
 		}
-		
+
 		public function objectsToHTML($objects, $tax_queries) {
 			if(count($objects) > 0) {
 				ob_start();?>
@@ -579,9 +579,9 @@ class Venue extends CustomPostType
 				<?
 					$count = 0;
 					$end = False;
-					foreach($objects as $object) { 
+					foreach($objects as $object) {
 						$attach_id = get_post_thumbnail_id($object->ID);
-						if($attach_id !== False && 
+						if($attach_id !== False &&
 								($small_img_atts = wp_get_attachment_image_src($attach_id, 'thumbnail')) !== False &&
 									($full_img_atts = wp_get_attachment_image_src($attach_id, 'large'))) {
 							$last = (($count + 1) % 3) == 0 ? True : False;
@@ -596,13 +596,13 @@ class Venue extends CustomPostType
 				<?	$end = ($last) ? True : False;
 						}
 					$count++;
-				} 
+				}
 				?>
 				</ul><?
 				return ob_get_clean();
 			}
 		}
-} // END class 
+} // END class
 
 /**
  * Desribes a Issuu publication
@@ -624,12 +624,12 @@ class Publication extends CustomPostType
 		$use_thumbnails = False,
 		$use_order      = False,
 		$taxonomies     = Array();
-		
+
 		public function fields(){
 			$fields = array();
 			return $fields;
 		}
-		
+
 } // END class
 
 ?>

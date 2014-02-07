@@ -7,7 +7,7 @@
 class ArgumentException extends Exception{}
 class Config{
 	static
-		$body_classes			 = array(), # Body classes 
+		$body_classes			 = array(), # Body classes
 		$theme_settings		 = array(), # Theme settings
 		$custom_post_types = array(), # Custom post types to register
 		$custom_taxonomies = array(), # Custom taxonomies to register
@@ -15,8 +15,8 @@ class Config{
 		$scripts					 = array(), # Scripts to register
 		$links						 = array(), # <link>s to include in <head>
 		$metas						 = array(); # <meta>s to include in <head>
-	
-	
+
+
 	/**
 	 * Creates and returns a normalized name for a resource url defined by $src.
 	 **/
@@ -25,8 +25,8 @@ class Config{
 		$name = slug($base);
 		return $name;
 	}
-	
-	
+
+
 	/**
 	 * Registers a stylesheet with built-in wordpress style registration.
 	 * Arguments to this can either be a string or an array with required css
@@ -51,7 +51,7 @@ class Config{
 			$new['src'] = $attr;
 			$attr				= $new;
 		}
-		
+
 		if (!isset($attr['src'])){
 			throw new ArgumentException('add_css expects argument array to contain key "src"');
 		}
@@ -61,9 +61,9 @@ class Config{
 			'admin' => False,
 		);
 		$attr = array_merge($default, $attr);
-		
+
 		$is_admin = (is_admin() or is_login());
-		
+
 		if (
 			($attr['admin'] and $is_admin) or
 			(!$attr['admin'] and !$is_admin)
@@ -72,8 +72,8 @@ class Config{
 			wp_enqueue_style($attr['name'], $attr['src'], null, null, $attr['media']);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Functions similar to add_css, but appends scripts to the footer instead.
 	 * Accepts a string or array argument, like add_css, with the string
@@ -93,7 +93,7 @@ class Config{
 			$new['src'] = $attr;
 			$attr				= $new;
 		}
-		
+
 		if (!isset($attr['src'])){
 			throw new ArgumentException('add_script expects argument array to contain key "src"');
 		}
@@ -102,9 +102,9 @@ class Config{
 			'admin' => False,
 		);
 		$attr = array_merge($default, $attr);
-		
+
 		$is_admin = (is_admin() or is_login());
-		
+
 		if (
 			($attr['admin'] and $is_admin) or
 			(!$attr['admin'] and !$is_admin)
@@ -124,7 +124,7 @@ abstract class Field{
 		$this->value			 = @$attr['value'];
 		$this->description = @$attr['description'];
 		$this->default		 = @$attr['default'];
-		
+
 		if ($this->value === null){
 			$this->value = $this->default;
 		}
@@ -285,14 +285,14 @@ function mimetype_to_application($mimetype){
  * Fetches objects defined by arguments passed, outputs the objects according
  * to the objectsToHTML method located on the object.  Used by the auto
  * generated shortcodes enabled on custom post types. See also:
- * 
+ *
  *   CustomPostType::objectsToHTML
  *   CustomPostType::toHTML
  *
  **/
 function sc_object_list($attr, $default_content=null){
 	if (!is_array($attr)){return '';}
-	
+
 	# set defaults and combine with passed arguments
 	$defaults = array(
 		'type'  => null,
@@ -300,7 +300,7 @@ function sc_object_list($attr, $default_content=null){
 		'join'  => 'or',
 	);
 	$options = array_merge($defaults, $attr);
-	
+
 	# verify options
 	if ($options['type'] == null){
 		return '<p class="error">No type defined for object list.</p>';
@@ -314,34 +314,34 @@ function sc_object_list($attr, $default_content=null){
 	if (null == ($class = get_custom_post_type($options['type']))){
 		return '<p class="error">Invalid post type.</p>';
 	}
-	
+
 	# get taxonomies and translation
 	$translate  = array(
 		'tags'       => 'post_tag',
 		'categories' => 'category',
 	);
 	$taxonomies = array_diff(array_keys($attr), array_keys($defaults));
-	
+
 	# assemble taxonomy query
 	$tax_queries             = array();
 	$tax_queries['relation'] = strtoupper($options['join']);
-	
+
 	foreach($taxonomies as $tax){
 		$terms = $options[$tax];
 		$terms = trim(preg_replace('/\s+/', ' ', $terms));
 		$terms = explode(' ', $terms);
-		
+
 		if (array_key_exists($tax, $translate)){
 			$tax = $translate[$tax];
 		}
-		
+
 		$tax_queries[] = array(
 			'taxonomy' => $tax,
 			'field'    => 'slug',
 			'terms'    => $terms,
 		);
 	}
-	
+
 	# perform query
 	$query_array = array(
 		'tax_query'      => $tax_queries,
@@ -353,8 +353,8 @@ function sc_object_list($attr, $default_content=null){
 	);
 	$query = new WP_Query($query_array);
 	$class = new $class;
-	
-	
+
+
 	global $post;
 	$objects = array();
 	while($query->have_posts()){
@@ -362,7 +362,7 @@ function sc_object_list($attr, $default_content=null){
 		$objects[] = $post;
 	}
 	wp_reset_postdata();
-	
+
 	array_shift($tax_queries);
 	if (count($objects)){
 		$html = $class->objectsToHTML($objects, $tax_queries);
@@ -374,14 +374,14 @@ function sc_object_list($attr, $default_content=null){
 
 
 /**
- * Creates an array 
+ * Creates an array
  **/
 function shortcodes(){
 	$file = file_get_contents(THEME_DIR.'/shortcodes.php');
-	
+
 	$documentation = "\/\*\*(?P<documentation>.*?)\*\*\/";
 	$declaration	 = "function[\s]+(?P<declaration>[^\(]+)";
-	
+
 	# Auto generated shortcode documentation.
 	$codes = array();
 	$auto	 = array_filter(installed_custom_post_types(), create_function('$c', '
@@ -413,7 +413,7 @@ DOC;
 			'shortcode'			=> $scode,
 		);
 	}
-	
+
 	# Defined shortcode documentation
 	$found = preg_match_all("/{$documentation}\s*{$declaration}/is", $file, $matches);
 	if ($found){
@@ -525,7 +525,7 @@ add_action('after_setup_theme', '__init__');
 
 
 /**
- * Uses the google search appliance to search the current site or the site 
+ * Uses the google search appliance to search the current site or the site
  * defined by the argument $domain.
  **/
 function get_search_results(
@@ -535,7 +535,7 @@ function get_search_results(
 		$domain=null,
 		$search_url="http://google.cc.ucf.edu/search"
 	){
-	
+
 	$start     = ($start) ? $start : 0;
 	$per_page  = ($per_page) ? $per_page : 10;
 	$domain    = ($domain) ? $domain : $_SERVER['SERVER_NAME'];
@@ -557,19 +557,19 @@ function get_search_results(
 		'sitesearch' => $domain,
 		'q'          => $query,
 	);
-	
+
 	if (strlen($query) > 0){
 		$query_string = http_build_query($arguments);
 		$url          = $search_url.'?'.$query_string;
 		$response     = file_get_contents($url);
-		
+
 		if ($response){
 			$xml   = simplexml_load_string($response);
 			$items = $xml->RES->R;
 			$total = $xml->RES->M;
-			
+
 			$temp = array();
-			
+
 			if ($total){
 				foreach($items as $result){
 					$item            = array();
@@ -585,7 +585,7 @@ function get_search_results(
 			$results['number'] = $total;
 		}
 	}
-	
+
 	return $results;
 }
 
@@ -628,21 +628,21 @@ function post_type($post){
 	if (is_int($post)){
 		$post = get_post($post);
 	}
-	
+
 	# check post_type field
 	$post_type = $post->post_type;
-	
+
 	if ($post_type === 'revision'){
 		$parent    = (int)$post->post_parent;
 		$post_type = post_type($parent);
 	}
-	
+
 	return $post_type;
 }
 
 
 /**
- * Will return a string $s normalized to a slug value.	The optional argument, 
+ * Will return a string $s normalized to a slug value.	The optional argument,
  * $spaces, allows you to define what spaces and other undesirable characters
  * will be replaced with.	 Useful for content that will appear in urls or
  * turning plain text into an id.
@@ -670,22 +670,22 @@ function get_custom_post_type($name){
 /**
  * Custom function using some of WordPreses buit-ins. Only displays
  * submenus of the link of the current page.
- * 
+ *
  * TODO: Clean up and make submenu exclusion optional.
  *
  **/
 function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 	global $post;
-	
+
 	$locations = get_nav_menu_locations();
 	$menu			 = @$locations[$name];
-	
+
 	if (!$menu){
 		return "<div class='error'>No menu location found with name '{$name}'.</div>";
 	}
-	
+
 	$items = wp_get_nav_menu_items($menu);
-	
+
 	$output           = '';
 	$parent_ids       = array();
 	$top_level_obj_id = 0;
@@ -696,7 +696,7 @@ function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 		$prev = isset($items[$i - 1]) ? $items[$i - 1] : null;
 		$next = isset($items[$i + 1]) ? $items[$i + 1] : null;
 		$menu_item_parent = (int)$item->menu_item_parent;
-		
+
 		if($menu_item_parent == 0) {
 			$top_count++;
 			// Going all the way up
@@ -723,17 +723,17 @@ function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 		}
 		if((int)$item->object_id == $post->ID) {
 			$show_num = $top_count;
-		}	
+		}
 	}
-	
+
 	while(count($parent_ids) > 0) {
 		array_pop($parent_ids);
 		$output .= '</ul></li>';
 	}
-	
+
 	$output = str_replace('class="__hide'.$show_num.'"', '', $output);
 	$output = preg_replace('/__hide\d+/', 'hide', $output);
-	
+
 	return '<ul id="'.$id.'" class="'.$classes.'">'.$output.'</ul>';
 }
 
@@ -772,7 +772,7 @@ function create_html_element($tag, $attr=array(), $content=null, $self_close=Tru
 			$element = "<{$tag}{$attr_str}></{$tag}>";
 		}
 	}
-	
+
 	return $element;
 }
 
@@ -837,7 +837,7 @@ function header_meta(){
 	$metas		 = Config::$metas;
 	$meta_html = array();
 	$defaults	 = array();
-	
+
 	foreach($metas as $meta){
 		$meta				 = array_merge($defaults, $meta);
 		$meta_html[] = create_html_element('meta', $meta);
@@ -854,12 +854,12 @@ function header_links(){
 	$links			= Config::$links;
 	$links_html = array();
 	$defaults		= array();
-	
+
 	foreach($links as $link){
 		$link					= array_merge($defaults, $link);
 		$links_html[] = create_html_element('link', $link, null, False);
 	}
-	
+
 	$links_html = implode("\n", $links_html);
 	return $links_html;
 }
@@ -875,24 +875,24 @@ function header_title(){
 	if ( is_single() ) {
 		$content = single_post_title('', FALSE);
 	}
-	elseif ( is_home() || is_front_page() ) { 
+	elseif ( is_home() || is_front_page() ) {
 		$content = get_bloginfo('description');
 	}
-	elseif ( is_page() ) { 
-		$content = single_post_title('', FALSE); 
+	elseif ( is_page() ) {
+		$content = single_post_title('', FALSE);
 	}
-	elseif ( is_search() ) { 
-		$content = __('Search Results for:'); 
+	elseif ( is_search() ) {
+		$content = __('Search Results for:');
 		$content .= ' ' . esc_html(stripslashes(get_search_query()));
 	}
 	elseif ( is_category() ) {
 		$content = __('Category Archives:');
 		$content .= ' ' . single_cat_title("", false);;
 	}
-	elseif ( is_404() ) { 
-		$content = __('Not Found'); 
+	elseif ( is_404() ) {
+		$content = __('Not Found');
 	}
-	else { 
+	else {
 		$content = get_bloginfo('description');
 	}
 
@@ -914,13 +914,13 @@ function header_title(){
 			$elements = array(
 				'content' => $content,
 			);
-		}	 
+		}
 	} else {
 		$elements = array(
 			'site_name' => $site_name,
 		);
 	}
-	
+
 	// But if they don't, it won't try to implode
 	if(is_array($elements)) {
 	$doctitle = implode(' ', $elements);
@@ -942,7 +942,7 @@ function header_title(){
 function body_classes(){
 	$classes = Config::$body_classes;
 	$classes = array_merge($classes, browser_classes());
-	
+
 	return implode(' ', $classes);
 }
 
@@ -954,7 +954,7 @@ function body_classes(){
  **/
 function browser_classes() {
 	$browser = $_SERVER[ 'HTTP_USER_AGENT' ];
-	
+
 	// Mac, PC ...or Linux
 	if ( preg_match( "/Mac/", $browser ) ){
 		$classes[] = 'mac';
@@ -965,29 +965,29 @@ function browser_classes() {
 	} else {
 		$classes[] = 'unknown-os';
 	}
-	
+
 	// Checks browsers in this order: Chrome, Safari, Opera, MSIE, FF
 	if ( preg_match( "/Chrome/", $browser ) ) {
 		$classes[] = 'chrome';
-	
+
 		preg_match( "/Chrome\/(\d.\d)/si", $browser, $matches);
 		$ch_version = 'ch' . str_replace( '.', '-', $matches[1] );
 		$classes[] = $ch_version;
 	} elseif ( preg_match( "/Safari/", $browser ) ) {
 		$classes[] = 'safari';
-		
+
 		preg_match( "/Version\/(\d.\d)/si", $browser, $matches);
 		$sf_version = 'sf' . str_replace( '.', '-', $matches[1] );
 		$classes[] = $sf_version;
 	} elseif ( preg_match( "/Opera/", $browser ) ) {
 		$classes[] = 'opera';
-		
+
 		preg_match( "/Opera\/(\d.\d)/si", $browser, $matches);
 		$op_version = 'op' . str_replace( '.', '-', $matches[1] );
 		$classes[] = $op_version;
 	} elseif ( preg_match( "/MSIE/", $browser ) ) {
 		$classes[] = 'ie';
-		
+
 		if( preg_match( "/MSIE 6.0/", $browser ) ) {
 			$classes[] = 'ie6';
 		} elseif ( preg_match( "/MSIE 7.0/", $browser ) ){
@@ -997,7 +997,7 @@ function browser_classes() {
 		}
 	} elseif ( preg_match( "/Firefox/", $browser ) && preg_match( "/Gecko/", $browser ) ) {
 			$classes[] = 'firefox';
-			
+
 			preg_match( "/Firefox\/(\d)/si", $browser, $matches);
 			$ff_version = 'ff' . str_replace( '.', '-', $matches[1] );
 			$classes[] = $ff_version;
@@ -1025,7 +1025,7 @@ function disallow_direct_load($page){
  **/
 function installed_custom_post_types(){
 	$installed = Config::$custom_post_types;
-	
+
 	return array_map(create_function('$class', '
 		return new $class;
 	'), $installed);
@@ -1037,7 +1037,7 @@ function installed_custom_post_types(){
  **/
 function installed_custom_taxonomies(){
 	$installed = Config::$custom_taxonomies;
-	
+
 	return array_map(create_function('$class', '
 		return new $class;
 	'), $installed);
@@ -1049,16 +1049,16 @@ function flush_rewrite_rules_if_necessary(){
 	$start    = microtime(True);
 	$original = get_option('rewrite_rules');
 	$rules    = $wp_rewrite->rewrite_rules();
-	
+
 	if (!$rules or !$original){
 		return;
 	}
 	ksort($rules);
 	ksort($original);
-	
+
 	$rules    = md5(implode('', array_keys($rules)));
 	$original = md5(implode('', array_keys($original)));
-	
+
 	if ($rules != $original){
 		flush_rewrite_rules();
 	}
@@ -1090,7 +1090,7 @@ function register_custom_post_types(){
 	foreach(installed_custom_post_types() as $custom_post_type){
 		$custom_post_type->register();
 	}
-	
+
 	#This ensures that the permalinks for custom posts work
 	flush_rewrite_rules_if_necessary();
 }
@@ -1126,7 +1126,7 @@ function save_meta_data($post){
 		}
 	}
 	return _save_meta_data($post, $meta_box);
-	
+
 }
 add_action('save_post', 'save_meta_data');
 
@@ -1151,7 +1151,7 @@ function show_meta_boxes($post){
 function save_default($post_id, $field){
 	$old = get_post_meta($post_id, $field['id'], true);
 	$new = $_POST[$field['id']];
-	
+
 	# Update if new is not empty and is not the same value as old
 	if ($new !== "" and $new !== null and $new != $old) {
 		update_post_meta($post_id, $field['id'], $new);
@@ -1171,11 +1171,11 @@ function save_file($post_id, $field){
 		$override['action'] = 'editpost';
 		$file               = $_FILES[$field['id']];
 		$uploaded_file      = wp_handle_upload($file, $override);
-		
+
 		# TODO: Pass reason for error back to frontend
 		if ($uploaded_file['error']){return;}
-		
-		
+
+
 		$attachment = array(
 			'post_title'     => $file['name'],
 			'post_type'      => 'attachment',
@@ -1185,7 +1185,7 @@ function save_file($post_id, $field){
 			'post_content'   => ''
 		);
 		$id = wp_insert_attachment($attachment, $uploaded_file['file'], $post_id);
-		
+
 		wp_update_attachment_metadata(
 			$id,
 			wp_generate_attachment_metadata($id, $uploaded_file['file'])
@@ -1219,7 +1219,7 @@ function _save_meta_data($post_id, $meta_box){
 	} elseif (!current_user_can('edit_post', $post_id)) {
 		return $post_id;
 	}
-	
+
 	foreach ($meta_box['fields'] as $field) {
 		switch ($field['type']){
 			case 'file':
@@ -1252,14 +1252,14 @@ function _show_meta_boxes($post, $meta_box){
 					<?=$field['desc']?>
 				</div>
 			<?php endif;?>
-			
-			<?php switch ($field['type']): 
+
+			<?php switch ($field['type']):
 				case 'text':?>
 				<input type="text" name="<?=$field['id']?>" id="<?=$field['id']?>" value="<?=($current_value) ? htmlentities($current_value) : $field['std']?>" />
-			
+
 			<?php break; case 'textarea':?>
 				<textarea name="<?=$field['id']?>" id="<?=$field['id']?>" cols="60" rows="4"><?=($current_value) ? htmlentities($current_value) : $field['std']?></textarea>
-			
+
 			<?php break; case 'select':?>
 				<select name="<?=$field['id']?>" id="<?=$field['id']?>">
 					<option value=""><?=($field['default']) ? $field['default'] : '--'?></option>
@@ -1267,16 +1267,16 @@ function _show_meta_boxes($post, $meta_box){
 					<option <?=($current_value == $v) ? ' selected="selected"' : ''?> value="<?=$v?>"><?=$k?></option>
 				<?php endforeach;?>
 				</select>
-			
+
 			<?php break; case 'radio':?>
 				<?php foreach ($field['options'] as $k=>$v):?>
 				<label for="<?=$field['id']?>_<?=slug($k, '_')?>"><?=$k?></label>
 				<input type="radio" name="<?=$field['id']?>" id="<?=$field['id']?>_<?=slug($k, '_')?>" value="<?=$v?>"<?=($current_value == $v) ? ' checked="checked"' : ''?> />
 				<?php endforeach;?>
-			
+
 			<?php break; case 'checkbox':?>
 				<input type="checkbox" name="<?=$field['id']?>" id="<?=$field['id']?>"<?=($current_value) ? ' checked="checked"' : ''?> />
-			
+
 			<?php break; case 'help':?><!-- Do nothing for help -->
 			<?php break; case 'file':
 							$document_id = get_post_meta($post->ID, $field['id'], True);
@@ -1299,7 +1299,7 @@ function _show_meta_boxes($post, $meta_box){
 		</tr>
 	<?php endforeach;?>
 	</table>
-	
+
 	<?php if($meta_box['helptxt']):?>
 	<p><?=$meta_box['helptxt']?></p>
 	<?php endif;?>
@@ -1330,11 +1330,11 @@ function get_promo_html()
 	if($promo_count === False) {
 		$promo_count = 1;
 	}
-	
+
 	$promos = get_posts(array('numberposts' => $promo_count));
-	
+
 	ob_start();
-	foreach($promos as $promo) { 
+	foreach($promos as $promo) {
 		$link_url = get_post_meta($promo->ID, '_links_to', True);
 		$link_target = get_post_meta($promo->UD, '_links_to_target', True);?>
 		<li class="clearfix">
@@ -1344,7 +1344,7 @@ function get_promo_html()
 				<?=str_replace(']]>', ']]&gt;', apply_filters('the_content', $promo->post_content));?>
 			<? if($link_url != '') {?></a><?}?>
 		</li>
-	<? } 
+	<? }
 	return ob_get_clean();
 }
 
@@ -1364,34 +1364,34 @@ function return_600( $seconds ) {
 function get_today_news()
 {
 	global $post, $_wp_additional_image_sizes;
-	
+
 	if( ($feed_url = get_post_meta($post->ID, 'page_feed', True)) == '') {
 		$feed_url = get_theme_option('today_rosen_rss');
 	}
 	if($feed_url !== False && $feed_url != '') {
-		
+
 		$dimensions = '';
 		if(isset($_wp_additional_image_sizes['sidebar-rss-thumb'])) {
 			$dimensions  = '?thumb='.$_wp_additional_image_sizes['sidebar-rss-thumb']['width'];
 			$dimensions .= 'x'.$_wp_additional_image_sizes['sidebar-rss-thumb']['height'];
 		}
-		
+
 		add_filter( 'wp_feed_cache_transient_lifetime' , 'return_600' );
 		$rss = fetch_feed($feed_url.$dimensions	);
 		remove_filter( 'wp_feed_cache_transient_lifetime' , 'return_600' );
-		
+
 		if(!is_wp_error($rss)) {
 			$item        = $rss->get_item(0);
 			$description = $item->get_description();
 			$enclosure   = $item->get_enclosure();
-			
+
 			if(method_exists($enclosure, 'get_thumbnail')) {
 				$img_src = $enclosure->get_thumbnail();
 				if($img_src != '') {
 					$img = '<img src="'.$img_src.'" width="272" alt="'.$item->get_title().' Thumbnail" />';
 				}
 			}
-			
+
 			ob_start();?>
 			<div class="sidebar-pub serif">
 				<?=isset($img) ? $img : ''?>
@@ -1424,7 +1424,7 @@ function get_person_meta($post_id)
 		<div id="headshot" class="span-3">
 			<? if($img == '') {?>
 				<img src="<?=bloginfo('stylesheet_directory')?>/static/img/no-photo.jpg" alt="not photo available"/>
-			<? } else {?> 
+			<? } else {?>
 				<?=get_the_post_thumbnail($post_id, 'full')?>
 			<? } ?>
 		</div>
@@ -1474,18 +1474,18 @@ function get_form_class($form_id)
  **/
 function submit_cc_signup()
 {
-	
+
 	if(isset($_POST['cc_email'])) {
-		
+
 		$email = $_POST['cc_email'];
-		
+
 		$base_error = 'Error: Adding your email addresss to the mailing list failed.';
-		
+
 		$username = get_theme_option('constant_contact_username');
 		$password = get_theme_option('constant_contact_password');
 		$api_key  = get_theme_option('constant_contact_api_key');
 		$list     = get_theme_option('constant_contact_list');
-	
+
 		if( ($username === False || $password === False || $api_key === False) ||
 					($username == '' || $password == '' || $api_key == '')) {
 			$_SESSION['cc_error'] = $base_error.' (misconfiguraiton)';
@@ -1510,16 +1510,16 @@ function submit_cc_signup()
 							</Contact>
 						</content>
 					</entry>';
-					
+
 					if($list === False || !is_numeric($list)) {
 						$list = 2;
 					}
-					
+
 					$auth = trim($api_key).'%'.$username.':'.$password;
 					$email = html_entity_decode($email, ENT_COMPAT);
-					
+
 					$ch = curl_init();
-					
+
 					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, False);
 					curl_setopt($ch, CURLOPT_URL, sprintf(CC_ADD_CONTACT_API_URL, $username));
 					curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -1529,11 +1529,11 @@ function submit_cc_signup()
 					curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:application/atom+xml"));
 					curl_setopt($ch, CURLOPT_HEADER, false); // Do not return headers
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, True); // If you set this to 0, it will take you to a page with the http response
-					
+
 					$response = curl_exec($ch);
 					curl_close($ch);
 					//$response = http_put_data($url, );
-					
+
 					if($response === False || @simplexml_load_string($response) === False) {
 						if(strpos($response, 'Error') == 0 && ($msg = substr($response, strpos($response, ':') + 1)) != '') {
 							$_SESSION['cc_error'] = $base_error.' '.$msg.'.';
