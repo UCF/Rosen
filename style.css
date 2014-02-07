@@ -2,7 +2,7 @@
 Theme Name: Rosen
 Author: UCF Web Communications
 Github Theme URI: https://github.com/UCF/Rosen
-Version: v1.0.31
+Version: v1.0.32
 */
 
 
@@ -233,6 +233,7 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
 #person-meta #details > p  {margin-bottom:5px;font-weight:bold;}
 #person-meta #details > ul {margin:0;padding:0;}
 #person-meta #details > ul > li {list-style-type:none;margin:0;padding:0 0 5px 0;}
+#person-meta #details p.additional-info {font-weight: normal; font-size: 13px; margin-top: 5px;}
 
 /*/ Gallery /*/
 #flickr_gallery {margin:0;padding:0;}

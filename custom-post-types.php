@@ -500,6 +500,12 @@ class Person extends CustomPostType
 					'id'      => $this->options('name').'_orderby_name',
 					'type'    => 'text',
 				),
+				array(
+					'name'    => __('Additional Information'),
+					'desc'    => __('Add any additional information for the person (ex Offices hours, room number, etc.).'),
+					'id'      => $this->options('name').'_additional_info',
+					'type'    => 'textarea',
+				),
 			);
 			return $fields;
 		}

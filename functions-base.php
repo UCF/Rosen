@@ -1418,7 +1418,8 @@ function get_person_meta($post_id)
 	$phones = get_post_meta($post_id, 'person_phones', True);
 	$phones = ($phones != '') ? explode(',', $phones) : Array();
 	$email  = get_post_meta($post_id, 'person_email', True);
-	
+	$addtional_info = get_post_meta($post_id, 'person_additional_info', True);
+
 	ob_start()?>
 	<div id="person-meta" class="span-15 append-1 last">
 		<div id="headshot" class="span-3">
@@ -1438,6 +1439,7 @@ function get_person_meta($post_id)
 				<? } ?>
 			</ul>
 			<?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?>
+			<p class="additional-info"><?=$addtional_info?></p>
 		</div>
 	</div><?
 	return ob_get_clean();
