@@ -22,11 +22,11 @@
 						<?=get_menu('footer-menu-right', 'menu vertical clearfix footer-menu', 'footer-menu-right', True)?>
 					</div>
 				</div>
-				<div class="span-7 last" id="newsletter_signup">
-					<h3 class="serif">Sign Up for  the Newsletter:</h3>
-					<form action="<?=bloginfo('url')?>" method="post">
-						<input type="text" name="cc_email" value="Enter Email Address..." />
-						<input type="submit" value="Submit" />
+				<div class="footer-pub span-7 last" id="search">
+					<h3 class="serif">Search Rosen College:</h3>
+					<form method="get" action="<?=home_url( '/' )?>" role="search" id="search">
+						<input type="text" value="<?=isset($_GET['s']) ? htmlentities($_GET['s']) : 'Enter Search Term...'?>" name="s"  />
+						<input type="submit" value="Search" />
 					</form>
 				</div>
 			</div>

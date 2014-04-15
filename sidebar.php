@@ -5,29 +5,29 @@
 	<?=get_the_post_thumbnail($post->ID, 'sidebar-feature')?>
 <? } ?>
 <?=get_menu('sidebar-nav-menu', 'menu vertical sans', 'sidebar-nav-menu', (is_front_page() ? True : False))?>
-<div class="sidebar-pub" id="search">
-	<h3 class="serif">Search Rosen College:</h3>
-	<form method="get" action="<?=home_url( '/' )?>" role="search" id="search">
-		<input type="text" value="<?=isset($_GET['s']) ? htmlentities($_GET['s']) : 'Enter Search Term...'?>" name="s"  />
-		<input type="submit" value="Search" />
+<div class="sidebar-pub" id="newsletter_signup">
+	<h3 class="serif">Sign Up for  the Newsletter:</h3>
+	<form action="<?=bloginfo('url')?>" method="post">
+		<input type="text" name="cc_email" value="Enter Email Address..." />
+		<input type="submit" value="Submit" />
 	</form>
 </div>
-<?=get_today_news()?>
-<?
-	$catering_title = get_theme_option('catering_spotlight_title'); 
-	$catering_content = get_theme_option('catering_spotlight_content');
-	if($catering_title !== FALSE && $catering_content !== FALSE &&
-			$catering_title != '' && $catering_content != ''):
-?>
-<div class="sidebar-pub" id="theme-shoutout">
-	<h3 class="serif"><?=$catering_title?></h3>
-	<p class="serif">
-		<?=$catering_content?>
-	</p>
-</div>
-<? endif; ?>
 <div id="sidebar-social">
 	<h3><?=get_menu_title('sidebar-social-menu')?></h3>
 	<?=get_menu('sidebar-social-menu', 'menu vertical sans', 'sidebar-social-menu')?>
 </div>
+<?=get_today_news()?>
+<?
+	$home_page_title = get_theme_option('home_page_spotlight_title'); 
+	$home_page_content = get_theme_option('home_page_spotlight_content');
+	if($home_page_title !== FALSE && $home_page_content !== FALSE &&
+			$home_page_title != '' && $home_page_content != ''):
+?>
+<div class="sidebar-pub" id="theme-shoutout">
+	<h3 class="serif"><?=$home_page_title?></h3>
+	<p class="serif">
+		<?=$home_page_content?>
+	</p>
+</div>
+<? endif; ?>
 <?php endif;?>

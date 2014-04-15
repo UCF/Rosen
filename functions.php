@@ -178,18 +178,18 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['gallery_feed_url']
 		)),
 		new TextField(array(
-			'name'        => 'Catering Spotlight Title',
-			'id'          => THEME_OPTIONS_NAME.'[catering_spotlight_title]',
+			'name'        => 'Spotlight Title',
+			'id'          => THEME_OPTIONS_NAME.'[home_page_spotlight_title]',
 			'description' => 'Title will be contained in an H3.',
 			'default'     => null,
-			'value'       => $theme_options['catering_spotlight_title'],
+			'value'       => $theme_options['home_page_spotlight_title'],
 		)),
 		new TextareaField(array(
-			'name'        => 'Catering Spotlight Content',
-			'id'          => THEME_OPTIONS_NAME.'[catering_spotlight_content]',
+			'name'        => 'Spotlight Content',
+			'id'          => THEME_OPTIONS_NAME.'[home_page_spotlight_content]',
 			'description' => '',
 			'default'     => null,
-			'value'       => $theme_options['catering_spotlight_content'],
+			'value'       => $theme_options['home_page_spotlight_content'],
 		)),
 	)
 );
