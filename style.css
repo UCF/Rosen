@@ -2,7 +2,7 @@
 Theme Name: Rosen
 Author: UCF Web Communications
 Github Theme URI: https://github.com/UCF/Rosen
-Version: v1.0.32
+Version: v1.0.33
 */
 
 
@@ -73,8 +73,8 @@ article ul, article ol {margin-top:0;}
 .sidebar-pub > h3 > a {color:#ad834e;text-decoration:none;}
 .sidebar-pub > p {color:#000;font-size:110%;}
 
-#sidebar-social {padding-left:20px; padding-bottom:90px;}
-#sidebar-social > h3 {color: #000;font-size:140%;font-weight:normal;margin-bottom:10px;}
+#sidebar-social {padding-left:20px; overflow:hidden; margin-bottom:21px;}
+#sidebar-social > h3 {color: #000;font-size:140%;font-weight:normal;margin-bottom:10px;margin-top:0px;}
 #sidebar-social > ul {margin:0 0 0 5px;padding:0;}
 #sidebar-social > ul > li {list-style-type:none;float:left; margin-right: 5px;}
 li.facebook > a,
@@ -118,12 +118,12 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
 */
 #home h2:first-child {margin-bottom:0;margin-top:-10px;}
 #home h2:first-child > a:hover {color:#333;}
-#home #subtitle {font-size:120%; margin-bottom:200px;}
+#home #subtitle {font-size:120%; margin-bottom:220px;}
 
 #home .page-content > div:first-child {background-color:transparent !important;}
 .trident #home .page-content > div:first-child {-ms-filter: none !important;filter: none !important;}
 
-#home #promos {margin:0 0 35px 0;padding-top:0;}
+#home #promos {margin:0 0 35px 0;padding:0;}
 /*#home #promos > li {list-style-type:none; background-color:rgba(255, 255, 255, .6); padding:20px;}
 .trident .ie6 #home #promos > li, .trident .ie7 #home #promos > li, .trident .ie8 #home #promos > li {background: transparent;
 						-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#87FFFFFF,endColorstr=#87FFFFFF)";
@@ -256,8 +256,6 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
 .footer-pub {background-color:rgba(255,255,255,.6);padding:15px;margin:0 0 35px 8px;box-shadow:0px 0px	 5px #666;}
 .msie7 .sidebar-pub, .msie8 .sidebar-pub {background-color:#fdf1cf}
 
-.gecko .footer-pub {-moz-box-shadow: 0px 0px	 5px #666;}
-.webkit .footer-pub {-webkit-box-shadow: 0px 0px	 5px #666;}
 .footer-pub > h3 {font-size:140%;color:#ad834e;margin-bottom:5px;margin-top:0;line-height:1.3em;}
 .footer-pub > h3 > a {color:#ad834e;text-decoration:none;}
 .footer-pub > p {color:#000;font-size:110%;}
@@ -265,6 +263,6 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
 #footer #search > form > input[type="text"] {height:20px;width:199px;display:block;padding:3px;color:#666;font-style:italic;float:left;}
 .webkit #footer #search > form > input[type="text"] {width:205px;height:19px;}
 #footer #search > form > input[type="text"].focus {color:#000;font-style:normal;}
-#footer #search > form > input[type="submit"] {margin:0px 0 0 5px;color:#fff;background-color:#706355;border:1px solid #706355;padding:5px;font-size:100%;}
+#footer #search > form > input[type="submit"] {margin:0px 0 0 4px;color:#fff;background-color:#706355;border:1px solid #706355;padding:5px;font-size:100%;}
 .gecko #footer #search > form > input[type="submit"] {padding-top:4px;padding-bottom:4px;}
 .msie7 #footer #search > form > input[type="submit"] {padding:3px 0 3px 0;}
