@@ -23,7 +23,7 @@
 						$events = get_events($options['events_feed'], 0, $options['events_max_items']);
 						print display_events($events);
 						?>
-						<a id="more_events" href="<?=$options['events_url']?>">Check out the Rosen College Events</a><br/>
+						<a id="more_events" href="<?=$options['events_url']?>">More Events</a><br/>
 						<a id="more_events" href="http://vcart.velocitypayment.com/rosencollege/">Events Registration</a>
 					</div>
 				</div>
