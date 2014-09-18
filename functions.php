@@ -9,7 +9,7 @@ define('THEME_CSS_URL', THEME_STATIC_URL.'/css');
 define('THEME_OPTIONS_GROUP', 'settings');
 define('THEME_OPTIONS_NAME', 'theme');
 define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
-define('EVENT_PROXY_URL', THEME_STATIC_URL.'/event_proxy.php');
+define('FEED_FETCH_TIMEOUT', 10); // seconds
 
 // Constant Contact add contact API url
 // The username, pass and api key are contained in theme options
@@ -141,11 +141,25 @@ Config::$theme_settings = array(
 	),
 	'Events' => array(
 		new TextField(array(
-			'name'        => 'Calendar ID',
-			'id'          => THEME_OPTIONS_NAME.'[events_calendar_id]',
-			'description' => 'Identifier of the event system calendar that poulates the event widget.',
-			'default'     => 1,
-			'value'       => $theme_options['events_calendar_id']
+			'name'        => 'Events Feed URL',
+			'id'          => THEME_OPTIONS_NAME.'[events_feed]',
+			'description' => 'URL of the json feed for your calendar on the events system.',
+			'default'     => 'http://events.ucf.edu/calendar/217/rosen-college-of-hospitality-management-events/upcoming/feed.json',
+			'value'       => $theme_options['events_feed']
+		)),
+		new TextField(array(
+			'name'        => 'Events Landing Page URL',
+			'id'          => THEME_OPTIONS_NAME.'[events_url]',
+			'description' => 'URL of your front-facing calendar on the events system.',
+			'default'     => 'http://events.ucf.edu/calendar/217/rosen-college-of-hospitality-management-events/upcoming/',
+			'value'       => $theme_options['events_url']
+		)),
+		new TextField(array(
+			'name'        => 'Events Limit',
+			'id'          => THEME_OPTIONS_NAME.'[events_max_items]',
+			'description' => 'Max number of events to appear in events lists. Maximum is 8 events.',
+			'default'     => '4',
+			'value'       => $theme_options['events_max_items']
 		)),
 	),
 	'Miscellaneous' => array(
@@ -228,6 +242,7 @@ Config::$scripts = array(
 Config::$metas = array(
 	array('charset' => 'utf-8',),
 );
+
 if ((bool)$theme_options['gw_verify']){
 	Config::$metas[] = array(
 		'name'    => 'google-site-verification',
@@ -242,3 +257,71 @@ function protocol_relative_attachment_url($url) {
     return $url;
 }
 add_filter('wp_get_attachment_url', 'protocol_relative_attachment_url');
+
+
+/* Fetch events (json) */
+function get_events($feed, $start, $limit){
+	// Set a timeout
+	$opts = array('http' => array(
+						'method'  => 'GET',
+						'timeout' => FEED_FETCH_TIMEOUT
+	));
+	$context = stream_context_create($opts);
+
+	// Grab the events feed
+	$raw_events = file_get_contents($feed, false, $context);
+	if ($raw_events) {
+		$events = json_decode($raw_events, TRUE);
+		$events = array_slice($events, $start, $limit);
+		return $events;
+	}
+	else { return NULL; }
+}
+
+/*
+ * Display events data (from get_events()).
+ * There is a weird execution order problem with this theme--
+ * Fetch events from home.php where $theme_options is available.
+ */
+function display_events($events, $start=null, $limit=null) {
+	$url     = $theme_options['events_url'];
+	$feed    = $theme_options['events_feed'];
+	$start	 = ($start) ? $start : 0;
+
+	// Check for a given limit, then a set Options value, then if none exist, set to 4
+	if ($limit) {
+		$limit = intval($limit);
+	}
+	elseif ($theme_options['events_max_items']) {
+		$limit = intval($theme_options['events_max_items']);
+		if ($limit > 4) {
+			$limit = 4;
+		}
+	}
+	else {
+		$limit = 4;
+	}
+
+	if($events !== NULL && count($events)): ?>
+		<ul class="events clearfix">
+			<?php foreach($events as $item):
+				$start 		= new DateTime($item['starts']);
+				$day 		= $start->format('d');
+				$month 		= $start->format('M');
+				$link 		= $item['url'];
+				$title		= $item['title'];
+			?>
+			<li class="event">
+				<div class="date">
+					<span class="month"><?=$month?></span>
+					<span class="day"><?=$day?></span>
+				</div>
+				<a class="title" href="<?=$link?>"><?=$title?></a>
+				<div class="end"></div>
+			</li>
+			<?php endforeach;?>
+		</ul>
+	<?php else:?>
+		<p>Events could not be retrieved at this time.  Please try again later.</p>
+	<?php endif;
+}

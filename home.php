@@ -18,8 +18,13 @@
 				<div class="span-7 append-1">
 				  <div class="widget">
 						<h3 class="serif">Events</h3>
-							<a id="more_events" href="http://events.ucf.edu/?calendar_id=<?=get_theme_option('events_calendar_id')?>&upcoming=upcoming">Check out the Rosen College Events</a><br/>
-							<a id="more_events" href="http://vcart.velocitypayment.com/rosencollege/">Events Registration</a>
+						<?php
+						$options = get_option(THEME_OPTIONS_NAME);
+						$events = get_events($options['events_feed'], 0, $options['events_max_items']);
+						print display_events($events);
+						?>
+						<a id="more_events" href="<?=$options['events_url']?>">Check out the Rosen College Events</a><br/>
+						<a id="more_events" href="http://vcart.velocitypayment.com/rosencollege/">Events Registration</a>
 					</div>
 				</div>
 				<div class="span-7 last">

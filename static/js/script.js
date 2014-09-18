@@ -4,8 +4,6 @@ jQuery(document).ready(function($) {
 	Webcom.analytics($);
 	Webcom.handleExternalLinks($);
 	Webcom.loadMoreSearchResults($);
-	
-	$('.events').each(function(){Webcom.events.callback($, $(this));});
 
 	(function() {
 		$('#newsletter_signup input[type="text"]')
