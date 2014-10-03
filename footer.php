@@ -12,6 +12,8 @@
 						Orlando, Florida 32819
 						<br />
 						407.903.8000
+						<br />
+						<a href="mailto:rchminfo@ucf.edu">rchminfo@ucf.edu</a>
 					</p>
 				</div>
 				<div class="span-10">
