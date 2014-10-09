@@ -325,3 +325,9 @@ function display_events($events, $start=null, $limit=null) {
 		<p>Events could not be retrieved at this time.  Please try again later.</p>
 	<?php endif;
 }
+
+/**
+ * Disable kses filtering to allow <iframe>, <script> tags, etc.
+ * Necessary to allow non-superusers to save Publication embed codes.
+ **/
+add_filter('init', 'kses_remove_filters');
