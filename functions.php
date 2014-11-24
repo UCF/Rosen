@@ -322,7 +322,7 @@ function display_events($events, $start=null, $limit=null) {
 			<?php endforeach;?>
 		</ul>
 	<?php else:?>
-		<p>Events could not be retrieved at this time.  Please try again later.</p>
+		<p>There are no upcoming events at this time.</p>
 	<?php endif;
 }
 
