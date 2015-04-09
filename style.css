@@ -300,6 +300,7 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
 
   #home #subtitle {
     margin-bottom: 50%;
+    padding: 0 15px;
   }
 
   #home #promos > li {
