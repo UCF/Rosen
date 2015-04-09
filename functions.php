@@ -218,6 +218,7 @@ Config::$styles = array(
 	THEME_CSS_URL.'/jquery-ui.css',
 	THEME_CSS_URL.'/jquery-uniform.css',
 	THEME_CSS_URL.'/blueprint-screen.css',
+	THEME_CSS_URL.'/blueprint-responsive.css',
 	array('media' => 'print', 'src' => THEME_CSS_URL.'/blueprint-print.css',),
 	THEME_CSS_URL.'/yahoo-reset.css',
 	THEME_CSS_URL.'/yahoo-fonts.css',

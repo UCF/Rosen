@@ -267,3 +267,75 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
 #footer #search > form > input[type="submit"] {margin:0px 0 0 4px;color:#fff;background-color:#706355;border:1px solid #706355;padding:5px;font-size:100%;}
 .gecko #footer #search > form > input[type="submit"] {padding-top:4px;padding-bottom:4px;}
 .msie7 #footer #search > form > input[type="submit"] {padding:3px 0 3px 0;}
+
+
+/* Responsive overrides */
+
+@media (max-width: 950px) {
+  #header h1,
+  #search {
+    box-sizing: border-box;
+  }
+
+  #search {
+    margin-left: 0;
+  }
+
+  #home #splash-container {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  #home #splash-container > img {
+    height: auto;
+    width: 100%;
+  }
+
+  #home h2:first-child {
+    box-sizing: border-box;
+    display: block;
+    padding: 0 15px;
+    width: 100%;
+  }
+
+  #home #subtitle {
+    margin-bottom: 50%;
+  }
+
+  #home #promos > li {
+    padding: 1px 1em;
+  }
+
+  #home #promos > li img {
+    padding: 15px 15px 15px 0;
+  }
+
+  #home #promos > li h3,
+  #home #promos > li p {
+    right: 0;
+    padding-right: 0;
+  }
+
+  #home .widget {
+    margin-bottom: 1.5em;
+  }
+
+  #footer .footer-menu {
+    padding-left: 15px;
+  }
+
+  #footer #footer-menu-left {
+    margin-top: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  #home h2:first-child {
+    font-size: 30px;
+  }
+
+  #home #promos > li img {
+    height: auto;
+    width: 100px;
+  }
+}
