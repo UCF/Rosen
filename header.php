@@ -11,6 +11,8 @@
 <html lang="en-US">
 	<head>
 		<?="\n".header_()."\n"?>
+		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!--[if IE]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<style>article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}</style>
