@@ -169,9 +169,6 @@
     Site Responsive Overrides
 \******************************************************************************/
 
-@media (max-width: 974px) {
-}
-
 @media (max-width: 950px) {
   .left,
   .right {
