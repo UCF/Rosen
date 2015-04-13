@@ -58,13 +58,29 @@ jQuery(document).ready(function($) {
     var $mobileNav = $('#mobile-nav'),
         $mobileNavToggle = $mobileNav.find('#mobile-nav-toggle'),
         $mobileNavMenu = $mobileNav.find('#mobile-nav-menu'),
-        $header = $('#header');
+        $header = $('#header'),
+        $splashContainer = $('#splash-container');
 
     $(window).on('load resize', function() {
+      var mobileNavTop = $header.outerHeight(),
+          splashContainerTop = mobileNavTop + $mobileNavToggle.outerHeight();
+
+      // Position mobile navbar absolutely, directly below site title
       $mobileNav.css({
         'position': 'absolute',
         'top': $header.outerHeight(),
       });
+
+      // At mobile sizes, push the home page splash image container down below
+      // the site title and mobile navbar
+      if ($(window).outerWidth() <= 950) {
+        $splashContainer.css({
+          'top': splashContainerTop,
+        });
+      }
+      else {
+        $splashContainer.attr('style', '');
+      }
     });
 
     $mobileNavToggle.on('click', function() {

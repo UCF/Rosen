@@ -174,7 +174,6 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
   box-sizing: border-box;
   background: rgba(206, 170, 72, 1);
   display: none;
-  padding: 10px 12px;
   position: relative;
   z-index: 9999;
 }
@@ -184,6 +183,7 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
   display: block;
   font-size: 16px;
   font-weight: 500;
+  padding: 10px 12px;
   text-decoration: none;
 }
 
@@ -211,7 +211,7 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
 #mobile-nav-menu {
   display: none;
   margin: 20px 0;
-  padding-left: 0;
+  padding: 0 12px;
 }
 
 #mobile-nav-menu li {
@@ -371,7 +371,7 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
   }
 
   #home #subtitle {
-    margin-bottom: 40%;
+    margin-bottom: 70%;
     padding: 0 15px;
   }
 
