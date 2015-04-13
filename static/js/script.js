@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
 					email.removeClass('focus');
 				}
 			});
-		
+
 		$('#flickr_gallery a, .venue-list a:has("img")').lightBox({
 			imageLoading:THEME_IMG_URL + '/lightbox/lightbox-ico-loading.gif',
 			imageBtnClose:THEME_IMG_URL + '/lightbox/lightbox-btn-close.gif',
@@ -54,5 +54,22 @@ jQuery(document).ready(function($) {
 				}
 			})
 		*/
+
+    var $mobileNav = $('#mobile-nav'),
+        $mobileNavToggle = $mobileNav.find('#mobile-nav-toggle'),
+        $mobileNavMenu = $mobileNav.find('#mobile-nav-menu'),
+        $header = $('#header');
+
+    $(window).on('load resize', function() {
+      $mobileNav.css({
+        'position': 'absolute',
+        'top': $header.outerHeight(),
+      });
+    });
+
+    $mobileNavToggle.on('click', function() {
+      $mobileNavMenu.slideToggle();
+      $mobileNavToggle.toggleClass('active');
+    });
 	})();
 });

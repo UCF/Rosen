@@ -169,6 +169,60 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
 #home .widget > .events > li > a {font-size:100%;display:block;position:relative;padding-left:70px; margin-top:3px;}
 .msie7 #home .widget > .events > li > a {margin-top:5px;}
 
+/*/ Mobile Navbar /*/
+#mobile-nav {
+  box-sizing: border-box;
+  background: rgba(206, 170, 72, 1);
+  display: none;
+  padding: 10px 12px;
+  position: relative;
+  z-index: 9999;
+}
+
+#mobile-nav-toggle {
+  color: #fff;
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.hamburger {
+  display: block;
+  float: left;
+  border-bottom: 7px double #fff;
+  border-top: 2px solid #fff;
+  content: "";
+  height: 3px;
+  width: 20px;
+  margin-right: 10px;
+  margin-top: 2px;
+}
+
+#mobile-nav-toggle.active {
+  color: #000;
+}
+
+#mobile-nav-toggle.active .hamburger {
+  border-bottom: 7px double #000;
+  border-top: 2px solid #000;
+}
+
+#mobile-nav-menu {
+  display: none;
+  margin: 20px 0;
+  padding-left: 0;
+}
+
+#mobile-nav-menu li {
+  list-style-type: none;
+}
+
+#mobile-nav-menu li a {
+  color: #fff;
+  display: block;
+}
+
 /*/ Subpage /*/
 #page #blueprint-container {padding:0;}
 #page h1 {position:relative;left:-10px;top:30px;}
@@ -272,14 +326,32 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
 /* Responsive overrides */
 
 @media (max-width: 950px) {
+  #blueprint-container {
+    padding-top: 0;
+  }
+
   #header h1,
   #search {
     box-sizing: border-box;
   }
 
+  #header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  #mobile-nav {
+    display: block;
+  }
+
+  #mobile-nav + .page-content {
+    margin-top: 60px; /* height of #mobile-nav + 20px pad */
+  }
+
   #search {
     margin-left: 0;
   }
+
 
   #home #splash-container {
     margin-right: 0;
@@ -299,7 +371,7 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
   }
 
   #home #subtitle {
-    margin-bottom: 50%;
+    margin-bottom: 40%;
     padding: 0 15px;
   }
 
@@ -321,12 +393,58 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
     margin-bottom: 1.5em;
   }
 
+
   #footer .footer-menu {
     padding-left: 15px;
   }
 
   #footer #footer-menu-left {
     margin-top: 1.5em;
+  }
+
+  #footer #logo {
+    margin-left: 10px;
+  }
+
+
+  #page #blueprint-container {
+    overflow: visible;
+    position: relative;
+  }
+
+  #page #content-container {
+    position: relative;
+    z-index: 1;
+  }
+
+  #page h1 {
+    left: 0;
+    top: 0;
+  }
+
+  #page .page-content > div:first-child {
+    box-sizing: border-box;
+    left: 0;
+    margin-right: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 0;
+    top: -20px;
+  }
+
+  #page article h2 {
+    font-size: 275%;
+  }
+
+  #page #sidebar {
+    top: 0;
+  }
+
+  #page #sidebar-nav-menu,
+  #page #newsletter_signup,
+  .sidebar-pub,
+  #theme-shoutout {
+    margin-left: 0;
   }
 }
 

@@ -53,3 +53,10 @@
 			<div id="header" class="span-15 last">
 				<h1 class="span-15 last sans"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
 			</div>
+			<div id="mobile-nav" class="span-24 last">
+				<a id="mobile-nav-toggle" href="#">
+					<span class="hamburger"></span>
+					Menu
+				</a>
+				<?php echo get_menu( 'sidebar-nav-menu', 'menu vertical sans', 'mobile-nav-menu', ( is_front_page() ? True : False ) ); ?>
+			</div>
