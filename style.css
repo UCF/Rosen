@@ -406,6 +406,12 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
     margin-left: 10px;
   }
 
+  #footer #contact,
+  #footer #contact a,
+  #footer .footer-menu li > a {
+    font-weight: 300;
+  }
+
 
   #page #blueprint-container {
     overflow: visible;
