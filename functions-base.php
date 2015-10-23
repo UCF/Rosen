@@ -1149,18 +1149,18 @@ function show_meta_boxes($post){
 }
 
 function save_default($post_id, $field){
-	$old = get_post_meta($post_id, $field['id'], true);
-	$new = $_POST[$field['id']];
+	$old = get_post_meta( $post_id, $field['id'], true );
+	$new = isset( $_POST[$field['id']]) ? $_POST[$field['id']] : null;
 
-	# Update if new is not empty and is not the same value as old
-	if ($new !== "" and $new !== null and $new != $old) {
-		update_post_meta($post_id, $field['id'], $new);
+	// Update if new is not empty and is not the same value as old
+	if ( $new !== "" and $new !== null and $new != $old ) {
+		update_post_meta( $post_id, $field['id'], $new );
 	}
-	# Delete if we're sending a new null value and there was an old value
-	elseif ($new === "" and $old) {
-		delete_post_meta($post_id, $field['id'], $old);
+	// Delete if we're sending a new null value and there was an old value
+	elseif ( ( $new === "" or is_null( $new ) ) and $old ) {
+		delete_post_meta( $post_id, $field['id'], $old );
 	}
-	# Otherwise we do nothing, field stays the same
+	// Otherwise we do nothing, field stays the same
 	return;
 }
 
@@ -1275,7 +1275,7 @@ function _show_meta_boxes($post, $meta_box){
 				<?php endforeach;?>
 
 			<?php break; case 'checkbox':?>
-				<input type="checkbox" name="<?=$field['id']?>" id="<?=$field['id']?>"<?=($current_value) ? ' checked="checked"' : ''?> />
+				<input type="checkbox" name="<?php echo $field['id']; ?>" id="<?php echo $field['id']; ?>"<?php echo ( $current_value == 'on' ) ? ' checked="checked"' : ''; ?>>
 
 			<?php break; case 'help':?><!-- Do nothing for help -->
 			<?php break; case 'file':
