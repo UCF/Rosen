@@ -9,12 +9,6 @@
 	<h3><?=get_menu_title('sidebar-social-menu')?></h3>
 	<?=get_menu('sidebar-social-menu', 'menu vertical sans', 'sidebar-social-menu')?>
 </div>
-<div class="sidebar-pub" id="theme-shoutout">
-	<h3 class="serif"><?=$home_page_title?></h3>
-	<p class="serif">
-		<?=$home_page_content?>
-	</p>
-</div>
 <?
 	$home_page_title = get_theme_option('home_page_spotlight_title'); 
 	$home_page_content = get_theme_option('home_page_spotlight_content');
@@ -29,5 +23,11 @@
 	</form>
 </div>
 <?=get_today_news()?>
+<div class="sidebar-pub" id="theme-shoutout">
+	<h3 class="serif"><?=$home_page_title?></h3>
+	<p class="serif">
+		<?=$home_page_content?>
+	</p>
+</div>
 <? endif; ?>
 <?php endif;?>
