@@ -21,6 +21,7 @@
 		<?=$home_page_content?>
 	</p>
 </div>
+<?=get_today_news()?>
 <div class="sidebar-pub" id="newsletter_signup">
 	<h3 class="serif">Sign Up for  the Newsletter:</h3>
 	<form action="<?=bloginfo('url')?>" method="post">
@@ -28,6 +29,5 @@
 		<input type="submit" value="Submit" />
 	</form>
 </div>
-<?=get_today_news()?>
 <? endif; ?>
 <?php endif;?>
