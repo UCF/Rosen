@@ -15,6 +15,12 @@
 	if($home_page_title !== FALSE && $home_page_content !== FALSE &&
 			$home_page_title != '' && $home_page_content != ''):
 ?>
+<div class="sidebar-pub" id="theme-shoutout">
+	<h3 class="serif"><?=$home_page_title?></h3>
+	<p class="serif">
+		<?=$home_page_content?>
+	</p>
+</div>
 <div class="sidebar-pub" id="newsletter_signup">
 	<h3 class="serif">Sign Up for  the Newsletter:</h3>
 	<form action="<?=bloginfo('url')?>" method="post">
@@ -23,11 +29,5 @@
 	</form>
 </div>
 <?=get_today_news()?>
-<div class="sidebar-pub" id="theme-shoutout">
-	<h3 class="serif"><?=$home_page_title?></h3>
-	<p class="serif">
-		<?=$home_page_content?>
-	</p>
-</div>
 <? endif; ?>
 <?php endif;?>
