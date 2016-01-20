@@ -33,6 +33,7 @@
 				</div>
 			</div>
 		</div><!-- #blueprint-container -->
+		<?php echo get_remarketing_code(); ?>
 		<?="\n".footer_()."\n"?>
 	</body>
 </html>
