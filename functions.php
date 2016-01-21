@@ -343,5 +343,7 @@ function get_remarketing_code() {
 	global $theme_options;
 	if ( isset( $theme_options['ga_remarketing'] ) ) {
 		return $theme_options['ga_remarketing'];
+	} else {
+		return '';
 	}
 }
