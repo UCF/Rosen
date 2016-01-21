@@ -92,6 +92,12 @@ Config::$theme_settings = array(
 			'default'     => 10,
 			'value'       => $theme_options['search_per_page'],
 		)),
+		new TextareaField(array(
+			'name'        => 'Google Remarketing Code',
+			'id'          => THEME_OPTIONS_NAME.'[ga_remarketing]',
+			'description' => 'Paste your Google Remarketing Code here.',
+			'value'       => $theme_options['ga_remarketing'],
+		)),
 	),
 	'Chartbeat' => array(
 		new TextField(array(
@@ -332,3 +338,12 @@ function display_events($events, $start=null, $limit=null) {
  * Necessary to allow non-superusers to save Publication embed codes.
  **/
 add_filter('init', 'kses_remove_filters');
+
+function get_remarketing_code() {
+	global $theme_options;
+	if ( isset( $theme_options['ga_remarketing'] ) ) {
+		return $theme_options['ga_remarketing'];
+	} else {
+		return '';
+	}
+}
