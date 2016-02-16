@@ -24,12 +24,17 @@
 						<?=get_menu('footer-menu-right', 'menu vertical clearfix footer-menu', 'footer-menu-right', True)?>
 					</div>
 				</div>
-				<div class="footer-pub span-7 last" id="search">
-					<h3 class="serif">Search Rosen College:</h3>
-					<form method="get" action="<?=home_url( '/' )?>" role="search" id="search">
-						<input type="text" value="<?=isset($_GET['s']) ? htmlentities($_GET['s']) : 'Enter Search Term...'?>" name="s"  />
-						<input type="submit" value="Search" />
-					</form>
+				<div class="span-8 last">
+					<div class="footer-pub" id="search">
+						<h3 class="serif">Search Rosen College:</h3>
+						<form method="get" action="<?=home_url( '/' )?>" role="search" id="search">
+							<input type="text" value="<?=isset($_GET['s']) ? htmlentities($_GET['s']) : 'Enter Search Term...'?>" name="s"  />
+							<input type="submit" value="Search" />
+						</form>
+					</div>
+					<div class="best-colleges-container">
+						<img src="<?php echo THEME_IMG_URL ?>/best-colleges-most-innovative-2016.png" width="129" height="125" alt="Best Colleges Most Innovative 2016" class="best-colleges-badge">
+					</div>
 				</div>
 			</div>
 		</div><!-- #blueprint-container -->
