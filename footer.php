@@ -18,22 +18,27 @@
 				</div>
 				<div class="span-10">
 					<div class="span-5">
-						<?=get_menu('footer-menu-left', 'menu vertical clearfix footer-menu', 'footer-menu-left', True)?>
+						<?php echo get_menu('footer-menu-left', 'menu vertical clearfix footer-menu', 'footer-menu-left', True)?>
 					</div>
 					<div class="span-5 last">
-						<?=get_menu('footer-menu-right', 'menu vertical clearfix footer-menu', 'footer-menu-right', True)?>
+						<?php echo get_menu('footer-menu-right', 'menu vertical clearfix footer-menu', 'footer-menu-right', True)?>
 					</div>
 				</div>
-				<div class="footer-pub span-7 last" id="search">
-					<h3 class="serif">Search Rosen College:</h3>
-					<form method="get" action="<?=home_url( '/' )?>" role="search" id="search">
-						<input type="text" value="<?=isset($_GET['s']) ? htmlentities($_GET['s']) : 'Enter Search Term...'?>" name="s"  />
-						<input type="submit" value="Search" />
-					</form>
+				<div class="span-8 last">
+					<div class="best-colleges-container">
+						<img src="<?php echo THEME_IMG_URL ?>/best-colleges-most-innovative-2016.png" width="129" height="125" alt="Best Colleges Most Innovative 2016" class="best-colleges-badge">
+					</div>
+					<div class="footer-pub" id="search">
+						<h3 class="serif">Search Rosen College:</h3>
+						<form method="get" action="<?php echo home_url( '/' )?>" role="search" id="search">
+							<input type="text" value="<?php echo isset($_GET['s']) ? htmlentities($_GET['s']) : 'Enter Search Term...'?>" name="s"  />
+							<input type="submit" value="Search" />
+						</form>
+					</div>
 				</div>
 			</div>
 		</div><!-- #blueprint-container -->
 		<?php echo get_remarketing_code(); ?>
-		<?="\n".footer_()."\n"?>
+		<?php echo "\n".footer_()."\n"?>
 	</body>
 </html>
