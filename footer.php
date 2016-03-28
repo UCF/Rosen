@@ -40,5 +40,8 @@
 		</div><!-- #blueprint-container -->
 		<?php echo get_remarketing_code(); ?>
 		<?php echo "\n".footer_()."\n"?>
+		<?php if ( $post && $post->post_type == 'page' ) : ?>
+			<?php echo get_post_meta( $post->ID, 'page_script_snippets', True ); ?>
+		<?php endif; ?>
 	</body>
 </html>

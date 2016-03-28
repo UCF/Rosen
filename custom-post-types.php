@@ -306,6 +306,12 @@ class Page extends CustomPostType{
 				'id'    => $this->options('name').'_titlecolor',
 				'type'  => 'text',
 			),
+			array(
+				'name'  => 'Analytic Script Area:',
+				'desc'  => 'Copy and paste script snippets for various vendor analytics here.',
+				'id'    => $this->options('name').'_script_snippets',
+				'type'  => 'textarea'
+			),
 		);
 	}
 }
