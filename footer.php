@@ -26,6 +26,7 @@
 				</div>
 				<div class="span-8 last">
 					<div class="best-colleges-container">
+						<img src="<?php echo THEME_IMG_URL ?>/1604ROS130-CEOWORLD-Rosen-Badge129x125.png width="129" height="125" alt="Best Hospitality and Hotel Management School in the World " class="best-colleges-badge">
 						<img src="<?php echo THEME_IMG_URL ?>/best-colleges-most-innovative-2016.png" width="129" height="125" alt="Best Colleges Most Innovative 2016" class="best-colleges-badge">
 					</div>
 					<div class="footer-pub" id="search">
