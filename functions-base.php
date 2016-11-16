@@ -674,14 +674,14 @@ function get_custom_post_type($name){
  * TODO: Clean up and make submenu exclusion optional.
  *
  **/
-function get_menu($name, $classes=null, $id=null, $top_level_only = False){
+function get_menu($_name, $classes=null, $id=null, $top_level_only = False){
 	global $post;
 
 	$locations = get_nav_menu_locations();
-	$menu			 = @$locations[$name];
+	$menu			 = @$locations[$_name];
 
 	if (!$menu){
-		return "<div class='error'>No menu location found with name '{$name}'.</div>";
+		return "<div class='error'>No menu location found with name '{$_name}'.</div>";
 	}
 
 	$items = wp_get_nav_menu_items($menu);
@@ -743,11 +743,11 @@ function get_menu($name, $classes=null, $id=null, $top_level_only = False){
  * @return string
  * @author Chris Conover
  **/
-function get_menu_title($name)
+function get_menu_title($_name)
 {
 	$locations = get_nav_menu_locations();
-	if(isset($locations[$name])) {
-		$menu_id = $locations[$name];
+	if(isset($locations[$_name])) {
+		$menu_id = $locations[$_name];
 		if( ($term = get_term_by('id', $menu_id, 'nav_menu')) !== False) {
 			return $term->name;
 		}
