@@ -692,10 +692,10 @@ function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 	$top_count        = 0;
 	$show_num         = 0;
 	for($i = 0; $i < count($items);$i++) {
-		$item = $items[$i];
+		$link = $items[$i];
 		$prev = isset($items[$i - 1]) ? $items[$i - 1] : null;
 		$next = isset($items[$i + 1]) ? $items[$i + 1] : null;
-		$menu_item_parent = (int)$item->menu_item_parent;
+		$menu_item_parent = (int)$link->menu_item_parent;
 
 		if($menu_item_parent == 0) {
 			$top_count++;
@@ -704,12 +704,12 @@ function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 				array_pop($parent_ids);
 				$output .= '</ul></li>';
 			}
-			$output .= '<li class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
-			$top_level_obj_id = (int)$item->object_id;
+			$output .= '<li class="'.implode(' ', $link->classes).'"><a href="'.$link->url.'">'.$link->title.'</a>';
+			$top_level_obj_id = (int)$link->object_id;
 		} else if(!$top_level_only){
 			if($menu_item_parent == (int)$prev->menu_item_parent) {
 				// Same level
-				$output .= '<li class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
+				$output .= '<li class="'.implode(' ', $link->classes).'"><a href="'.$link->url.'">'.$link->title.'</a>';
 			} else if(in_array($menu_item_parent, $parent_ids)) {
 				// Going Up
 				while($menu_item_parent != $parent_ids[count($parent_ids) - 1]) {
@@ -718,10 +718,10 @@ function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 				}
 			} else { // Going Down
 				array_push($parent_ids, $prev->ID);
-				$output .= '<ul class="__hide'.$top_count.'"><li class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
+				$output .= '<ul class="__hide'.$top_count.'"><li class="'.implode(' ', $link->classes).'"><a href="'.$link->url.'">'.$link->title.'</a>';
 			}
 		}
-		if((int)$item->object_id == $post->ID) {
+		if((int)$link->object_id == $post->ID) {
 			$show_num = $top_count;
 		}
 	}
@@ -1331,7 +1331,9 @@ function get_promo_html()
 		$promo_count = 1;
 	}
 
-	$promos = get_posts(array('numberposts' => $promo_count));
+	$promos = get_posts(array(
+		'numberposts' => $promo_count
+	));
 
 	ob_start();
 	foreach($promos as $promo) {

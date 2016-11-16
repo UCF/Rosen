@@ -124,26 +124,26 @@ add_shortcode('flickr-gallery', 'sc_flickr_gallery');
  **/
 function sc_feed_list($atts = array())
 {
-	$feed_url  = isset($atts['url']) ? $atts['url'] : null;
-	$item_num  = isset($atts['num']) && intval($atts['num']) > 0 ? intval($atts['item_num']) : 5;
-	$empty_txt = isset($atts['empty']) ? $atts['empty'] : '';
+	$feed_url  = isset( $atts['url'] ) ? $atts['url'] : null;
+	$item_num  = isset( $atts['num'] ) && intval($atts['num'] ) > 0 ? intval( $atts['item_num'] ) : 5;
+	$empty_txt = isset( $atts['empty'] ) ? $atts['empty'] : '';
 
-	if(!is_null($feed_url)) {
-		$rss = fetch_feed($feed_url);
+	if( !is_null( $feed_url )) {
+		$rss = fetch_feed( $feed_url );
 
-		if(!is_wp_error($rss)) {
-			$item_max = $rss->get_item_quantity($item_num);
-			$items = $rss->get_items(0, $item_max);
-			ob_start();?>
+		if( !is_wp_error( $rss )) {
+			$item_max = $rss->get_item_quantity( $item_num );
+			$items = $rss->get_items( 0, $item_max );
+			ob_start(); ?>
 			<ul class="feed-list">
 			<?
-			if(count($items) == 0):
-				if($empty_text != ''):?>
-				<p><?=$empty_txt?></p>
+			if( count( $items ) == 0 ):
+				if( $empty_text != '' ):?>
+				<p><?php echo $empty_txt; ?></p>
 			<?endif;
 			else:
-				foreach($items as $item): ?>
-				<li><a href="<?=$item->get_link()?>"><?=$item->get_title()?> &raquo;</a></li>
+				foreach( $items as $item ): ?>
+				<li><a href="<?php echo $item->get_link(); ?>"><?php echo $item->get_title(); ?> &raquo;</a></li>
 			<? endforeach;
 			endif; ?>
 			</ul><?
@@ -151,7 +151,7 @@ function sc_feed_list($atts = array())
 		}
 	}
 }
-add_shortcode('feed-list', 'sc_feed_list');
+add_shortcode( 'feed-list', 'sc_feed_list' );
 
 /**
  * Outputs Google directions widget. Takes optional width and height parameters.
