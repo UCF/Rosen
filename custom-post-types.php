@@ -125,7 +125,7 @@ abstract class CustomPostType{
 		if ($this->options('use_metabox')){
 			return array(
 				'id'       => $this->options('name').'_metabox',
-				'cpt_title'    => __($this->options('singular_name').' Fields'),
+				'title'    => __($this->options('singular_name').' Fields'),
 				'page'     => $this->options('name'),
 				'context'  => 'normal',
 				'priority' => 'high',
@@ -144,7 +144,7 @@ abstract class CustomPostType{
 			$metabox = $this->metabox();
 			add_meta_box(
 				$metabox['id'],
-				$metabox['cpt_title'],
+				$metabox['title'],
 				'show_meta_boxes',
 				$metabox['page'],
 				$metabox['context'],
