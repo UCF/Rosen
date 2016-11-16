@@ -675,7 +675,7 @@ function get_custom_post_type($name){
  *
  **/
 function get_menu($name, $classes=null, $id=null, $top_level_only = False){
-	//global $post;
+	global $post;
 
 	$locations = get_nav_menu_locations();
 	$menu			 = @$locations[$name];
@@ -721,9 +721,9 @@ function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 				$output .= '<ul class="__hide'.$top_count.'"><li class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
 			}
 		}
-		//if((int)$item->object_id == $post->ID) {
-		//	$show_num = $top_count;
-		//}
+		if((int)$item->object_id == $post->ID) {
+			$show_num = $top_count;
+		}
 	}
 
 	while(count($parent_ids) > 0) {

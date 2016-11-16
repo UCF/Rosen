@@ -4,7 +4,7 @@
 <? if(is_page()) {?>
 	<?=get_the_post_thumbnail($post->ID, 'sidebar-feature')?>
 <? } ?>
-<?=get_menu('sidebar-nav-menu', 'menu vertical sans', 'sidebar-nav-menu', (is_front_page() ? True : False))?>
+<?php echo get_menu('sidebar-nav-menu', 'menu vertical sans', 'sidebar-nav-menu', (is_front_page() ? True : False)); ?>
 <div id="sidebar-social">
 	<h3><?=get_menu_title('sidebar-social-menu')?></h3>
 	<?=get_menu('sidebar-social-menu', 'menu vertical sans', 'sidebar-social-menu')?>

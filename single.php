@@ -8,7 +8,7 @@
 			</article>
 		</div>
 		<div id="sidebar" class="span-8 last">
-			<?=get_sidebar();?>
+			<?php get_sidebar(); ?>
 		</div>
 		<div class="clear"><!-- --></div>
 	</div>
