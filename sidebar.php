@@ -10,8 +10,9 @@
 	<?=get_menu('sidebar-social-menu', 'menu vertical sans', 'sidebar-social-menu')?>
 </div>
 <?
-	$home_page_title = get_theme_option('home_page_spotlight_title'); 
+	$home_page_title = get_theme_option('home_page_spotlight_title');
 	$home_page_content = get_theme_option('home_page_spotlight_content');
+	$home_page_content = do_shortcode( $home_page_content );
 	if($home_page_title !== FALSE && $home_page_content !== FALSE &&
 			$home_page_title != '' && $home_page_content != ''):
 ?>

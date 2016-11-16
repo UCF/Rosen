@@ -63,6 +63,8 @@ article ul, article ol {margin-top:0;}
 #sidebar-nav-menu li:last-child {margin-bottom:0px;}
 #sidebar-nav-menu > li ul {border-left: 2px solid #FCDD88;margin-left:10px;padding-left:15px;font-size:90%;}
 #sidebar-nav-menu li > a {color:#FFF;font-size:150%;font-weight:300;}
+#sidebar .feed-list { font-family: "Georgia", "serif"; font-size: 14px; list-style-type: none; padding-left: 0; margin-top: 0; }
+#sidebar .feed-list li { list-style-type: none; font-style: italic; }
 
 .sidebar-pub {background-color:rgba(255,255,255,.6);padding:15px;margin:0 0 35px 8px;box-shadow:0px 0px	 5px #666;}
 .msie7 .sidebar-pub, .msie8 .sidebar-pub {background-color:#fdf1cf}
