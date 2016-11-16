@@ -685,6 +685,10 @@ function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 	}
 
 	$items = wp_get_nav_menu_items($menu);
+	// $items = wp_nav_menu(array(
+	// 	'menu' => $menu,
+	// 	'echo' => false
+	// ));
 	echo "<!--\n";
 	print_r($items);
 	echo "\n-->";
