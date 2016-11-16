@@ -1,3 +1,6 @@
+<?
+	$footer_badge_content = get_theme_option('footer_badge_content');
+?>
 			</div><!-- #blueprint-container -->
 		</div>
 		<div id="footer" class="sans">
@@ -25,10 +28,11 @@
 					</div>
 				</div>
 				<div class="span-8 last">
-					<div class="best-colleges-container">
-						<img src="<?php echo THEME_IMG_URL ?>/1604ROS130%20CEOWORLD%20Rosen%20Badge129x125.png" width="129" height="125" alt="Best Hospitality and Hotel Management School in the World " class="best-colleges-badge">
-						<img src="<?php echo THEME_IMG_URL ?>/best-colleges-most-innovative-2016.png" width="129" height="125" alt="Best Colleges Most Innovative 2016" class="best-colleges-badge">
-					</div>
+					<?php if($footer_badge_content): ?>
+						<div class="footer-right-content">
+							<?php echo $footer_badge_content; ?>
+						</div>
+					<?php endif; ?>
 					<div class="footer-pub" id="search">
 						<h3 class="serif">Search Rosen College:</h3>
 						<form method="get" action="<?php echo home_url( '/' )?>" role="search" id="search">

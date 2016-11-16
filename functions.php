@@ -211,6 +211,13 @@ Config::$theme_settings = array(
 			'default'     => null,
 			'value'       => $theme_options['home_page_spotlight_content'],
 		)),
+		new TextareaField(array(
+			'name'        => 'Footer Content',
+			'id'          => THEME_OPTIONS_NAME.'[footer_badge_content]',
+			'description' => 'Area in right of footer, above the search form.',
+			'default'     => null,
+			'value'       => $theme_options['footer_badge_content'],
+		)),
 	)
 );
 
