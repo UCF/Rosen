@@ -685,6 +685,9 @@ function get_menu($name, $classes=null, $id=null, $top_level_only = False){
 	}
 
 	$items = wp_get_nav_menu_items($menu);
+	echo "<!--\n";
+	print_r($items);
+	echo "\n-->";
 
 	$output           = '';
 	$parent_ids       = array();
