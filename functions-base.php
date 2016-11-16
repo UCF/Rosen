@@ -674,14 +674,14 @@ function get_custom_post_type($name){
  * TODO: Clean up and make submenu exclusion optional.
  *
  **/
-function get_menu($_name, $classes=null, $id=null, $top_level_only = False){
-	global $post;
+function get_menu($name, $classes=null, $id=null, $top_level_only = False){
+	//global $post;
 
 	$locations = get_nav_menu_locations();
-	$menu			 = @$locations[$_name];
+	$menu			 = @$locations[$name];
 
 	if (!$menu){
-		return "<div class='error'>No menu location found with name '{$_name}'.</div>";
+		return "<div class='error'>No menu location found with name '{$name}'.</div>";
 	}
 
 	$items = wp_get_nav_menu_items($menu);
@@ -721,9 +721,9 @@ function get_menu($_name, $classes=null, $id=null, $top_level_only = False){
 				$output .= '<ul class="__hide'.$top_count.'"><li class="'.implode(' ', $item->classes).'"><a href="'.$item->url.'">'.$item->title.'</a>';
 			}
 		}
-		if((int)$item->object_id == $post->ID) {
-			$show_num = $top_count;
-		}
+		//if((int)$item->object_id == $post->ID) {
+		//	$show_num = $top_count;
+		//}
 	}
 
 	while(count($parent_ids) > 0) {
@@ -743,11 +743,11 @@ function get_menu($_name, $classes=null, $id=null, $top_level_only = False){
  * @return string
  * @author Chris Conover
  **/
-function get_menu_title($_name)
+function get_menu_title($name)
 {
 	$locations = get_nav_menu_locations();
-	if(isset($locations[$_name])) {
-		$menu_id = $locations[$_name];
+	if(isset($locations[$name])) {
+		$menu_id = $locations[$name];
 		if( ($term = get_term_by('id', $menu_id, 'nav_menu')) !== False) {
 			return $term->name;
 		}
