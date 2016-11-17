@@ -1423,7 +1423,7 @@ function get_today_news()
 function get_person_meta($post_id)
 {
 	$img    = get_the_post_thumbnail($post_id, 'full');
-	//$title  = get_post_meta($post_id, 'person_jobtitle', True);
+	$title  = get_post_meta($post_id, 'person_jobtitle', True);
 	$phones = get_post_meta($post_id, 'person_phones', True);
 	$phones = ($phones != '') ? explode(',', $phones) : Array();
 	$email  = get_post_meta($post_id, 'person_email', True);
@@ -1566,17 +1566,17 @@ add_action('wp_loaded', 'submit_cc_signup');
  * @return string
  * @author Chris Conover
  **/
-function person_title_filter($title)
-{
-	global $post;
-	if($post->post_type == 'person') {
-		return get_person_name($post);
-	} else {
-		return $title;
-	}
-}
-add_filter('the_title', 'person_title_filter');
-add_filter('single_post_title', 'person_title_filter');
+// function person_title_filter($title)
+// {
+// 	global $post;
+// 	if($post->post_type == 'person') {
+// 		return get_person_name($post);
+// 	} else {
+// 		return $title;
+// 	}
+// }
+//add_filter('the_title', 'person_title_filter');
+//add_filter('single_post_title', 'person_title_filter');
 
 /**
  * List of Person post objects based on a rosen_org_groups term
