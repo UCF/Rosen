@@ -58,6 +58,12 @@ Config::$custom_taxonomies = array(
 
 Config::$body_classes = array();
 
+$categories = array();
+$cats = get_categories();
+	foreach( $cats as $category ) {
+		$categories[$category->name] = $category->cat_ID;
+}
+
 /**
  * Configure theme settings, see abstract class Field's descendants for
  * available fields. -- functions-base.php
@@ -174,6 +180,14 @@ Config::$theme_settings = array(
 			'id'          => THEME_OPTIONS_NAME.'[promo_post_num]',
 			'description' => 'Controls how many promo posts will appear on the home page.',
 			'value'       => $theme_options['promo_post_num']
+		)),
+		new CheckboxField(array(
+			'name'        => 'Promo Categories to Exclude:',
+			'id'          => THEME_OPTIONS_NAME.'[promo_post_categories]',
+			'description' => 'Posts of categories specified here will be filtered out of promo posts.',
+			'default'     => null,
+			'choices'     => $categories,
+			'value'       => $theme_options['promo_post_categories']
 		)),
 		new TextField(array(
 			'name'        => 'UCF Today Rosen News RSS URL:',
