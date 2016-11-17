@@ -873,13 +873,13 @@ function header_title(){
 	$separator = '|';
 
 	if ( is_single() ) {
-		$content = single_post_title('', FALSE);
+		$content = get_person_title( single_post_title( '', FALSE ));
 	}
 	elseif ( is_home() || is_front_page() ) {
 		$content = get_bloginfo('description');
 	}
 	elseif ( is_page() ) {
-		$content = single_post_title('', FALSE);
+		$content = get_person_title( single_post_title('', FALSE) );
 	}
 	elseif ( is_search() ) {
 		$content = __('Search Results for:');
@@ -1553,23 +1553,42 @@ function submit_cc_signup()
 }
 add_action('wp_loaded', 'submit_cc_signup');
 
+// /**
+//  * Apply Person object name formatting to profile page titles
+//  *
+//  * @return string
+//  * @author Chris Conover
+//  **/
+// function person_title_filter($title)
+// {
+// 	global $post;
+// 	if($post->post_type == 'person') {
+// 		return get_person_name($post);
+// 	} else {
+// 		return $title;
+// 	}
+// }
+// add_filter('the_title', 'person_title_filter');
+// add_filter('single_post_title', 'person_title_filter');
+
 /**
  * Apply Person object name formatting to profile page titles
  *
  * @return string
  * @author Chris Conover
  **/
-function person_title_filter($title)
+function get_person_title( $_title='' )
 {
 	global $post;
-	if($post->post_type == 'person') {
-		return get_person_name($post);
+
+	if( $post->post_type === 'person' ) {
+		return get_person_name( $post );
+	} else if ( $_title !== '' ) {
+		return $_title;
 	} else {
 		return $title;
 	}
 }
-add_filter('the_title', 'person_title_filter');
-add_filter('single_post_title', 'person_title_filter');
 
 /**
  * List of Person post objects based on a rosen_org_groups term
