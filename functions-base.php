@@ -1423,7 +1423,7 @@ function get_today_news()
 function get_person_meta($post_id)
 {
 	$img    = get_the_post_thumbnail($post_id, 'full');
-	$title  = get_post_meta($post_id, 'person_jobtitle', True);
+	//$title  = get_post_meta($post_id, 'person_jobtitle', True);
 	$phones = get_post_meta($post_id, 'person_phones', True);
 	$phones = ($phones != '') ? explode(',', $phones) : Array();
 	$email  = get_post_meta($post_id, 'person_email', True);
