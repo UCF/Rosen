@@ -3,7 +3,7 @@
 	<div class="span-24 last page-content" id="<?=$post->post_name?>">
 		<div class="span-15 append-1">
 			<article>
-				<h2><?php the_title();?></h2>
+				<h2><?php echo get_person_title(); ?></h2>
 				<?php the_content();?>
 			</article>
 		</div>
