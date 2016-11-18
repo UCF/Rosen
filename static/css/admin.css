@@ -26,3 +26,9 @@ tr.section td{padding: 0;}
 tr.section td td{padding: 10px; margin: 0;}
 tr.section h3{padding: 10px; margin: 0; background-color: #efefef; color: #21759B; border: 1px solid #DFDFDF;}
 tr.section table{padding: 0; margin: 0 0 20px 0;}
+
+
+#wpbody .checkbox-list { max-height: 145px; overflow-y: scroll; width: 70%; background: #efefef; padding: 18px 15px; border: solid 1px #d2d2d2; }
+#wpbody .checkbox-list li { display: block; }
+#wpbody .checkbox-list li input[type=checkbox] { display: inline-block; }
+#wpbody .checkbox-list li label { display: inline-block; }

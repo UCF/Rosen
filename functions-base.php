@@ -1338,12 +1338,22 @@ function get_promo_html()
 		$promo_count = 1;
 	}
 
-	$promos = get_posts(array(
-		'numberposts' => $promo_count
-	));
+	$exclude_cats = get_theme_option('promo_post_categories');
+
+	$promo_query = new WP_Query(
+		array(
+			'posts_per_page' => $promo_count,
+			'category__not_in' => $exclude_cats,
+			'orderby' => 'date',
+			'order' => 'desc'
+		)
+	);
 
 	ob_start();
-	foreach($promos as $promo) {
+
+	while ( $promo_query->have_posts() ) {
+		$promo_query->the_post();
+		$promo = $promo_query->post;
 		$link_url = get_post_meta($promo->ID, '_links_to', True);
 		$link_target = get_post_meta($promo->UD, '_links_to_target', True);?>
 		<li class="clearfix">
@@ -1559,24 +1569,6 @@ function submit_cc_signup()
 	}
 }
 add_action('wp_loaded', 'submit_cc_signup');
-
-// /**
-//  * Apply Person object name formatting to profile page titles
-//  *
-//  * @return string
-//  * @author Chris Conover
-//  **/
-// function person_title_filter($title)
-// {
-// 	global $post;
-// 	if($post->post_type == 'person') {
-// 		return get_person_name($post);
-// 	} else {
-// 		return $title;
-// 	}
-// }
-// add_filter('the_title', 'person_title_filter');
-// add_filter('single_post_title', 'person_title_filter');
 
 /**
  * Apply Person object name formatting to profile page titles
