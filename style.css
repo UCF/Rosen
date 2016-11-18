@@ -171,6 +171,8 @@ h1 > a {font-size:75%;margin:0;padding:0;line-height:1em;color:#764e19 !importan
 #home .widget > .events > li > a {font-size:100%;display:block;position:relative;padding-left:70px; margin-top:3px;}
 .msie7 #home .widget > .events > li > a {margin-top:5px;}
 
+#page #post-list h1 { margin-bottom: 40px; }
+
 /*/ Mobile Navbar /*/
 #mobile-nav {
   box-sizing: border-box;
