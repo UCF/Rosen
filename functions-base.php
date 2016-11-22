@@ -1333,20 +1333,16 @@ function get_promo_html()
 
 	$exclude_cats = get_theme_option('promo_post_categories');
 
-	$promo_query = new WP_Query(
+	$promos = get_posts(
 		array(
-			'posts_per_page' => $promo_count,
+			'numberposts' => $promo_count,
 			'category__not_in' => $exclude_cats,
-			'orderby' => 'date',
-			'order' => 'desc'
 		)
 	);
 
 	ob_start();
 
-	while ( $promo_query->have_posts() ) {
-		$promo_query->the_post();
-		$promo = $promo_query->post;
+	foreach($promos as $promo) {
 		$link_url = get_post_meta($promo->ID, '_links_to', True);
 		$link_target = get_post_meta($promo->UD, '_links_to_target', True);?>
 		<li class="clearfix">
@@ -1578,7 +1574,7 @@ function get_person_title( $_title='' )
 	} else if ( $_title !== '' ) {
 		return $_title;
 	} else {
-		return $title;
+		return $post->post_title;
 	}
 }
 
