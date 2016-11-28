@@ -85,6 +85,13 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['gw_verify'],
 		)),
 		new TextField(array(
+			'name'        => 'Google Site Search Proxy URL',
+			'id'          => THEME_OPTIONS_NAME.'[gss_proxy_url]',
+			'description' => 'The proxy url for Google Site Search',
+			'default'     => 'https://search.ucf.edu/proxy.php?type=google',
+			'value'       => $theme_options['gss_proxy_url']
+		)),
+		new TextField(array(
 			'name'        => 'GSA Search Domain',
 			'id'          => THEME_OPTIONS_NAME.'[search_domain]',
 			'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example <em>some.domain.com</em>',

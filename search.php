@@ -2,7 +2,7 @@
 	$options = get_option(THEME_OPTIONS_NAME);
 	$domain  = $options['search_domain'];
 	$limit   = (int)$options['search_per_page'];
-	$start   = (is_numeric($_GET['start'])) ? (int)$_GET['start'] : 0;
+	$start   = (is_numeric($_GET['start'])) ? (int)$_GET['start'] : 1;
 	$results = get_search_results($_GET['s'], $start, $limit, $domain);
 ?>
 <?php get_header(); the_post();?>
